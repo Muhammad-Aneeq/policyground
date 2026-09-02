@@ -24,6 +24,7 @@ from policyground.ingest.manifest import build_manifest, corpus_digest, write_ma
 from policyground.retrieval.base import Chunk
 from policyground.retrieval.embeddings import build_embedder
 from policyground.retrieval.vector_store import save_index
+from policyground.retrieval.vocabulary import CorpusVocabulary
 
 
 class IngestError(RuntimeError):
@@ -90,6 +91,12 @@ def run_ingest(settings: Settings, *, mode: AppMode, rebuild: bool = False) -> I
 
     digest = corpus_digest(docs)
 
+    # The vocabulary is derived from the corpus, not from the backend, so it is written in
+    # BOTH modes. Refusal behaviour must not differ between LOCAL and AZURE, and it would if
+    # the off-corpus signal were only available in one of them.
+    settings.data_dir.mkdir(parents=True, exist_ok=True)
+    CorpusVocabulary.from_chunks(chunks).save(settings.vocabulary_path)
+
     chunk_counts: dict[str, int] = {}
     for chunk in chunks:
         chunk_counts[chunk.policy_id] = chunk_counts.get(chunk.policy_id, 0) + 1
@@ -98,7 +105,6 @@ def run_ingest(settings: Settings, *, mode: AppMode, rebuild: bool = False) -> I
     if mode is AppMode.AZURE:
         target = _ingest_azure(settings, chunks, vectors, embedder.name)
     else:
-        settings.data_dir.mkdir(parents=True, exist_ok=True)
         save_index(
             settings.index_path,
             settings.vectors_path,

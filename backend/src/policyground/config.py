@@ -109,6 +109,15 @@ class Settings(BaseSettings):
         return self.data_dir / "vectors.npy"
 
     @property
+    def vocabulary_path(self) -> Path:
+        """Corpus document frequencies, written by ingestion in BOTH modes.
+
+        A property of the corpus rather than of the retrieval backend, so refusal behaviour is
+        identical in LOCAL and AZURE (see ``retrieval.vocabulary``).
+        """
+        return self.data_dir / "vocabulary.json"
+
+    @property
     def judge_cache_dir(self) -> Path:
         return repo_root() / "evals" / "judge_cache"
 

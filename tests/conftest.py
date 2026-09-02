@@ -14,6 +14,7 @@ from policyground.corpus.models import PolicyDoc
 from policyground.retrieval.base import Chunk
 from policyground.retrieval.embeddings import HashEmbedder
 from policyground.retrieval.local_retriever import LocalHybridRetriever
+from policyground.retrieval.vocabulary import CorpusVocabulary
 
 
 @pytest.fixture(scope="session")
@@ -60,3 +61,14 @@ def retriever(chunks: list[Chunk], settings: Settings) -> LocalHybridRetriever:
     return LocalHybridRetriever(
         chunks=chunks, vectors=vectors, embedder=embedder, rrf_k=settings.rrf_k
     )
+
+
+@pytest.fixture(scope="session")
+def vocabulary(chunks: list[Chunk]) -> CorpusVocabulary:
+    """Corpus document frequencies, built in-process from the same chunks the retriever uses.
+
+    Built rather than loaded from ``data/vocabulary.json`` for the same reason as the retriever
+    fixture: the tests must fail when the corpus and the code disagree, not when someone forgot to
+    re-run ``pg ingest``.
+    """
+    return CorpusVocabulary.from_chunks(chunks)
