@@ -64,9 +64,18 @@ class Settings(BaseSettings):
 
     # ---------------------------------------------------------- retrieval --
     retrieval_top_k: int = Field(default=6, ge=1, le=50)
-    #: Below this fused-evidence score the graph refuses (spec 08 §4 F4). Calibrated on the
-    #: question bank's *calibration* split only (PLAN.md D-019); see docs/evals_methodology.md.
-    sufficiency_threshold: float = Field(default=0.45, ge=0.0, le=1.0)
+    #: Below this evidence-sufficiency score the graph refuses (spec 08 §4 F4).
+    #:
+    #: **0.80 is a measured value, not a guess.** It was chosen by sweeping thresholds over the
+    #: question bank's *calibration* split only and maximising Youden's J (refusal-on-unanswerable
+    #: minus false-refusal-rate), which weights both directions equally. CI then gates on the
+    #: *gate* split, which the threshold has never seen (PLAN.md D-019).
+    #:
+    #: It is high because the vector arm is a lexical stand-in in this build (BLOCKERS.md B1), so
+    #: off-corpus questions that share vocabulary with the corpus score higher than they should.
+    #: With a real embedding model the two classes separate further and a lower threshold would
+    #: do the same work. The full sweep is published in docs/evals_methodology.md.
+    sufficiency_threshold: float = Field(default=0.80, ge=0.0, le=1.0)
     #: RRF constant. 60 is the published default and the value Azure AI Search uses for hybrid
     #: fusion, which is what keeps LOCAL and AZURE behaviourally comparable (PLAN.md D-005).
     rrf_k: int = Field(default=60, ge=1)

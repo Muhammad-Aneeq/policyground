@@ -1,0 +1,13 @@
+{
+  "cache_key": "1eb1163dedd7c0a302dcfe2415c39b9c1b0bb26fea8b8edf8f9047dca8853027",
+  "model": "none",
+  "normalised": 1.0,
+  "note": "offline deterministic proxy over 4 claim(s); token overlap, figure containment and out-of-passage vocabulary. No language understanding.",
+  "provider": "offline-fixture",
+  "rubric_version": "1",
+  "scores": {
+    "fidelity": 3,
+    "scope": 3,
+    "support": 3
+  }
+}

@@ -1,0 +1,3901 @@
+{
+  "commit": "d1e4490e11fbad98772e35f2a6f3f0b7e5a87e99",
+  "split": "gate",
+  "threshold": 0.8,
+  "embedder": "hash-embedder-v1",
+  "composer": "offline-extractive",
+  "judge": "offline-fixture:none",
+  "judge_offline": true,
+  "judge_cache_hits": 40,
+  "judge_cache_misses": 0,
+  "cases": 55,
+  "runs": 73,
+  "metrics": {
+    "runs": 73,
+    "citation_validity": 1.0,
+    "rendered_claims": 160,
+    "unsupported_claims": 0,
+    "fabricated_citation_ids": 0,
+    "label_leaks": 0,
+    "leaked_canaries": [],
+    "refusal_on_unanswerable": 0.7742,
+    "false_refusal_rate": 0.2143,
+    "unanswerable_runs": 31,
+    "answerable_runs": 42,
+    "missed_refusals": [
+      "pg-una-009/staff",
+      "pg-una-018/staff",
+      "pg-res-003/staff",
+      "pg-res-008/guest",
+      "pg-res-008/staff",
+      "pg-res-012/guest",
+      "pg-res-012/staff"
+    ],
+    "false_refusals": [
+      "pg-ans-006/staff",
+      "pg-ans-014/staff",
+      "pg-ans-015/staff",
+      "pg-ans-021/staff",
+      "pg-ans-024/staff",
+      "pg-ans-026/staff",
+      "pg-ans-027/staff",
+      "pg-ans-029/staff",
+      "pg-ans-033/staff"
+    ],
+    "restricted_refused_for_unprivileged": 0.7222,
+    "restricted_answered_for_controller": 1.0,
+    "expected_policy_cited": 1.0,
+    "groundedness": 1.0,
+    "judged_runs": 40,
+    "claims_stripped": 0
+  },
+  "outcomes": [
+    {
+      "case_id": "pg-ans-002",
+      "kind": "answerable",
+      "split": "gate",
+      "role": "staff",
+      "question": "What is the capitalisation threshold for IT equipment?",
+      "refused": false,
+      "should_answer": true,
+      "sufficiency": 0.9437,
+      "threshold": 0.8,
+      "withheld_count": 0,
+      "retrieved_ids": [
+        "PG-0003::002",
+        "PG-0004::001",
+        "PG-0003::006",
+        "PG-0005::002",
+        "PG-0004::000",
+        "PG-0003::001"
+      ],
+      "retrieved_labels": [
+        "public"
+      ],
+      "cited_ids": [
+        "PG-0003::002",
+        "PG-0005::002"
+      ],
+      "cited_policy_ids": [
+        "PG-0003",
+        "PG-0005"
+      ],
+      "claims": [
+        {
+          "text": "- The **IT equipment capitalisation threshold of USD 1,000** is deliberately lower than the general",
+          "citation_ids": [
+            "PG-0003::002"
+          ]
+        },
+        {
+          "text": "- The **software capitalisation threshold of USD 10,000** applies to total qualifying development",
+          "citation_ids": [
+            "PG-0003::002"
+          ]
+        },
+        {
+          "text": "The **software capitalisation threshold of USD 10,000** applies to total qualifying development",
+          "citation_ids": [
+            "PG-0005::002"
+          ]
+        },
+        {
+          "text": "- The **general capitalisation threshold of USD 5,000** applies to items of property, plant and",
+          "citation_ids": [
+            "PG-0003::002"
+          ]
+        }
+      ],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": null,
+      "expected_policy_ids": [
+        "PG-0003"
+      ],
+      "leaked_canaries": [],
+      "groundedness": 1.0,
+      "judge_provider": "offline-fixture"
+    },
+    {
+      "case_id": "pg-ans-003",
+      "kind": "answerable",
+      "split": "gate",
+      "role": "staff",
+      "question": "At what cost do we capitalise leasehold improvements?",
+      "refused": false,
+      "should_answer": true,
+      "sufficiency": 0.9083,
+      "threshold": 0.8,
+      "withheld_count": 0,
+      "retrieved_ids": [
+        "PG-0003::002",
+        "PG-0003::005",
+        "PG-0027::005",
+        "PG-0004::001",
+        "PG-0005::003",
+        "PG-0014::005"
+      ],
+      "retrieved_labels": [
+        "internal",
+        "public"
+      ],
+      "cited_ids": [
+        "PG-0003::002",
+        "PG-0003::005"
+      ],
+      "cited_policy_ids": [
+        "PG-0003"
+      ],
+      "claims": [
+        {
+          "text": "| Leasehold improvements | USD 25,000 | Total cost of the fit-out project |",
+          "citation_ids": [
+            "PG-0003::002"
+          ]
+        },
+        {
+          "text": "- The **leasehold improvement capitalisation threshold of USD 25,000** is applied to the fit-out",
+          "citation_ids": [
+            "PG-0003::002"
+          ]
+        },
+        {
+          "text": "| IT end-user hardware | USD 1,000 | Unit cost |",
+          "citation_ids": [
+            "PG-0003::002"
+          ]
+        },
+        {
+          "text": "If its original cost is not known, the cost of the",
+          "citation_ids": [
+            "PG-0003::005"
+          ]
+        }
+      ],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": null,
+      "expected_policy_ids": [
+        "PG-0003"
+      ],
+      "leaked_canaries": [],
+      "groundedness": 1.0,
+      "judge_provider": "offline-fixture"
+    },
+    {
+      "case_id": "pg-ans-005",
+      "kind": "answerable",
+      "split": "gate",
+      "role": "staff",
+      "question": "What useful life do we use for buildings?",
+      "refused": false,
+      "should_answer": true,
+      "sufficiency": 0.9525,
+      "threshold": 0.8,
+      "withheld_count": 0,
+      "retrieved_ids": [
+        "PG-0004::003",
+        "PG-0004::004",
+        "PG-0027::006",
+        "PG-0004::008",
+        "PG-0003::006",
+        "PG-0030::001"
+      ],
+      "retrieved_labels": [
+        "internal",
+        "public"
+      ],
+      "cited_ids": [
+        "PG-0004::003",
+        "PG-0004::004"
+      ],
+      "cited_policy_ids": [
+        "PG-0004"
+      ],
+      "claims": [
+        {
+          "text": "| Class | Useful life | Residual value assumption |",
+          "citation_ids": [
+            "PG-0004::003"
+          ]
+        },
+        {
+          "text": "| Buildings (freehold structure) | 40 years | Nil |",
+          "citation_ids": [
+            "PG-0004::003"
+          ]
+        },
+        {
+          "text": "| Building services and plant | 15 years | Nil |",
+          "citation_ids": [
+            "PG-0004::003"
+          ]
+        },
+        {
+          "text": "In practice this applies to buildings — structure, roof, services and",
+          "citation_ids": [
+            "PG-0004::004"
+          ]
+        }
+      ],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": null,
+      "expected_policy_ids": [
+        "PG-0004"
+      ],
+      "leaked_canaries": [],
+      "groundedness": 1.0,
+      "judge_provider": "offline-fixture"
+    },
+    {
+      "case_id": "pg-ans-006",
+      "kind": "answerable",
+      "split": "gate",
+      "role": "staff",
+      "question": "Who must approve the disposal of an asset with a large net book value?",
+      "refused": true,
+      "should_answer": true,
+      "sufficiency": 0.7177,
+      "threshold": 0.8,
+      "withheld_count": 0,
+      "retrieved_ids": [
+        "PG-0004::006",
+        "PG-0004::008",
+        "PG-0004::007",
+        "PG-0007::004",
+        "PG-0030::004",
+        "PG-0030::005"
+      ],
+      "retrieved_labels": [
+        "internal",
+        "public"
+      ],
+      "cited_ids": [],
+      "cited_policy_ids": [],
+      "claims": [],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": "insufficient_evidence",
+      "expected_policy_ids": [
+        "PG-0004",
+        "PG-0007"
+      ],
+      "leaked_canaries": [],
+      "groundedness": null,
+      "judge_provider": null
+    },
+    {
+      "case_id": "pg-ans-008",
+      "kind": "answerable",
+      "split": "gate",
+      "role": "staff",
+      "question": "When can internally developed software be capitalised?",
+      "refused": false,
+      "should_answer": true,
+      "sufficiency": 0.9914,
+      "threshold": 0.8,
+      "withheld_count": 0,
+      "retrieved_ids": [
+        "PG-0005::000",
+        "PG-0005::005",
+        "PG-0005::003",
+        "PG-0005::002",
+        "PG-0005::006",
+        "PG-0005::007"
+      ],
+      "retrieved_labels": [
+        "public"
+      ],
+      "cited_ids": [
+        "PG-0005::000",
+        "PG-0005::002",
+        "PG-0005::003"
+      ],
+      "cited_policy_ids": [
+        "PG-0005"
+      ],
+      "claims": [
+        {
+          "text": "Costs that may be capitalised in the development phase are directly attributable: internal",
+          "citation_ids": [
+            "PG-0005::003"
+          ]
+        },
+        {
+          "text": "The **software capitalisation threshold of USD 10,000** applies to total qualifying development",
+          "citation_ids": [
+            "PG-0005::002"
+          ]
+        },
+        {
+          "text": "Internal time is capitalised only where it is supported by timesheet records",
+          "citation_ids": [
+            "PG-0005::003"
+          ]
+        },
+        {
+          "text": "Software is where capitalisation policy is most often misapplied, because the spend looks like",
+          "citation_ids": [
+            "PG-0005::000"
+          ]
+        }
+      ],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": null,
+      "expected_policy_ids": [
+        "PG-0005"
+      ],
+      "leaked_canaries": [],
+      "groundedness": 1.0,
+      "judge_provider": "offline-fixture"
+    },
+    {
+      "case_id": "pg-ans-009",
+      "kind": "answerable",
+      "split": "gate",
+      "role": "staff",
+      "question": "How do we treat configuration costs in a cloud subscription?",
+      "refused": false,
+      "should_answer": true,
+      "sufficiency": 0.9645,
+      "threshold": 0.8,
+      "withheld_count": 1,
+      "retrieved_ids": [
+        "PG-0005::004",
+        "PG-0005::003",
+        "PG-0014::005",
+        "PG-0014::004",
+        "PG-0014::001",
+        "PG-0029::007"
+      ],
+      "retrieved_labels": [
+        "internal",
+        "public"
+      ],
+      "cited_ids": [
+        "PG-0005::003",
+        "PG-0005::004",
+        "PG-0014::001"
+      ],
+      "cited_policy_ids": [
+        "PG-0005",
+        "PG-0014"
+      ],
+      "claims": [
+        {
+          "text": "Implementation costs paid to a third party for a cloud arrangement are expensed as the service is",
+          "citation_ids": [
+            "PG-0005::004"
+          ]
+        },
+        {
+          "text": "| Cost | Treatment | Why |",
+          "citation_ids": [
+            "PG-0014::001"
+          ]
+        },
+        {
+          "text": "| Phase | Typical activities | Treatment |",
+          "citation_ids": [
+            "PG-0005::003"
+          ]
+        },
+        {
+          "text": "Prepaid multi-year subscriptions are held as prepayments and released over the term.",
+          "citation_ids": [
+            "PG-0005::004"
+          ]
+        }
+      ],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": null,
+      "expected_policy_ids": [
+        "PG-0005"
+      ],
+      "leaked_canaries": [],
+      "groundedness": 1.0,
+      "judge_provider": "offline-fixture"
+    },
+    {
+      "case_id": "pg-ans-011",
+      "kind": "answerable",
+      "split": "gate",
+      "role": "staff",
+      "question": "How much can I claim for a hotel per night?",
+      "refused": false,
+      "should_answer": true,
+      "sufficiency": 0.9356,
+      "threshold": 0.8,
+      "withheld_count": 1,
+      "retrieved_ids": [
+        "PG-0006::004",
+        "PG-0006::005",
+        "PG-0006::010",
+        "PG-0010::007",
+        "PG-0006::003",
+        "PG-0006::001"
+      ],
+      "retrieved_labels": [
+        "public"
+      ],
+      "cited_ids": [
+        "PG-0006::004",
+        "PG-0006::005",
+        "PG-0006::010"
+      ],
+      "cited_policy_ids": [
+        "PG-0006"
+      ],
+      "claims": [
+        {
+          "text": "Hotel bookings are made through the Group travel provider wherever the provider has coverage.",
+          "citation_ids": [
+            "PG-0006::004"
+          ]
+        },
+        {
+          "text": "Claims route to the claimant's line manager, and additionally to the Finance Director where the",
+          "citation_ids": [
+            "PG-0006::010"
+          ]
+        },
+        {
+          "text": "Alcohol is not reimbursable other than as part of a client entertainment claim under",
+          "citation_ids": [
+            "PG-0006::005"
+          ]
+        },
+        {
+          "text": "Singapore and Sydney — the **Tier 1 city nightly room rate cap of USD 350** applies.",
+          "citation_ids": [
+            "PG-0006::004"
+          ]
+        }
+      ],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": null,
+      "expected_policy_ids": [
+        "PG-0006"
+      ],
+      "leaked_canaries": [],
+      "groundedness": 1.0,
+      "judge_provider": "offline-fixture"
+    },
+    {
+      "case_id": "pg-ans-012",
+      "kind": "answerable",
+      "split": "gate",
+      "role": "staff",
+      "question": "What is the domestic meal per diem?",
+      "refused": false,
+      "should_answer": true,
+      "sufficiency": 0.9557,
+      "threshold": 0.8,
+      "withheld_count": 1,
+      "retrieved_ids": [
+        "PG-0006::005",
+        "PG-0008::002",
+        "PG-0015::000",
+        "PG-0030::002",
+        "PG-0015::007",
+        "PG-0027::007"
+      ],
+      "retrieved_labels": [
+        "internal",
+        "public"
+      ],
+      "cited_ids": [
+        "PG-0006::005"
+      ],
+      "cited_policy_ids": [
+        "PG-0006"
+      ],
+      "claims": [
+        {
+          "text": "- **domestic meal per diem of USD 75** per full day",
+          "citation_ids": [
+            "PG-0006::005"
+          ]
+        },
+        {
+          "text": "- **international meal per diem of USD 110** per full day",
+          "citation_ids": [
+            "PG-0006::005"
+          ]
+        },
+        {
+          "text": "Actual-cost meal claims for a group are made by the most senior person present.",
+          "citation_ids": [
+            "PG-0006::005"
+          ]
+        },
+        {
+          "text": "Employees claim either actual cost or the per diem, not both, and the choice is made per trip.",
+          "citation_ids": [
+            "PG-0006::005"
+          ]
+        }
+      ],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": null,
+      "expected_policy_ids": [
+        "PG-0006"
+      ],
+      "leaked_canaries": [],
+      "groundedness": 1.0,
+      "judge_provider": "offline-fixture"
+    },
+    {
+      "case_id": "pg-ans-014",
+      "kind": "answerable",
+      "split": "gate",
+      "role": "staff",
+      "question": "How many days do I have to submit an expense claim?",
+      "refused": true,
+      "should_answer": true,
+      "sufficiency": 0.7938,
+      "threshold": 0.8,
+      "withheld_count": 2,
+      "retrieved_ids": [
+        "PG-0006::001",
+        "PG-0006::002",
+        "PG-0010::004",
+        "PG-0006::010",
+        "PG-0006::005",
+        "PG-0030::006"
+      ],
+      "retrieved_labels": [
+        "internal",
+        "public"
+      ],
+      "cited_ids": [],
+      "cited_policy_ids": [],
+      "claims": [],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": "insufficient_evidence",
+      "expected_policy_ids": [
+        "PG-0006",
+        "PG-0010"
+      ],
+      "leaked_canaries": [],
+      "groundedness": null,
+      "judge_provider": null
+    },
+    {
+      "case_id": "pg-ans-015",
+      "kind": "answerable",
+      "split": "gate",
+      "role": "staff",
+      "question": "Above what amount do I need an itemised receipt?",
+      "refused": true,
+      "should_answer": true,
+      "sufficiency": 0.7717,
+      "threshold": 0.8,
+      "withheld_count": 0,
+      "retrieved_ids": [
+        "PG-0006::002",
+        "PG-0010::004",
+        "PG-0008::007",
+        "PG-0010::007",
+        "PG-0015::002",
+        "PG-0001::004"
+      ],
+      "retrieved_labels": [
+        "internal",
+        "public"
+      ],
+      "cited_ids": [],
+      "cited_policy_ids": [],
+      "claims": [],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": "insufficient_evidence",
+      "expected_policy_ids": [
+        "PG-0006",
+        "PG-0010"
+      ],
+      "leaked_canaries": [],
+      "groundedness": null,
+      "judge_provider": null
+    },
+    {
+      "case_id": "pg-ans-017",
+      "kind": "answerable",
+      "split": "gate",
+      "role": "staff",
+      "question": "What is the maximum petty cash claim?",
+      "refused": false,
+      "should_answer": true,
+      "sufficiency": 0.9764,
+      "threshold": 0.8,
+      "withheld_count": 0,
+      "retrieved_ids": [
+        "PG-0010::007",
+        "PG-0010::000",
+        "PG-0010::002",
+        "PG-0010::006",
+        "PG-0010::003",
+        "PG-0013::007"
+      ],
+      "retrieved_labels": [
+        "internal",
+        "public"
+      ],
+      "cited_ids": [
+        "PG-0010::000",
+        "PG-0010::007"
+      ],
+      "cited_policy_ids": [
+        "PG-0010"
+      ],
+      "claims": [
+        {
+          "text": "- The **petty cash claim maximum of USD 500** applies per claim; larger amounts go through Accounts",
+          "citation_ids": [
+            "PG-0010::007"
+          ]
+        },
+        {
+          "text": "Corporate cards and petty cash both put Group money directly in an individual's hands.",
+          "citation_ids": [
+            "PG-0010::000"
+          ]
+        },
+        {
+          "text": "Petty cash floats are held only where a documented operational need exists and no card alternative",
+          "citation_ids": [
+            "PG-0010::007"
+          ]
+        },
+        {
+          "text": "Petty cash is never used to pay an employee for services, to make an advance against salary, or to",
+          "citation_ids": [
+            "PG-0010::007"
+          ]
+        }
+      ],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": null,
+      "expected_policy_ids": [
+        "PG-0010"
+      ],
+      "leaked_canaries": [],
+      "groundedness": 1.0,
+      "judge_provider": "offline-fixture"
+    },
+    {
+      "case_id": "pg-ans-018",
+      "kind": "answerable",
+      "split": "gate",
+      "role": "staff",
+      "question": "Can I use my corporate card for personal expenditure?",
+      "refused": false,
+      "should_answer": true,
+      "sufficiency": 0.9799,
+      "threshold": 0.8,
+      "withheld_count": 0,
+      "retrieved_ids": [
+        "PG-0010::003",
+        "PG-0010::002",
+        "PG-0010::006",
+        "PG-0010::004",
+        "PG-0006::009",
+        "PG-0010::000"
+      ],
+      "retrieved_labels": [
+        "public"
+      ],
+      "cited_ids": [
+        "PG-0010::002",
+        "PG-0010::003"
+      ],
+      "cited_policy_ids": [
+        "PG-0010"
+      ],
+      "claims": [
+        {
+          "text": "Prohibited: any personal expenditure, however small and however promptly repaid; cash withdrawals",
+          "citation_ids": [
+            "PG-0010::003"
+          ]
+        },
+        {
+          "text": "Personal use is the most common breach and is treated seriously precisely because it looks minor.",
+          "citation_ids": [
+            "PG-0010::003"
+          ]
+        },
+        {
+          "text": "The **standard corporate card limit of USD 10,000** per monthly cycle applies to all cardholders.",
+          "citation_ids": [
+            "PG-0010::002"
+          ]
+        },
+        {
+          "text": "A card limit is not spending authority.",
+          "citation_ids": [
+            "PG-0010::002"
+          ]
+        }
+      ],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": null,
+      "expected_policy_ids": [
+        "PG-0010"
+      ],
+      "leaked_canaries": [],
+      "groundedness": 1.0,
+      "judge_provider": "offline-fixture"
+    },
+    {
+      "case_id": "pg-ans-020",
+      "kind": "answerable",
+      "split": "gate",
+      "role": "staff",
+      "question": "What is the approval limit for the Finance Director?",
+      "refused": false,
+      "should_answer": true,
+      "sufficiency": 0.9322,
+      "threshold": 0.8,
+      "withheld_count": 0,
+      "retrieved_ids": [
+        "PG-0007::003",
+        "PG-0010::002",
+        "PG-0028::001",
+        "PG-0028::002",
+        "PG-0007::004",
+        "PG-0006::010"
+      ],
+      "retrieved_labels": [
+        "internal",
+        "public"
+      ],
+      "cited_ids": [
+        "PG-0007::003",
+        "PG-0010::002",
+        "PG-0028::001"
+      ],
+      "cited_policy_ids": [
+        "PG-0007",
+        "PG-0010",
+        "PG-0028"
+      ],
+      "claims": [
+        {
+          "text": "| Requested limit | Approver |",
+          "citation_ids": [
+            "PG-0028::001"
+          ]
+        },
+        {
+          "text": "- The **Finance Director may approve commitments up to USD 100,000**.",
+          "citation_ids": [
+            "PG-0007::003"
+          ]
+        },
+        {
+          "text": "| Temporary uplift, maximum 60 days | Up to double the standing limit | Finance Director |",
+          "citation_ids": [
+            "PG-0010::002"
+          ]
+        },
+        {
+          "text": "| Cardholder group | Cycle limit | Approver |",
+          "citation_ids": [
+            "PG-0010::002"
+          ]
+        }
+      ],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": null,
+      "expected_policy_ids": [
+        "PG-0007"
+      ],
+      "leaked_canaries": [],
+      "groundedness": 1.0,
+      "judge_provider": "offline-fixture"
+    },
+    {
+      "case_id": "pg-ans-021",
+      "kind": "answerable",
+      "split": "gate",
+      "role": "staff",
+      "question": "Who approves a commitment above two million?",
+      "refused": true,
+      "should_answer": true,
+      "sufficiency": 0.4639,
+      "threshold": 0.8,
+      "withheld_count": 0,
+      "retrieved_ids": [
+        "PG-0007::003",
+        "PG-0007::005",
+        "PG-0009::003",
+        "PG-0008::001",
+        "PG-0008::002",
+        "PG-0007::002"
+      ],
+      "retrieved_labels": [
+        "public"
+      ],
+      "cited_ids": [],
+      "cited_policy_ids": [],
+      "claims": [],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": "insufficient_evidence",
+      "expected_policy_ids": [
+        "PG-0007"
+      ],
+      "leaked_canaries": [],
+      "groundedness": null,
+      "judge_provider": null
+    },
+    {
+      "case_id": "pg-ans-023",
+      "kind": "answerable",
+      "split": "gate",
+      "role": "staff",
+      "question": "What is the three-way match tolerance?",
+      "refused": false,
+      "should_answer": true,
+      "sufficiency": 0.9838,
+      "threshold": 0.8,
+      "withheld_count": 0,
+      "retrieved_ids": [
+        "PG-0009::002",
+        "PG-0009::000",
+        "PG-0009::004",
+        "PG-0009::006",
+        "PG-0009::008",
+        "PG-0019::005"
+      ],
+      "retrieved_labels": [
+        "internal",
+        "public"
+      ],
+      "cited_ids": [
+        "PG-0009::002",
+        "PG-0009::004"
+      ],
+      "cited_policy_ids": [
+        "PG-0009"
+      ],
+      "claims": [
+        {
+          "text": "Where the invoice exceeds the purchase order, the **three-way match tolerance of 2 per cent** of",
+          "citation_ids": [
+            "PG-0009::002"
+          ]
+        },
+        {
+          "text": "A match on any key stops the invoice for review.",
+          "citation_ids": [
+            "PG-0009::004"
+          ]
+        },
+        {
+          "text": "Credit notes are matched to the original invoice before they are applied.",
+          "citation_ids": [
+            "PG-0009::004"
+          ]
+        },
+        {
+          "text": "Every purchase-order-backed invoice is matched to the purchase order and the goods receipt.",
+          "citation_ids": [
+            "PG-0009::002"
+          ]
+        }
+      ],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": null,
+      "expected_policy_ids": [
+        "PG-0009",
+        "PG-0008"
+      ],
+      "leaked_canaries": [],
+      "groundedness": 1.0,
+      "judge_provider": "offline-fixture"
+    },
+    {
+      "case_id": "pg-ans-024",
+      "kind": "answerable",
+      "split": "gate",
+      "role": "staff",
+      "question": "How do we detect duplicate invoices?",
+      "refused": true,
+      "should_answer": true,
+      "sufficiency": 0.6617,
+      "threshold": 0.8,
+      "withheld_count": 0,
+      "retrieved_ids": [
+        "PG-0009::008",
+        "PG-0009::004",
+        "PG-0009::001",
+        "PG-0009::003",
+        "PG-0009::007",
+        "PG-0003::003"
+      ],
+      "retrieved_labels": [
+        "public"
+      ],
+      "cited_ids": [],
+      "cited_policy_ids": [],
+      "claims": [],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": "insufficient_evidence",
+      "expected_policy_ids": [
+        "PG-0009"
+      ],
+      "leaked_canaries": [],
+      "groundedness": null,
+      "judge_provider": null
+    },
+    {
+      "case_id": "pg-ans-026",
+      "kind": "answerable",
+      "split": "gate",
+      "role": "staff",
+      "question": "What do we do when a supplier asks to change their bank details?",
+      "refused": true,
+      "should_answer": true,
+      "sufficiency": 0.7043,
+      "threshold": 0.8,
+      "withheld_count": 0,
+      "retrieved_ids": [
+        "PG-0008::005",
+        "PG-0008::004",
+        "PG-0009::005",
+        "PG-0009::004",
+        "PG-0008::000",
+        "PG-0009::006"
+      ],
+      "retrieved_labels": [
+        "public"
+      ],
+      "cited_ids": [],
+      "cited_policy_ids": [],
+      "claims": [],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": "insufficient_evidence",
+      "expected_policy_ids": [
+        "PG-0008",
+        "PG-0009"
+      ],
+      "leaked_canaries": [],
+      "groundedness": null,
+      "judge_provider": null
+    },
+    {
+      "case_id": "pg-ans-027",
+      "kind": "answerable",
+      "split": "gate",
+      "role": "staff",
+      "question": "How many quotations are needed for a purchase of fifty thousand?",
+      "refused": true,
+      "should_answer": true,
+      "sufficiency": 0.2392,
+      "threshold": 0.8,
+      "withheld_count": 2,
+      "retrieved_ids": [
+        "PG-0008::003",
+        "PG-0009::003",
+        "PG-0008::001",
+        "PG-0008::000",
+        "PG-0008::002",
+        "PG-0008::006"
+      ],
+      "retrieved_labels": [
+        "public"
+      ],
+      "cited_ids": [],
+      "cited_policy_ids": [],
+      "claims": [],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": "insufficient_evidence",
+      "expected_policy_ids": [
+        "PG-0008"
+      ],
+      "leaked_canaries": [],
+      "groundedness": null,
+      "judge_provider": null
+    },
+    {
+      "case_id": "pg-ans-029",
+      "kind": "answerable",
+      "split": "gate",
+      "role": "staff",
+      "question": "When is the group submission due?",
+      "refused": true,
+      "should_answer": true,
+      "sufficiency": 0.5604,
+      "threshold": 0.8,
+      "withheld_count": 0,
+      "retrieved_ids": [
+        "PG-0020::005",
+        "PG-0016::004",
+        "PG-0016::001",
+        "PG-0016::005",
+        "PG-0029::001",
+        "PG-0006::002"
+      ],
+      "retrieved_labels": [
+        "internal",
+        "public"
+      ],
+      "cited_ids": [],
+      "cited_policy_ids": [],
+      "claims": [],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": "insufficient_evidence",
+      "expected_policy_ids": [
+        "PG-0016",
+        "PG-0019"
+      ],
+      "leaked_canaries": [],
+      "groundedness": null,
+      "judge_provider": null
+    },
+    {
+      "case_id": "pg-ans-030",
+      "kind": "answerable",
+      "split": "gate",
+      "role": "staff",
+      "question": "What is the accrual threshold?",
+      "refused": false,
+      "should_answer": true,
+      "sufficiency": 0.8988,
+      "threshold": 0.8,
+      "withheld_count": 0,
+      "retrieved_ids": [
+        "PG-0015::002",
+        "PG-0016::002",
+        "PG-0005::002",
+        "PG-0001::003",
+        "PG-0003::001",
+        "PG-0003::002"
+      ],
+      "retrieved_labels": [
+        "internal",
+        "public"
+      ],
+      "cited_ids": [
+        "PG-0003::002",
+        "PG-0015::002",
+        "PG-0016::002"
+      ],
+      "cited_policy_ids": [
+        "PG-0003",
+        "PG-0015",
+        "PG-0016"
+      ],
+      "claims": [
+        {
+          "text": "The Group applies an **accrual threshold of USD 2,500** per item.",
+          "citation_ids": [
+            "PG-0015::002"
+          ]
+        },
+        {
+          "text": "Entities post accruals and prepayments before the sub-ledger close, applying the **accrual threshold",
+          "citation_ids": [
+            "PG-0016::002"
+          ]
+        },
+        {
+          "text": "| Category | Threshold | Applied to |",
+          "citation_ids": [
+            "PG-0003::002"
+          ]
+        },
+        {
+          "text": "Items below the threshold are not",
+          "citation_ids": [
+            "PG-0015::002"
+          ]
+        }
+      ],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": null,
+      "expected_policy_ids": [
+        "PG-0015",
+        "PG-0016"
+      ],
+      "leaked_canaries": [],
+      "groundedness": 1.0,
+      "judge_provider": "offline-fixture"
+    },
+    {
+      "case_id": "pg-ans-032",
+      "kind": "answerable",
+      "split": "gate",
+      "role": "staff",
+      "question": "What approval does a large journal entry need?",
+      "refused": false,
+      "should_answer": true,
+      "sufficiency": 0.8215,
+      "threshold": 0.8,
+      "withheld_count": 0,
+      "retrieved_ids": [
+        "PG-0017::000",
+        "PG-0017::003",
+        "PG-0017::008",
+        "PG-0017::002",
+        "PG-0017::007",
+        "PG-0017::004"
+      ],
+      "retrieved_labels": [
+        "internal"
+      ],
+      "cited_ids": [
+        "PG-0017::000",
+        "PG-0017::003",
+        "PG-0017::004"
+      ],
+      "cited_policy_ids": [
+        "PG-0017"
+      ],
+      "claims": [
+        {
+          "text": "| Entry value (larger of debit or credit total) | Approval |",
+          "citation_ids": [
+            "PG-0017::003"
+          ]
+        },
+        {
+          "text": "The preparer of a journal may not approve it.",
+          "citation_ids": [
+            "PG-0017::004"
+          ]
+        },
+        {
+          "text": "Where a system permits posting before approval, the entry is",
+          "citation_ids": [
+            "PG-0017::003"
+          ]
+        },
+        {
+          "text": "This policy sets the evidence and approval standard for every such entry.",
+          "citation_ids": [
+            "PG-0017::000"
+          ]
+        }
+      ],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": null,
+      "expected_policy_ids": [
+        "PG-0017"
+      ],
+      "leaked_canaries": [],
+      "groundedness": 1.0,
+      "judge_provider": "offline-fixture"
+    },
+    {
+      "case_id": "pg-ans-033",
+      "kind": "answerable",
+      "split": "gate",
+      "role": "staff",
+      "question": "Can the preparer of a journal also approve it?",
+      "refused": true,
+      "should_answer": true,
+      "sufficiency": 0.7698,
+      "threshold": 0.8,
+      "withheld_count": 0,
+      "retrieved_ids": [
+        "PG-0017::004",
+        "PG-0017::008",
+        "PG-0017::007",
+        "PG-0017::005",
+        "PG-0017::002",
+        "PG-0017::003"
+      ],
+      "retrieved_labels": [
+        "internal"
+      ],
+      "cited_ids": [],
+      "cited_policy_ids": [],
+      "claims": [],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": "insufficient_evidence",
+      "expected_policy_ids": [
+        "PG-0017"
+      ],
+      "leaked_canaries": [],
+      "groundedness": null,
+      "judge_provider": null
+    },
+    {
+      "case_id": "pg-ans-035",
+      "kind": "answerable",
+      "split": "gate",
+      "role": "staff",
+      "question": "What is group performance materiality?",
+      "refused": false,
+      "should_answer": true,
+      "sufficiency": 0.922,
+      "threshold": 0.8,
+      "withheld_count": 0,
+      "retrieved_ids": [
+        "PG-0001::004",
+        "PG-0030::005",
+        "PG-0012::005",
+        "PG-0016::005",
+        "PG-0012::003",
+        "PG-0018::004"
+      ],
+      "retrieved_labels": [
+        "internal",
+        "public"
+      ],
+      "cited_ids": [
+        "PG-0001::004",
+        "PG-0016::005",
+        "PG-0030::005"
+      ],
+      "cited_policy_ids": [
+        "PG-0001",
+        "PG-0016",
+        "PG-0030"
+      ],
+      "claims": [
+        {
+          "text": "The Group applies a **group performance materiality of USD 1,500,000** for consolidated reporting",
+          "citation_ids": [
+            "PG-0001::004"
+          ]
+        },
+        {
+          "text": "**group performance materiality of USD 1,500,000** is reported to the Finance Director before it is",
+          "citation_ids": [
+            "PG-0030::005"
+          ]
+        },
+        {
+          "text": "Component materiality is allocated by Group Technical Accounting each year and",
+          "citation_ids": [
+            "PG-0001::004"
+          ]
+        },
+        {
+          "text": "Errors found after the group review meeting are assessed against materiality under PG-0001.",
+          "citation_ids": [
+            "PG-0016::005"
+          ]
+        }
+      ],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": null,
+      "expected_policy_ids": [
+        "PG-0001",
+        "PG-0018",
+        "PG-0030"
+      ],
+      "leaked_canaries": [],
+      "groundedness": 1.0,
+      "judge_provider": "offline-fixture"
+    },
+    {
+      "case_id": "pg-ans-036",
+      "kind": "answerable",
+      "split": "gate",
+      "role": "staff",
+      "question": "Which rate do we use to translate income statement items?",
+      "refused": false,
+      "should_answer": true,
+      "sufficiency": 0.9737,
+      "threshold": 0.8,
+      "withheld_count": 0,
+      "retrieved_ids": [
+        "PG-0020::002",
+        "PG-0020::003",
+        "PG-0020::004",
+        "PG-0020::005",
+        "PG-0020::000",
+        "PG-0006::009"
+      ],
+      "retrieved_labels": [
+        "internal",
+        "public"
+      ],
+      "cited_ids": [
+        "PG-0020::002",
+        "PG-0020::003",
+        "PG-0020::004"
+      ],
+      "cited_policy_ids": [
+        "PG-0020"
+      ],
+      "claims": [
+        {
+          "text": "| Monthly average rate | Income statement items, and transactions below USD 250,000 equivalent |",
+          "citation_ids": [
+            "PG-0020::002"
+          ]
+        },
+        {
+          "text": "- **Non-monetary items at fair value** are translated at the rate ruling when fair value was",
+          "citation_ids": [
+            "PG-0020::003"
+          ]
+        },
+        {
+          "text": "| Income and expense | Average rate for the period |",
+          "citation_ids": [
+            "PG-0020::004"
+          ]
+        },
+        {
+          "text": "| Daily spot rate | Individual transactions above USD 250,000 equivalent |",
+          "citation_ids": [
+            "PG-0020::002"
+          ]
+        }
+      ],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": null,
+      "expected_policy_ids": [
+        "PG-0020"
+      ],
+      "leaked_canaries": [],
+      "groundedness": 1.0,
+      "judge_provider": "offline-fixture"
+    },
+    {
+      "case_id": "pg-ans-038",
+      "kind": "answerable",
+      "split": "gate",
+      "role": "staff",
+      "question": "How do we allocate the transaction price across obligations?",
+      "refused": false,
+      "should_answer": true,
+      "sufficiency": 0.9627,
+      "threshold": 0.8,
+      "withheld_count": 0,
+      "retrieved_ids": [
+        "PG-0012::000",
+        "PG-0012::005",
+        "PG-0012::003",
+        "PG-0012::004",
+        "PG-0012::006",
+        "PG-0012::007"
+      ],
+      "retrieved_labels": [
+        "internal"
+      ],
+      "cited_ids": [
+        "PG-0012::003",
+        "PG-0012::004",
+        "PG-0012::005",
+        "PG-0012::006"
+      ],
+      "cited_policy_ids": [
+        "PG-0012"
+      ],
+      "claims": [
+        {
+          "text": "The transaction price is allocated to each obligation in proportion to the standalone selling price",
+          "citation_ids": [
+            "PG-0012::004"
+          ]
+        },
+        {
+          "text": "A discount is allocated proportionately across all obligations unless there is observable evidence",
+          "citation_ids": [
+            "PG-0012::005"
+          ]
+        },
+        {
+          "text": "| Additional distinct goods, not at standalone selling price | Terminate and replace: remaining consideration spread over remaining obligations prospectively |",
+          "citation_ids": [
+            "PG-0012::006"
+          ]
+        },
+        {
+          "text": "Renewal options priced at the",
+          "citation_ids": [
+            "PG-0012::003"
+          ]
+        }
+      ],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": null,
+      "expected_policy_ids": [
+        "PG-0012"
+      ],
+      "leaked_canaries": [],
+      "groundedness": 1.0,
+      "judge_provider": "offline-fixture"
+    },
+    {
+      "case_id": "pg-ans-039",
+      "kind": "answerable",
+      "split": "gate",
+      "role": "staff",
+      "question": "What is the standalone selling price tolerance band?",
+      "refused": false,
+      "should_answer": true,
+      "sufficiency": 0.964,
+      "threshold": 0.8,
+      "withheld_count": 0,
+      "retrieved_ids": [
+        "PG-0012::004",
+        "PG-0012::006",
+        "PG-0012::007",
+        "PG-0018::004",
+        "PG-0027::007",
+        "PG-0009::002"
+      ],
+      "retrieved_labels": [
+        "internal",
+        "public"
+      ],
+      "cited_ids": [
+        "PG-0012::004",
+        "PG-0012::006"
+      ],
+      "cited_policy_ids": [
+        "PG-0012"
+      ],
+      "claims": [
+        {
+          "text": "Where observed standalone prices cluster, the Group applies a **standalone selling price tolerance",
+          "citation_ids": [
+            "PG-0012::004"
+          ]
+        },
+        {
+          "text": "| Additional distinct goods at their standalone selling price | Separate new contract |",
+          "citation_ids": [
+            "PG-0012::006"
+          ]
+        },
+        {
+          "text": "The transaction price is allocated to each obligation in proportion to the standalone selling price",
+          "citation_ids": [
+            "PG-0012::004"
+          ]
+        },
+        {
+          "text": "The best evidence of standalone selling price is the observable price when the item is sold",
+          "citation_ids": [
+            "PG-0012::004"
+          ]
+        }
+      ],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": null,
+      "expected_policy_ids": [
+        "PG-0012"
+      ],
+      "leaked_canaries": [],
+      "groundedness": 1.0,
+      "judge_provider": "offline-fixture"
+    },
+    {
+      "case_id": "pg-ans-041",
+      "kind": "answerable",
+      "split": "gate",
+      "role": "staff",
+      "question": "Are sales commissions capitalised?",
+      "refused": false,
+      "should_answer": true,
+      "sufficiency": 0.9863,
+      "threshold": 0.8,
+      "withheld_count": 0,
+      "retrieved_ids": [
+        "PG-0014::000",
+        "PG-0014::005",
+        "PG-0014::006",
+        "PG-0014::004",
+        "PG-0014::001",
+        "PG-0014::003"
+      ],
+      "retrieved_labels": [
+        "internal"
+      ],
+      "cited_ids": [
+        "PG-0014::001",
+        "PG-0014::006"
+      ],
+      "cited_policy_ids": [
+        "PG-0014"
+      ],
+      "claims": [
+        {
+          "text": "| Commission paid only on a signed contract | Capitalise | Incremental |",
+          "citation_ids": [
+            "PG-0014::001"
+          ]
+        },
+        {
+          "text": "| Employer payroll taxes on a capitalised commission | Capitalise | Follows the commission |",
+          "citation_ids": [
+            "PG-0014::001"
+          ]
+        },
+        {
+          "text": "- The capitalised commission balance is reconciled monthly to the underlying contract population.",
+          "citation_ids": [
+            "PG-0014::006"
+          ]
+        },
+        {
+          "text": "| Fixed salary of the salesperson | Expense | Not incremental |",
+          "citation_ids": [
+            "PG-0014::001"
+          ]
+        }
+      ],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": null,
+      "expected_policy_ids": [
+        "PG-0014"
+      ],
+      "leaked_canaries": [],
+      "groundedness": 1.0,
+      "judge_provider": "offline-fixture"
+    },
+    {
+      "case_id": "pg-ans-042",
+      "kind": "answerable",
+      "split": "gate",
+      "role": "staff",
+      "question": "Over what maximum period are contract cost assets amortised?",
+      "refused": false,
+      "should_answer": true,
+      "sufficiency": 0.8109,
+      "threshold": 0.8,
+      "withheld_count": 0,
+      "retrieved_ids": [
+        "PG-0014::003",
+        "PG-0014::005",
+        "PG-0005::005",
+        "PG-0014::000",
+        "PG-0014::001",
+        "PG-0005::006"
+      ],
+      "retrieved_labels": [
+        "internal",
+        "public"
+      ],
+      "cited_ids": [
+        "PG-0014::001",
+        "PG-0014::003",
+        "PG-0014::005"
+      ],
+      "cited_policy_ids": [
+        "PG-0014"
+      ],
+      "claims": [
+        {
+          "text": "Contract cost assets are **amortised over a period not exceeding 5 years** unless Group Technical",
+          "citation_ids": [
+            "PG-0014::003"
+          ]
+        },
+        {
+          "text": "Contract cost assets are amortised on a systematic basis consistent with the transfer of the goods",
+          "citation_ids": [
+            "PG-0014::003"
+          ]
+        },
+        {
+          "text": "Contract cost assets are presented separately from contract assets arising from performance.",
+          "citation_ids": [
+            "PG-0014::005"
+          ]
+        },
+        {
+          "text": "Practical expedient: where the amortisation period would be one year or less, the cost is expensed",
+          "citation_ids": [
+            "PG-0014::001"
+          ]
+        }
+      ],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": null,
+      "expected_policy_ids": [
+        "PG-0014"
+      ],
+      "leaked_canaries": [],
+      "groundedness": 1.0,
+      "judge_provider": "offline-fixture"
+    },
+    {
+      "case_id": "pg-ans-044",
+      "kind": "answerable",
+      "split": "gate",
+      "role": "staff",
+      "question": "Which discount rate do we use for a property lease?",
+      "refused": false,
+      "should_answer": true,
+      "sufficiency": 0.9568,
+      "threshold": 0.8,
+      "withheld_count": 0,
+      "retrieved_ids": [
+        "PG-0027::000",
+        "PG-0027::004",
+        "PG-0027::007",
+        "PG-0030::004",
+        "PG-0004::001",
+        "PG-0003::002"
+      ],
+      "retrieved_labels": [
+        "internal",
+        "public"
+      ],
+      "cited_ids": [
+        "PG-0027::000",
+        "PG-0027::004"
+      ],
+      "cited_policy_ids": [
+        "PG-0027"
+      ],
+      "claims": [
+        {
+          "text": "The rate implicit in the lease is used where it can be readily determined, which for property leases",
+          "citation_ids": [
+            "PG-0027::004"
+          ]
+        },
+        {
+          "text": "Property leases dominate the portfolio, and the",
+          "citation_ids": [
+            "PG-0027::000"
+          ]
+        },
+        {
+          "text": "Entities use the published rate and do not derive their own.",
+          "citation_ids": [
+            "PG-0027::004"
+          ]
+        },
+        {
+          "text": "Group Treasury publishes a rate table each quarter by currency, entity credit profile and lease",
+          "citation_ids": [
+            "PG-0027::004"
+          ]
+        }
+      ],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": null,
+      "expected_policy_ids": [
+        "PG-0027"
+      ],
+      "leaked_canaries": [],
+      "groundedness": 1.0,
+      "judge_provider": "offline-fixture"
+    },
+    {
+      "case_id": "pg-ans-045",
+      "kind": "answerable",
+      "split": "gate",
+      "role": "staff",
+      "question": "What provision rate applies to receivables over 180 days past due?",
+      "refused": false,
+      "should_answer": true,
+      "sufficiency": 0.9872,
+      "threshold": 0.8,
+      "withheld_count": 1,
+      "retrieved_ids": [
+        "PG-0028::004",
+        "PG-0028::003",
+        "PG-0028::007",
+        "PG-0028::000",
+        "PG-0006::004",
+        "PG-0028::006"
+      ],
+      "retrieved_labels": [
+        "internal",
+        "public"
+      ],
+      "cited_ids": [
+        "PG-0028::003",
+        "PG-0028::004"
+      ],
+      "cited_policy_ids": [
+        "PG-0028"
+      ],
+      "claims": [
+        {
+          "text": "| Days past due | Base provision rate |",
+          "citation_ids": [
+            "PG-0028::004"
+          ]
+        },
+        {
+          "text": "| Days past due | Action | Owner |",
+          "citation_ids": [
+            "PG-0028::003"
+          ]
+        },
+        {
+          "text": "| Over 180 | 100 per cent |",
+          "citation_ids": [
+            "PG-0028::004"
+          ]
+        },
+        {
+          "text": "A provision matrix is applied by ageing",
+          "citation_ids": [
+            "PG-0028::004"
+          ]
+        }
+      ],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": null,
+      "expected_policy_ids": [
+        "PG-0028"
+      ],
+      "leaked_canaries": [],
+      "groundedness": 1.0,
+      "judge_provider": "offline-fixture"
+    },
+    {
+      "case_id": "pg-ans-047",
+      "kind": "answerable",
+      "split": "gate",
+      "role": "staff",
+      "question": "What cost formula do we use for inventory?",
+      "refused": false,
+      "should_answer": true,
+      "sufficiency": 0.9903,
+      "threshold": 0.8,
+      "withheld_count": 0,
+      "retrieved_ids": [
+        "PG-0029::001",
+        "PG-0029::000",
+        "PG-0029::003",
+        "PG-0029::002",
+        "PG-0029::008",
+        "PG-0029::006"
+      ],
+      "retrieved_labels": [
+        "internal"
+      ],
+      "cited_ids": [
+        "PG-0029::000",
+        "PG-0029::001",
+        "PG-0029::002"
+      ],
+      "cited_policy_ids": [
+        "PG-0029"
+      ],
+      "claims": [
+        {
+          "text": "The formula is applied consistently to all inventories of a similar nature and use.",
+          "citation_ids": [
+            "PG-0029::001"
+          ]
+        },
+        {
+          "text": "The Group uses weighted average cost for all inventory categories.",
+          "citation_ids": [
+            "PG-0029::001"
+          ]
+        },
+        {
+          "text": "Inventory is carried at the lower of cost and net realisable value.",
+          "citation_ids": [
+            "PG-0029::000"
+          ]
+        },
+        {
+          "text": "This is the most common inventory",
+          "citation_ids": [
+            "PG-0029::002"
+          ]
+        }
+      ],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": null,
+      "expected_policy_ids": [
+        "PG-0029"
+      ],
+      "leaked_canaries": [],
+      "groundedness": 1.0,
+      "judge_provider": "offline-fixture"
+    },
+    {
+      "case_id": "pg-ans-048",
+      "kind": "answerable",
+      "split": "gate",
+      "role": "staff",
+      "question": "What happens to fixed production overhead when output is abnormally low?",
+      "refused": false,
+      "should_answer": true,
+      "sufficiency": 0.8493,
+      "threshold": 0.8,
+      "withheld_count": 0,
+      "retrieved_ids": [
+        "PG-0029::002",
+        "PG-0016::000",
+        "PG-0027::003",
+        "PG-0018::001",
+        "PG-0008::000",
+        "PG-0005::001"
+      ],
+      "retrieved_labels": [
+        "internal",
+        "public"
+      ],
+      "cited_ids": [
+        "PG-0016::000",
+        "PG-0029::002"
+      ],
+      "cited_policy_ids": [
+        "PG-0016",
+        "PG-0029"
+      ],
+      "claims": [
+        {
+          "text": "Where actual production is abnormally low, the fixed overhead per unit is **not**",
+          "citation_ids": [
+            "PG-0029::002"
+          ]
+        },
+        {
+          "text": "**Excluded:** abnormal waste, storage costs other than those necessary before a further production",
+          "citation_ids": [
+            "PG-0029::002"
+          ]
+        },
+        {
+          "text": "This policy states what happens on each",
+          "citation_ids": [
+            "PG-0016::000"
+          ]
+        },
+        {
+          "text": "The close is a fixed timetable, not a best-effort exercise.",
+          "citation_ids": [
+            "PG-0016::000"
+          ]
+        }
+      ],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": null,
+      "expected_policy_ids": [
+        "PG-0029"
+      ],
+      "leaked_canaries": [],
+      "groundedness": 1.0,
+      "judge_provider": "offline-fixture"
+    },
+    {
+      "case_id": "pg-ans-050",
+      "kind": "answerable",
+      "split": "gate",
+      "role": "staff",
+      "question": "Can an impairment of goodwill be reversed?",
+      "refused": false,
+      "should_answer": true,
+      "sufficiency": 0.9644,
+      "threshold": 0.8,
+      "withheld_count": 0,
+      "retrieved_ids": [
+        "PG-0030::006",
+        "PG-0005::007",
+        "PG-0030::000",
+        "PG-0014::004",
+        "PG-0030::001",
+        "PG-0030::005"
+      ],
+      "retrieved_labels": [
+        "internal",
+        "public"
+      ],
+      "cited_ids": [
+        "PG-0014::004",
+        "PG-0030::005",
+        "PG-0030::006"
+      ],
+      "cited_policy_ids": [
+        "PG-0014",
+        "PG-0030"
+      ],
+      "claims": [
+        {
+          "text": "**Impairment of goodwill is never reversed.** A reversal is recognised in the period the change in",
+          "citation_ids": [
+            "PG-0030::006"
+          ]
+        },
+        {
+          "text": "Impairment losses on assets other than goodwill are reversed where the estimates used to determine",
+          "citation_ids": [
+            "PG-0030::006"
+          ]
+        },
+        {
+          "text": "An impairment loss reduces goodwill allocated to the unit first, then the other assets of the unit",
+          "citation_ids": [
+            "PG-0030::005"
+          ]
+        },
+        {
+          "text": "Impairment losses on contract",
+          "citation_ids": [
+            "PG-0014::004"
+          ]
+        }
+      ],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": null,
+      "expected_policy_ids": [
+        "PG-0030"
+      ],
+      "leaked_canaries": [],
+      "groundedness": 1.0,
+      "judge_provider": "offline-fixture"
+    },
+    {
+      "case_id": "pg-una-002",
+      "kind": "unanswerable",
+      "split": "gate",
+      "role": "staff",
+      "question": "What is our policy on carbon credits and emissions allowances?",
+      "refused": true,
+      "should_answer": false,
+      "sufficiency": 0.2656,
+      "threshold": 0.8,
+      "withheld_count": 2,
+      "retrieved_ids": [
+        "PG-0001::005",
+        "PG-0028::000",
+        "PG-0018::000",
+        "PG-0004::000",
+        "PG-0014::000",
+        "PG-0002::005"
+      ],
+      "retrieved_labels": [
+        "internal",
+        "public"
+      ],
+      "cited_ids": [],
+      "cited_policy_ids": [],
+      "claims": [],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": "insufficient_evidence",
+      "expected_policy_ids": [],
+      "leaked_canaries": [],
+      "groundedness": null,
+      "judge_provider": null
+    },
+    {
+      "case_id": "pg-una-003",
+      "kind": "unanswerable",
+      "split": "gate",
+      "role": "staff",
+      "question": "How are biological assets measured?",
+      "refused": true,
+      "should_answer": false,
+      "sufficiency": 0.3808,
+      "threshold": 0.8,
+      "withheld_count": 0,
+      "retrieved_ids": [
+        "PG-0004::002",
+        "PG-0030::000",
+        "PG-0020::002",
+        "PG-0030::001",
+        "PG-0005::001",
+        "PG-0027::006"
+      ],
+      "retrieved_labels": [
+        "internal",
+        "public"
+      ],
+      "cited_ids": [],
+      "cited_policy_ids": [],
+      "claims": [],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": "insufficient_evidence",
+      "expected_policy_ids": [],
+      "leaked_canaries": [],
+      "groundedness": null,
+      "judge_provider": null
+    },
+    {
+      "case_id": "pg-una-005",
+      "kind": "unanswerable",
+      "split": "gate",
+      "role": "staff",
+      "question": "What is the parental leave entitlement?",
+      "refused": true,
+      "should_answer": false,
+      "sufficiency": 0.6083,
+      "threshold": 0.8,
+      "withheld_count": 0,
+      "retrieved_ids": [
+        "PG-0011::001",
+        "PG-0011::002",
+        "PG-0016::006",
+        "PG-0010::006",
+        "PG-0015::004",
+        "PG-0001::004"
+      ],
+      "retrieved_labels": [
+        "internal",
+        "public"
+      ],
+      "cited_ids": [],
+      "cited_policy_ids": [],
+      "claims": [],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": "insufficient_evidence",
+      "expected_policy_ids": [],
+      "leaked_canaries": [],
+      "groundedness": null,
+      "judge_provider": null
+    },
+    {
+      "case_id": "pg-una-006",
+      "kind": "unanswerable",
+      "split": "gate",
+      "role": "staff",
+      "question": "What is our cybersecurity incident escalation procedure?",
+      "refused": true,
+      "should_answer": false,
+      "sufficiency": 0.3543,
+      "threshold": 0.8,
+      "withheld_count": 1,
+      "retrieved_ids": [
+        "PG-0018::004",
+        "PG-0001::003",
+        "PG-0005::001",
+        "PG-0003::003",
+        "PG-0028::003",
+        "PG-0004::006"
+      ],
+      "retrieved_labels": [
+        "internal",
+        "public"
+      ],
+      "cited_ids": [],
+      "cited_policy_ids": [],
+      "claims": [],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": "insufficient_evidence",
+      "expected_policy_ids": [],
+      "leaked_canaries": [],
+      "groundedness": null,
+      "judge_provider": null
+    },
+    {
+      "case_id": "pg-una-008",
+      "kind": "unanswerable",
+      "split": "gate",
+      "role": "staff",
+      "question": "What is the policy on remote working from abroad?",
+      "refused": true,
+      "should_answer": false,
+      "sufficiency": 0.2864,
+      "threshold": 0.8,
+      "withheld_count": 3,
+      "retrieved_ids": [
+        "PG-0011::000",
+        "PG-0016::000",
+        "PG-0001::005",
+        "PG-0015::007",
+        "PG-0009::007",
+        "PG-0019::004"
+      ],
+      "retrieved_labels": [
+        "internal",
+        "public"
+      ],
+      "cited_ids": [],
+      "cited_policy_ids": [],
+      "claims": [],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": "insufficient_evidence",
+      "expected_policy_ids": [],
+      "leaked_canaries": [],
+      "groundedness": null,
+      "judge_provider": null
+    },
+    {
+      "case_id": "pg-una-009",
+      "kind": "unanswerable",
+      "split": "gate",
+      "role": "staff",
+      "question": "How do we account for employee share purchase plan discounts?",
+      "refused": false,
+      "should_answer": false,
+      "sufficiency": 0.8013,
+      "threshold": 0.8,
+      "withheld_count": 0,
+      "retrieved_ids": [
+        "PG-0003::004",
+        "PG-0006::000",
+        "PG-0002::000",
+        "PG-0018::001",
+        "PG-0002::003",
+        "PG-0009::004"
+      ],
+      "retrieved_labels": [
+        "internal",
+        "public"
+      ],
+      "cited_ids": [
+        "PG-0002::000",
+        "PG-0002::003",
+        "PG-0003::004",
+        "PG-0018::001"
+      ],
+      "cited_policy_ids": [
+        "PG-0002",
+        "PG-0003",
+        "PG-0018"
+      ],
+      "claims": [
+        {
+          "text": "Included: purchase price after trade discounts, non-recoverable duties, freight, installation,",
+          "citation_ids": [
+            "PG-0003::004"
+          ]
+        },
+        {
+          "text": "A shared chart of accounts is what makes consolidation possible without manual mapping.",
+          "citation_ids": [
+            "PG-0002::000"
+          ]
+        },
+        {
+          "text": "The owner is accountable for the",
+          "citation_ids": [
+            "PG-0002::003"
+          ]
+        },
+        {
+          "text": "Accounts are assigned a risk rating that drives frequency:",
+          "citation_ids": [
+            "PG-0018::001"
+          ]
+        }
+      ],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": null,
+      "expected_policy_ids": [],
+      "leaked_canaries": [],
+      "groundedness": 1.0,
+      "judge_provider": "offline-fixture"
+    },
+    {
+      "case_id": "pg-una-011",
+      "kind": "unanswerable",
+      "split": "gate",
+      "role": "staff",
+      "question": "How is transfer pricing documentation prepared?",
+      "refused": true,
+      "should_answer": false,
+      "sufficiency": 0.5675,
+      "threshold": 0.8,
+      "withheld_count": 2,
+      "retrieved_ids": [
+        "PG-0012::007",
+        "PG-0030::007",
+        "PG-0020::006",
+        "PG-0011::001",
+        "PG-0019::003",
+        "PG-0011::006"
+      ],
+      "retrieved_labels": [
+        "internal"
+      ],
+      "cited_ids": [],
+      "cited_policy_ids": [],
+      "claims": [],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": "insufficient_evidence",
+      "expected_policy_ids": [],
+      "leaked_canaries": [],
+      "groundedness": null,
+      "judge_provider": null
+    },
+    {
+      "case_id": "pg-una-012",
+      "kind": "unanswerable",
+      "split": "gate",
+      "role": "staff",
+      "question": "What insurance cover does the Group carry on its buildings?",
+      "refused": true,
+      "should_answer": false,
+      "sufficiency": 0.7647,
+      "threshold": 0.8,
+      "withheld_count": 0,
+      "retrieved_ids": [
+        "PG-0006::009",
+        "PG-0001::005",
+        "PG-0006::006",
+        "PG-0004::004",
+        "PG-0010::002",
+        "PG-0001::003"
+      ],
+      "retrieved_labels": [
+        "public"
+      ],
+      "cited_ids": [],
+      "cited_policy_ids": [],
+      "claims": [],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": "insufficient_evidence",
+      "expected_policy_ids": [],
+      "leaked_canaries": [],
+      "groundedness": null,
+      "judge_provider": null
+    },
+    {
+      "case_id": "pg-una-014",
+      "kind": "unanswerable",
+      "split": "gate",
+      "role": "staff",
+      "question": "How do we account for pension scheme surpluses?",
+      "refused": true,
+      "should_answer": false,
+      "sufficiency": 0.3165,
+      "threshold": 0.8,
+      "withheld_count": 0,
+      "retrieved_ids": [
+        "PG-0013::002",
+        "PG-0002::000",
+        "PG-0009::004",
+        "PG-0002::004",
+        "PG-0006::008",
+        "PG-0002::002"
+      ],
+      "retrieved_labels": [
+        "internal",
+        "public"
+      ],
+      "cited_ids": [],
+      "cited_policy_ids": [],
+      "claims": [],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": "insufficient_evidence",
+      "expected_policy_ids": [],
+      "leaked_canaries": [],
+      "groundedness": null,
+      "judge_provider": null
+    },
+    {
+      "case_id": "pg-una-015",
+      "kind": "unanswerable",
+      "split": "gate",
+      "role": "staff",
+      "question": "What is the policy on political donations to trade associations?",
+      "refused": true,
+      "should_answer": false,
+      "sufficiency": 0.2078,
+      "threshold": 0.8,
+      "withheld_count": 2,
+      "retrieved_ids": [
+        "PG-0003::007",
+        "PG-0012::000",
+        "PG-0005::000",
+        "PG-0004::000",
+        "PG-0013::000",
+        "PG-0007::000"
+      ],
+      "retrieved_labels": [
+        "internal",
+        "public"
+      ],
+      "cited_ids": [],
+      "cited_policy_ids": [],
+      "claims": [],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": "insufficient_evidence",
+      "expected_policy_ids": [],
+      "leaked_canaries": [],
+      "groundedness": null,
+      "judge_provider": null
+    },
+    {
+      "case_id": "pg-una-017",
+      "kind": "unanswerable",
+      "split": "gate",
+      "role": "staff",
+      "question": "What is the retention period for supplier contracts?",
+      "refused": true,
+      "should_answer": false,
+      "sufficiency": 0.7137,
+      "threshold": 0.8,
+      "withheld_count": 4,
+      "retrieved_ids": [
+        "PG-0015::005",
+        "PG-0015::006",
+        "PG-0011::004",
+        "PG-0008::004",
+        "PG-0017::007",
+        "PG-0008::008"
+      ],
+      "retrieved_labels": [
+        "internal",
+        "public"
+      ],
+      "cited_ids": [],
+      "cited_policy_ids": [],
+      "claims": [],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": "insufficient_evidence",
+      "expected_policy_ids": [],
+      "leaked_canaries": [],
+      "groundedness": null,
+      "judge_provider": null
+    },
+    {
+      "case_id": "pg-una-018",
+      "kind": "unanswerable",
+      "split": "gate",
+      "role": "staff",
+      "question": "How is the internal audit plan approved?",
+      "refused": false,
+      "should_answer": false,
+      "sufficiency": 0.8981,
+      "threshold": 0.8,
+      "withheld_count": 2,
+      "retrieved_ids": [
+        "PG-0028::006",
+        "PG-0017::007",
+        "PG-0030::002",
+        "PG-0004::006",
+        "PG-0017::005",
+        "PG-0007::002"
+      ],
+      "retrieved_labels": [
+        "internal",
+        "public"
+      ],
+      "cited_ids": [
+        "PG-0004::006",
+        "PG-0007::002",
+        "PG-0017::005",
+        "PG-0017::007"
+      ],
+      "cited_policy_ids": [
+        "PG-0004",
+        "PG-0007",
+        "PG-0017"
+      ],
+      "claims": [
+        {
+          "text": "The audit trail records who prepared, who approved, and when",
+          "citation_ids": [
+            "PG-0017::007"
+          ]
+        },
+        {
+          "text": "These criteria are also the standing analytics run by Internal Audit each quarter over the journal",
+          "citation_ids": [
+            "PG-0017::005"
+          ]
+        },
+        {
+          "text": "Below that amount, Department Head approval is sufficient.",
+          "citation_ids": [
+            "PG-0004::006"
+          ]
+        },
+        {
+          "text": "USD 120,000 commitment and requires approval at that level.",
+          "citation_ids": [
+            "PG-0007::002"
+          ]
+        }
+      ],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": null,
+      "expected_policy_ids": [],
+      "leaked_canaries": [],
+      "groundedness": 1.0,
+      "judge_provider": "offline-fixture"
+    },
+    {
+      "case_id": "pg-una-020",
+      "kind": "unanswerable",
+      "split": "gate",
+      "role": "staff",
+      "question": "How do we account for government grants received?",
+      "refused": true,
+      "should_answer": false,
+      "sufficiency": 0.4242,
+      "threshold": 0.8,
+      "withheld_count": 0,
+      "retrieved_ids": [
+        "PG-0009::005",
+        "PG-0009::007",
+        "PG-0018::001",
+        "PG-0002::003",
+        "PG-0015::001",
+        "PG-0018::006"
+      ],
+      "retrieved_labels": [
+        "internal",
+        "public"
+      ],
+      "cited_ids": [],
+      "cited_policy_ids": [],
+      "claims": [],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": "insufficient_evidence",
+      "expected_policy_ids": [],
+      "leaked_canaries": [],
+      "groundedness": null,
+      "judge_provider": null
+    },
+    {
+      "case_id": "pg-res-002",
+      "kind": "restricted",
+      "split": "gate",
+      "role": "guest",
+      "question": "When is a retention award accrued?",
+      "refused": true,
+      "should_answer": false,
+      "sufficiency": 0.3818,
+      "threshold": 0.8,
+      "withheld_count": 6,
+      "retrieved_ids": [
+        "PG-0004::000",
+        "PG-0007::005",
+        "PG-0004::002",
+        "PG-0002::003",
+        "PG-0003::001",
+        "PG-0004::008"
+      ],
+      "retrieved_labels": [
+        "public"
+      ],
+      "cited_ids": [],
+      "cited_policy_ids": [],
+      "claims": [],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": "insufficient_evidence",
+      "expected_policy_ids": [
+        "PG-0021"
+      ],
+      "leaked_canaries": [],
+      "groundedness": null,
+      "judge_provider": null
+    },
+    {
+      "case_id": "pg-res-002",
+      "kind": "restricted",
+      "split": "gate",
+      "role": "staff",
+      "question": "When is a retention award accrued?",
+      "refused": true,
+      "should_answer": false,
+      "sufficiency": 0.6325,
+      "threshold": 0.8,
+      "withheld_count": 6,
+      "retrieved_ids": [
+        "PG-0017::007",
+        "PG-0015::005",
+        "PG-0015::002",
+        "PG-0017::001",
+        "PG-0007::005",
+        "PG-0013::000"
+      ],
+      "retrieved_labels": [
+        "internal",
+        "public"
+      ],
+      "cited_ids": [],
+      "cited_policy_ids": [],
+      "claims": [],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": "insufficient_evidence",
+      "expected_policy_ids": [
+        "PG-0021"
+      ],
+      "leaked_canaries": [],
+      "groundedness": null,
+      "judge_provider": null
+    },
+    {
+      "case_id": "pg-res-002",
+      "kind": "restricted",
+      "split": "gate",
+      "role": "controller",
+      "question": "When is a retention award accrued?",
+      "refused": false,
+      "should_answer": true,
+      "sufficiency": 0.9749,
+      "threshold": 0.8,
+      "withheld_count": 0,
+      "retrieved_ids": [
+        "PG-0021::005",
+        "PG-0021::002",
+        "PG-0021::003",
+        "PG-0021::000",
+        "PG-0021::004",
+        "PG-0021::006"
+      ],
+      "retrieved_labels": [
+        "restricted"
+      ],
+      "cited_ids": [
+        "PG-0021::002",
+        "PG-0021::004",
+        "PG-0021::005"
+      ],
+      "cited_policy_ids": [
+        "PG-0021"
+      ],
+      "claims": [
+        {
+          "text": "Retention awards are accrued over the retention period, not at the date of grant.",
+          "citation_ids": [
+            "PG-0021::005"
+          ]
+        },
+        {
+          "text": "Takers: base salary, annual incentive, long-term incentive, retention awards, buy-out awards on",
+          "citation_ids": [
+            "PG-0021::002"
+          ]
+        },
+        {
+          "text": "Retention awards made outside the normal cycle are approved by the Reward Committee and recorded",
+          "citation_ids": [
+            "PG-0021::005"
+          ]
+        },
+        {
+          "text": "| Award type | Measurement | Recognition |",
+          "citation_ids": [
+            "PG-0021::004"
+          ]
+        }
+      ],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": null,
+      "expected_policy_ids": [
+        "PG-0021"
+      ],
+      "leaked_canaries": [],
+      "groundedness": 1.0,
+      "judge_provider": "offline-fixture"
+    },
+    {
+      "case_id": "pg-res-003",
+      "kind": "restricted",
+      "split": "gate",
+      "role": "guest",
+      "question": "How are cash-settled long-term incentive awards measured?",
+      "refused": true,
+      "should_answer": false,
+      "sufficiency": 0.4048,
+      "threshold": 0.8,
+      "withheld_count": 6,
+      "retrieved_ids": [
+        "PG-0010::000",
+        "PG-0010::006",
+        "PG-0010::007",
+        "PG-0010::001",
+        "PG-0010::005",
+        "PG-0010::002"
+      ],
+      "retrieved_labels": [
+        "public"
+      ],
+      "cited_ids": [],
+      "cited_policy_ids": [],
+      "claims": [],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": "insufficient_evidence",
+      "expected_policy_ids": [
+        "PG-0021"
+      ],
+      "leaked_canaries": [],
+      "groundedness": null,
+      "judge_provider": null
+    },
+    {
+      "case_id": "pg-res-003",
+      "kind": "restricted",
+      "split": "gate",
+      "role": "staff",
+      "question": "How are cash-settled long-term incentive awards measured?",
+      "refused": false,
+      "should_answer": false,
+      "sufficiency": 0.8189,
+      "threshold": 0.8,
+      "withheld_count": 3,
+      "retrieved_ids": [
+        "PG-0019::006",
+        "PG-0027::005",
+        "PG-0018::001",
+        "PG-0027::003",
+        "PG-0010::000",
+        "PG-0030::004"
+      ],
+      "retrieved_labels": [
+        "internal",
+        "public"
+      ],
+      "cited_ids": [
+        "PG-0018::001",
+        "PG-0019::006",
+        "PG-0030::004"
+      ],
+      "cited_policy_ids": [
+        "PG-0018",
+        "PG-0019",
+        "PG-0030"
+      ],
+      "claims": [
+        {
+          "text": "| Low | Share capital, long-term borrowings with no movement, dormant balances | Quarterly |",
+          "citation_ids": [
+            "PG-0018::001"
+          ]
+        },
+        {
+          "text": "Balances are settled in cash monthly through the Group netting cycle, unless the balance is a",
+          "citation_ids": [
+            "PG-0019::006"
+          ]
+        },
+        {
+          "text": "- Beyond the explicit period, a steady or declining growth rate is used, not exceeding the long-term",
+          "citation_ids": [
+            "PG-0030::004"
+          ]
+        },
+        {
+          "text": "Entities do not settle bilaterally outside the netting",
+          "citation_ids": [
+            "PG-0019::006"
+          ]
+        }
+      ],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": null,
+      "expected_policy_ids": [
+        "PG-0021"
+      ],
+      "leaked_canaries": [],
+      "groundedness": 1.0,
+      "judge_provider": "offline-fixture"
+    },
+    {
+      "case_id": "pg-res-003",
+      "kind": "restricted",
+      "split": "gate",
+      "role": "controller",
+      "question": "How are cash-settled long-term incentive awards measured?",
+      "refused": false,
+      "should_answer": true,
+      "sufficiency": 0.9657,
+      "threshold": 0.8,
+      "withheld_count": 0,
+      "retrieved_ids": [
+        "PG-0021::002",
+        "PG-0021::004",
+        "PG-0019::006",
+        "PG-0027::005",
+        "PG-0018::001",
+        "PG-0021::005"
+      ],
+      "retrieved_labels": [
+        "internal",
+        "restricted"
+      ],
+      "cited_ids": [
+        "PG-0018::001",
+        "PG-0021::002",
+        "PG-0021::004"
+      ],
+      "cited_policy_ids": [
+        "PG-0018",
+        "PG-0021"
+      ],
+      "claims": [
+        {
+          "text": "Takers: base salary, annual incentive, long-term incentive, retention awards, buy-out awards on",
+          "citation_ids": [
+            "PG-0021::002"
+          ]
+        },
+        {
+          "text": "| Award type | Measurement | Recognition |",
+          "citation_ids": [
+            "PG-0021::004"
+          ]
+        },
+        {
+          "text": "| Low | Share capital, long-term borrowings with no movement, dormant balances | Quarterly |",
+          "citation_ids": [
+            "PG-0018::001"
+          ]
+        },
+        {
+          "text": "| Cash-settled | Fair value remeasured at each reporting date | Over vesting, with remeasurement through profit |",
+          "citation_ids": [
+            "PG-0021::004"
+          ]
+        }
+      ],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": null,
+      "expected_policy_ids": [
+        "PG-0021"
+      ],
+      "leaked_canaries": [],
+      "groundedness": 1.0,
+      "judge_provider": "offline-fixture"
+    },
+    {
+      "case_id": "pg-res-005",
+      "kind": "restricted",
+      "split": "gate",
+      "role": "guest",
+      "question": "Are acquisition advisory fees capitalised into goodwill?",
+      "refused": true,
+      "should_answer": false,
+      "sufficiency": 0.5723,
+      "threshold": 0.8,
+      "withheld_count": 3,
+      "retrieved_ids": [
+        "PG-0005::007",
+        "PG-0005::006",
+        "PG-0003::000",
+        "PG-0003::006",
+        "PG-0003::005",
+        "PG-0003::001"
+      ],
+      "retrieved_labels": [
+        "public"
+      ],
+      "cited_ids": [],
+      "cited_policy_ids": [],
+      "claims": [],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": "insufficient_evidence",
+      "expected_policy_ids": [
+        "PG-0022"
+      ],
+      "leaked_canaries": [],
+      "groundedness": null,
+      "judge_provider": null
+    },
+    {
+      "case_id": "pg-res-005",
+      "kind": "restricted",
+      "split": "gate",
+      "role": "staff",
+      "question": "Are acquisition advisory fees capitalised into goodwill?",
+      "refused": true,
+      "should_answer": false,
+      "sufficiency": 0.5523,
+      "threshold": 0.8,
+      "withheld_count": 2,
+      "retrieved_ids": [
+        "PG-0005::007",
+        "PG-0020::004",
+        "PG-0005::006",
+        "PG-0003::000",
+        "PG-0003::006",
+        "PG-0014::000"
+      ],
+      "retrieved_labels": [
+        "internal",
+        "public"
+      ],
+      "cited_ids": [],
+      "cited_policy_ids": [],
+      "claims": [],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": "insufficient_evidence",
+      "expected_policy_ids": [
+        "PG-0022"
+      ],
+      "leaked_canaries": [],
+      "groundedness": null,
+      "judge_provider": null
+    },
+    {
+      "case_id": "pg-res-005",
+      "kind": "restricted",
+      "split": "gate",
+      "role": "controller",
+      "question": "Are acquisition advisory fees capitalised into goodwill?",
+      "refused": false,
+      "should_answer": true,
+      "sufficiency": 0.9366,
+      "threshold": 0.8,
+      "withheld_count": 0,
+      "retrieved_ids": [
+        "PG-0005::007",
+        "PG-0022::007",
+        "PG-0022::005",
+        "PG-0020::004",
+        "PG-0005::006",
+        "PG-0003::000"
+      ],
+      "retrieved_labels": [
+        "internal",
+        "public",
+        "restricted"
+      ],
+      "cited_ids": [
+        "PG-0005::007",
+        "PG-0022::005",
+        "PG-0022::007"
+      ],
+      "cited_policy_ids": [
+        "PG-0005",
+        "PG-0022"
+      ],
+      "claims": [
+        {
+          "text": "They are never capitalised into goodwill.",
+          "citation_ids": [
+            "PG-0022::007"
+          ]
+        },
+        {
+          "text": "Those fall into goodwill or,",
+          "citation_ids": [
+            "PG-0022::005"
+          ]
+        },
+        {
+          "text": "Goodwill arising on acquisition is not amortised.",
+          "citation_ids": [
+            "PG-0005::007"
+          ]
+        },
+        {
+          "text": "Advisory, legal, due diligence, valuation and broker fees are expensed as incurred and are presented",
+          "citation_ids": [
+            "PG-0022::007"
+          ]
+        }
+      ],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": null,
+      "expected_policy_ids": [
+        "PG-0022"
+      ],
+      "leaked_canaries": [],
+      "groundedness": 1.0,
+      "judge_provider": "offline-fixture"
+    },
+    {
+      "case_id": "pg-res-006",
+      "kind": "restricted",
+      "split": "gate",
+      "role": "guest",
+      "question": "How long is the measurement period after an acquisition?",
+      "refused": true,
+      "should_answer": false,
+      "sufficiency": 0.6375,
+      "threshold": 0.8,
+      "withheld_count": 4,
+      "retrieved_ids": [
+        "PG-0004::002",
+        "PG-0004::000",
+        "PG-0004::004",
+        "PG-0003::005",
+        "PG-0005::007",
+        "PG-0003::004"
+      ],
+      "retrieved_labels": [
+        "public"
+      ],
+      "cited_ids": [],
+      "cited_policy_ids": [],
+      "claims": [],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": "insufficient_evidence",
+      "expected_policy_ids": [
+        "PG-0022"
+      ],
+      "leaked_canaries": [],
+      "groundedness": null,
+      "judge_provider": null
+    },
+    {
+      "case_id": "pg-res-006",
+      "kind": "restricted",
+      "split": "gate",
+      "role": "staff",
+      "question": "How long is the measurement period after an acquisition?",
+      "refused": true,
+      "should_answer": false,
+      "sufficiency": 0.7255,
+      "threshold": 0.8,
+      "withheld_count": 3,
+      "retrieved_ids": [
+        "PG-0027::005",
+        "PG-0004::002",
+        "PG-0004::000",
+        "PG-0027::000",
+        "PG-0015::007",
+        "PG-0027::006"
+      ],
+      "retrieved_labels": [
+        "internal",
+        "public"
+      ],
+      "cited_ids": [],
+      "cited_policy_ids": [],
+      "claims": [],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": "insufficient_evidence",
+      "expected_policy_ids": [
+        "PG-0022"
+      ],
+      "leaked_canaries": [],
+      "groundedness": null,
+      "judge_provider": null
+    },
+    {
+      "case_id": "pg-res-006",
+      "kind": "restricted",
+      "split": "gate",
+      "role": "controller",
+      "question": "How long is the measurement period after an acquisition?",
+      "refused": false,
+      "should_answer": true,
+      "sufficiency": 0.9313,
+      "threshold": 0.8,
+      "withheld_count": 0,
+      "retrieved_ids": [
+        "PG-0022::006",
+        "PG-0027::005",
+        "PG-0021::004",
+        "PG-0004::002",
+        "PG-0022::004",
+        "PG-0004::000"
+      ],
+      "retrieved_labels": [
+        "internal",
+        "public",
+        "restricted"
+      ],
+      "cited_ids": [
+        "PG-0004::000",
+        "PG-0004::002",
+        "PG-0022::004",
+        "PG-0022::006"
+      ],
+      "cited_policy_ids": [
+        "PG-0004",
+        "PG-0022"
+      ],
+      "claims": [
+        {
+          "text": "A measurement-period adjustment that",
+          "citation_ids": [
+            "PG-0022::006"
+          ]
+        },
+        {
+          "text": "Reclassification after the acquisition date is not permitted.",
+          "citation_ids": [
+            "PG-0022::004"
+          ]
+        },
+        {
+          "text": "Assets acquired in a business combination are measured at fair",
+          "citation_ids": [
+            "PG-0004::002"
+          ]
+        },
+        {
+          "text": "This policy governs the measurement of tangible fixed assets after the capitalisation decision has",
+          "citation_ids": [
+            "PG-0004::000"
+          ]
+        }
+      ],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": null,
+      "expected_policy_ids": [
+        "PG-0022"
+      ],
+      "leaked_canaries": [],
+      "groundedness": 1.0,
+      "judge_provider": "offline-fixture"
+    },
+    {
+      "case_id": "pg-res-008",
+      "kind": "restricted",
+      "split": "gate",
+      "role": "guest",
+      "question": "When can an insurance reimbursement be recognised as an asset?",
+      "refused": false,
+      "should_answer": false,
+      "sufficiency": 0.9017,
+      "threshold": 0.8,
+      "withheld_count": 5,
+      "retrieved_ids": [
+        "PG-0006::006",
+        "PG-0005::006",
+        "PG-0004::006",
+        "PG-0003::007",
+        "PG-0004::004",
+        "PG-0004::002"
+      ],
+      "retrieved_labels": [
+        "public"
+      ],
+      "cited_ids": [
+        "PG-0004::002",
+        "PG-0004::006",
+        "PG-0005::006",
+        "PG-0006::006"
+      ],
+      "cited_policy_ids": [
+        "PG-0004",
+        "PG-0005",
+        "PG-0006"
+      ],
+      "claims": [
+        {
+          "text": "Assets are measured at cost.",
+          "citation_ids": [
+            "PG-0004::002"
+          ]
+        },
+        {
+          "text": "Gains are never recognised in revenue.",
+          "citation_ids": [
+            "PG-0004::006"
+          ]
+        },
+        {
+          "text": "Fuel is reimbursed on receipt; prepaid fuel options",
+          "citation_ids": [
+            "PG-0006::006"
+          ]
+        },
+        {
+          "text": "| Internally generated brands, customer lists and goodwill | Never recognised |",
+          "citation_ids": [
+            "PG-0005::006"
+          ]
+        }
+      ],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": null,
+      "expected_policy_ids": [
+        "PG-0023"
+      ],
+      "leaked_canaries": [],
+      "groundedness": 1.0,
+      "judge_provider": "offline-fixture"
+    },
+    {
+      "case_id": "pg-res-008",
+      "kind": "restricted",
+      "split": "gate",
+      "role": "staff",
+      "question": "When can an insurance reimbursement be recognised as an asset?",
+      "refused": false,
+      "should_answer": false,
+      "sufficiency": 0.8817,
+      "threshold": 0.8,
+      "withheld_count": 3,
+      "retrieved_ids": [
+        "PG-0013::005",
+        "PG-0027::007",
+        "PG-0006::006",
+        "PG-0005::006",
+        "PG-0015::006",
+        "PG-0029::006"
+      ],
+      "retrieved_labels": [
+        "internal",
+        "public"
+      ],
+      "cited_ids": [
+        "PG-0005::006",
+        "PG-0006::006",
+        "PG-0027::007"
+      ],
+      "cited_policy_ids": [
+        "PG-0005",
+        "PG-0006",
+        "PG-0027"
+      ],
+      "claims": [
+        {
+          "text": "Where remeasurement reduces the asset below zero, the excess is recognised in profit or loss.",
+          "citation_ids": [
+            "PG-0027::007"
+          ]
+        },
+        {
+          "text": "Fuel is reimbursed on receipt; prepaid fuel options",
+          "citation_ids": [
+            "PG-0006::006"
+          ]
+        },
+        {
+          "text": "| Internally generated brands, customer lists and goodwill | Never recognised |",
+          "citation_ids": [
+            "PG-0005::006"
+          ]
+        },
+        {
+          "text": "Taxis and ride-hailing are reimbursable for journeys with luggage,",
+          "citation_ids": [
+            "PG-0006::006"
+          ]
+        }
+      ],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": null,
+      "expected_policy_ids": [
+        "PG-0023"
+      ],
+      "leaked_canaries": [],
+      "groundedness": 1.0,
+      "judge_provider": "offline-fixture"
+    },
+    {
+      "case_id": "pg-res-008",
+      "kind": "restricted",
+      "split": "gate",
+      "role": "controller",
+      "question": "When can an insurance reimbursement be recognised as an asset?",
+      "refused": false,
+      "should_answer": true,
+      "sufficiency": 0.9145,
+      "threshold": 0.8,
+      "withheld_count": 0,
+      "retrieved_ids": [
+        "PG-0023::005",
+        "PG-0013::005",
+        "PG-0023::007",
+        "PG-0027::007",
+        "PG-0006::006",
+        "PG-0022::005"
+      ],
+      "retrieved_labels": [
+        "internal",
+        "public",
+        "restricted"
+      ],
+      "cited_ids": [
+        "PG-0006::006",
+        "PG-0023::005",
+        "PG-0023::007",
+        "PG-0027::007"
+      ],
+      "cited_policy_ids": [
+        "PG-0006",
+        "PG-0023",
+        "PG-0027"
+      ],
+      "claims": [
+        {
+          "text": "A contingent asset is never recognised.",
+          "citation_ids": [
+            "PG-0023::007"
+          ]
+        },
+        {
+          "text": "Where remeasurement reduces the asset below zero, the excess is recognised in profit or loss.",
+          "citation_ids": [
+            "PG-0027::007"
+          ]
+        },
+        {
+          "text": "Where a third party — typically an insurer — is expected to reimburse some or all of the",
+          "citation_ids": [
+            "PG-0023::005"
+          ]
+        },
+        {
+          "text": "Fuel is reimbursed on receipt; prepaid fuel options",
+          "citation_ids": [
+            "PG-0006::006"
+          ]
+        }
+      ],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": null,
+      "expected_policy_ids": [
+        "PG-0023"
+      ],
+      "leaked_canaries": [],
+      "groundedness": 1.0,
+      "judge_provider": "offline-fixture"
+    },
+    {
+      "case_id": "pg-res-009",
+      "kind": "restricted",
+      "split": "gate",
+      "role": "guest",
+      "question": "When is a restructuring provision recognised?",
+      "refused": true,
+      "should_answer": false,
+      "sufficiency": 0.37,
+      "threshold": 0.8,
+      "withheld_count": 6,
+      "retrieved_ids": [
+        "PG-0005::006",
+        "PG-0004::006",
+        "PG-0004::002",
+        "PG-0004::001",
+        "PG-0009::007",
+        "PG-0004::004"
+      ],
+      "retrieved_labels": [
+        "public"
+      ],
+      "cited_ids": [],
+      "cited_policy_ids": [],
+      "claims": [],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": "insufficient_evidence",
+      "expected_policy_ids": [
+        "PG-0024"
+      ],
+      "leaked_canaries": [],
+      "groundedness": null,
+      "judge_provider": null
+    },
+    {
+      "case_id": "pg-res-009",
+      "kind": "restricted",
+      "split": "gate",
+      "role": "staff",
+      "question": "When is a restructuring provision recognised?",
+      "refused": true,
+      "should_answer": false,
+      "sufficiency": 0.6945,
+      "threshold": 0.8,
+      "withheld_count": 5,
+      "retrieved_ids": [
+        "PG-0015::008",
+        "PG-0029::008",
+        "PG-0029::004",
+        "PG-0013::005",
+        "PG-0005::006",
+        "PG-0011::003"
+      ],
+      "retrieved_labels": [
+        "internal",
+        "public"
+      ],
+      "cited_ids": [],
+      "cited_policy_ids": [],
+      "claims": [],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": "insufficient_evidence",
+      "expected_policy_ids": [
+        "PG-0024"
+      ],
+      "leaked_canaries": [],
+      "groundedness": null,
+      "judge_provider": null
+    },
+    {
+      "case_id": "pg-res-009",
+      "kind": "restricted",
+      "split": "gate",
+      "role": "controller",
+      "question": "When is a restructuring provision recognised?",
+      "refused": false,
+      "should_answer": true,
+      "sufficiency": 0.9187,
+      "threshold": 0.8,
+      "withheld_count": 0,
+      "retrieved_ids": [
+        "PG-0024::002",
+        "PG-0024::006",
+        "PG-0015::008",
+        "PG-0021::006",
+        "PG-0022::005",
+        "PG-0023::002"
+      ],
+      "retrieved_labels": [
+        "internal",
+        "restricted"
+      ],
+      "cited_ids": [
+        "PG-0022::005",
+        "PG-0023::002",
+        "PG-0024::002",
+        "PG-0024::006"
+      ],
+      "cited_policy_ids": [
+        "PG-0022",
+        "PG-0023",
+        "PG-0024"
+      ],
+      "claims": [
+        {
+          "text": "A provision is recognised where all three hold:",
+          "citation_ids": [
+            "PG-0023::002"
+          ]
+        },
+        {
+          "text": "Not recognised separately: assembled workforce, expected synergies, and any restructuring the",
+          "citation_ids": [
+            "PG-0022::005"
+          ]
+        },
+        {
+          "text": "A provision is recognised only when the Group has a detailed formal plan **and** has raised a valid",
+          "citation_ids": [
+            "PG-0024::002"
+          ]
+        },
+        {
+          "text": "Provisions are utilised only against the specific costs for which they were recognised, per PG-0023",
+          "citation_ids": [
+            "PG-0024::006"
+          ]
+        }
+      ],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": null,
+      "expected_policy_ids": [
+        "PG-0024"
+      ],
+      "leaked_canaries": [],
+      "groundedness": 1.0,
+      "judge_provider": "offline-fixture"
+    },
+    {
+      "case_id": "pg-res-011",
+      "kind": "restricted",
+      "split": "gate",
+      "role": "guest",
+      "question": "Which transactions with a related party need Audit Committee approval?",
+      "refused": true,
+      "should_answer": false,
+      "sufficiency": 0.6743,
+      "threshold": 0.8,
+      "withheld_count": 6,
+      "retrieved_ids": [
+        "PG-0007::008",
+        "PG-0007::002",
+        "PG-0008::003",
+        "PG-0007::004",
+        "PG-0007::000",
+        "PG-0001::004"
+      ],
+      "retrieved_labels": [
+        "public"
+      ],
+      "cited_ids": [],
+      "cited_policy_ids": [],
+      "claims": [],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": "insufficient_evidence",
+      "expected_policy_ids": [
+        "PG-0025"
+      ],
+      "leaked_canaries": [],
+      "groundedness": null,
+      "judge_provider": null
+    },
+    {
+      "case_id": "pg-res-011",
+      "kind": "restricted",
+      "split": "gate",
+      "role": "staff",
+      "question": "Which transactions with a related party need Audit Committee approval?",
+      "refused": true,
+      "should_answer": false,
+      "sufficiency": 0.6643,
+      "threshold": 0.8,
+      "withheld_count": 6,
+      "retrieved_ids": [
+        "PG-0007::002",
+        "PG-0007::008",
+        "PG-0008::003",
+        "PG-0020::006",
+        "PG-0019::000",
+        "PG-0007::004"
+      ],
+      "retrieved_labels": [
+        "internal",
+        "public"
+      ],
+      "cited_ids": [],
+      "cited_policy_ids": [],
+      "claims": [],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": "insufficient_evidence",
+      "expected_policy_ids": [
+        "PG-0025"
+      ],
+      "leaked_canaries": [],
+      "groundedness": null,
+      "judge_provider": null
+    },
+    {
+      "case_id": "pg-res-011",
+      "kind": "restricted",
+      "split": "gate",
+      "role": "controller",
+      "question": "Which transactions with a related party need Audit Committee approval?",
+      "refused": false,
+      "should_answer": true,
+      "sufficiency": 0.8535,
+      "threshold": 0.8,
+      "withheld_count": 0,
+      "retrieved_ids": [
+        "PG-0025::004",
+        "PG-0025::000",
+        "PG-0025::007",
+        "PG-0025::008",
+        "PG-0025::006",
+        "PG-0025::003"
+      ],
+      "retrieved_labels": [
+        "restricted"
+      ],
+      "cited_ids": [
+        "PG-0025::004",
+        "PG-0025::006",
+        "PG-0025::007",
+        "PG-0025::008"
+      ],
+      "cited_policy_ids": [
+        "PG-0025"
+      ],
+      "claims": [
+        {
+          "text": "Every transaction with a related party requires Chief Financial Officer and Audit Committee approval",
+          "citation_ids": [
+            "PG-0025::004"
+          ]
+        },
+        {
+          "text": "The Audit Committee reviews, at least annually: the register, every related-party transaction",
+          "citation_ids": [
+            "PG-0025::007"
+          ]
+        },
+        {
+          "text": "A transaction entered into without the approval required by §4 is reported to the Audit Committee",
+          "citation_ids": [
+            "PG-0025::008"
+          ]
+        },
+        {
+          "text": "| Approval of the Chief Executive Officer's expenses | Chair of the Audit Committee |",
+          "citation_ids": [
+            "PG-0025::006"
+          ]
+        }
+      ],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": null,
+      "expected_policy_ids": [
+        "PG-0025"
+      ],
+      "leaked_canaries": [],
+      "groundedness": 1.0,
+      "judge_provider": "offline-fixture"
+    },
+    {
+      "case_id": "pg-res-012",
+      "kind": "restricted",
+      "split": "gate",
+      "role": "guest",
+      "question": "Who approves the Chief Executive Officer's expenses?",
+      "refused": false,
+      "should_answer": false,
+      "sufficiency": 0.9415,
+      "threshold": 0.8,
+      "withheld_count": 3,
+      "retrieved_ids": [
+        "PG-0007::003",
+        "PG-0006::001",
+        "PG-0007::004",
+        "PG-0006::010",
+        "PG-0006::000",
+        "PG-0006::007"
+      ],
+      "retrieved_labels": [
+        "public"
+      ],
+      "cited_ids": [
+        "PG-0007::003",
+        "PG-0007::004"
+      ],
+      "cited_policy_ids": [
+        "PG-0007"
+      ],
+      "claims": [
+        {
+          "text": "- The **Chief Executive Officer may approve commitments up to USD 2,000,000**.",
+          "citation_ids": [
+            "PG-0007::003"
+          ]
+        },
+        {
+          "text": "| 5 | Chief Executive Officer | Up to USD 2,000,000 |",
+          "citation_ids": [
+            "PG-0007::003"
+          ]
+        },
+        {
+          "text": "- The **Chief Financial Officer may approve commitments up to USD 500,000**.",
+          "citation_ids": [
+            "PG-0007::003"
+          ]
+        },
+        {
+          "text": "| Any change to a person's pay, other than through the annual review cycle | Chief Financial Officer and Chief People Officer |",
+          "citation_ids": [
+            "PG-0007::004"
+          ]
+        }
+      ],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": null,
+      "expected_policy_ids": [
+        "PG-0025"
+      ],
+      "leaked_canaries": [],
+      "groundedness": 1.0,
+      "judge_provider": "offline-fixture"
+    },
+    {
+      "case_id": "pg-res-012",
+      "kind": "restricted",
+      "split": "gate",
+      "role": "staff",
+      "question": "Who approves the Chief Executive Officer's expenses?",
+      "refused": false,
+      "should_answer": false,
+      "sufficiency": 0.9315,
+      "threshold": 0.8,
+      "withheld_count": 3,
+      "retrieved_ids": [
+        "PG-0007::003",
+        "PG-0006::001",
+        "PG-0006::010",
+        "PG-0017::003",
+        "PG-0007::004",
+        "PG-0006::000"
+      ],
+      "retrieved_labels": [
+        "internal",
+        "public"
+      ],
+      "cited_ids": [
+        "PG-0007::003",
+        "PG-0007::004"
+      ],
+      "cited_policy_ids": [
+        "PG-0007"
+      ],
+      "claims": [
+        {
+          "text": "- The **Chief Executive Officer may approve commitments up to USD 2,000,000**.",
+          "citation_ids": [
+            "PG-0007::003"
+          ]
+        },
+        {
+          "text": "| 5 | Chief Executive Officer | Up to USD 2,000,000 |",
+          "citation_ids": [
+            "PG-0007::003"
+          ]
+        },
+        {
+          "text": "- The **Chief Financial Officer may approve commitments up to USD 500,000**.",
+          "citation_ids": [
+            "PG-0007::003"
+          ]
+        },
+        {
+          "text": "| Any change to a person's pay, other than through the annual review cycle | Chief Financial Officer and Chief People Officer |",
+          "citation_ids": [
+            "PG-0007::004"
+          ]
+        }
+      ],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": null,
+      "expected_policy_ids": [
+        "PG-0025"
+      ],
+      "leaked_canaries": [],
+      "groundedness": 1.0,
+      "judge_provider": "offline-fixture"
+    },
+    {
+      "case_id": "pg-res-012",
+      "kind": "restricted",
+      "split": "gate",
+      "role": "controller",
+      "question": "Who approves the Chief Executive Officer's expenses?",
+      "refused": false,
+      "should_answer": true,
+      "sufficiency": 0.9572,
+      "threshold": 0.8,
+      "withheld_count": 0,
+      "retrieved_ids": [
+        "PG-0025::006",
+        "PG-0006::001",
+        "PG-0007::003",
+        "PG-0021::000",
+        "PG-0021::008",
+        "PG-0006::010"
+      ],
+      "retrieved_labels": [
+        "public",
+        "restricted"
+      ],
+      "cited_ids": [
+        "PG-0025::006"
+      ],
+      "cited_policy_ids": [
+        "PG-0025"
+      ],
+      "claims": [
+        {
+          "text": "| Approval of the Chief Financial Officer's expenses | Chief Executive Officer |",
+          "citation_ids": [
+            "PG-0025::006"
+          ]
+        },
+        {
+          "text": "| Approval of an Executive Committee member's expenses | Chief Financial Officer |",
+          "citation_ids": [
+            "PG-0025::006"
+          ]
+        },
+        {
+          "text": "| Approval of the Chief Executive Officer's expenses | Chair of the Audit Committee |",
+          "citation_ids": [
+            "PG-0025::006"
+          ]
+        },
+        {
+          "text": "| Approval of a Non-Executive Director's expenses | Company Secretary |",
+          "citation_ids": [
+            "PG-0025::006"
+          ]
+        }
+      ],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": null,
+      "expected_policy_ids": [
+        "PG-0025"
+      ],
+      "leaked_canaries": [],
+      "groundedness": 1.0,
+      "judge_provider": "offline-fixture"
+    },
+    {
+      "case_id": "pg-res-014",
+      "kind": "restricted",
+      "split": "gate",
+      "role": "guest",
+      "question": "When can a tax reserve be released?",
+      "refused": true,
+      "should_answer": false,
+      "sufficiency": 0.5393,
+      "threshold": 0.8,
+      "withheld_count": 6,
+      "retrieved_ids": [
+        "PG-0005::004",
+        "PG-0002::002",
+        "PG-0009::008",
+        "PG-0006::002",
+        "PG-0006::008",
+        "PG-0010::006"
+      ],
+      "retrieved_labels": [
+        "public"
+      ],
+      "cited_ids": [],
+      "cited_policy_ids": [],
+      "claims": [],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": "insufficient_evidence",
+      "expected_policy_ids": [
+        "PG-0026"
+      ],
+      "leaked_canaries": [],
+      "groundedness": null,
+      "judge_provider": null
+    },
+    {
+      "case_id": "pg-res-014",
+      "kind": "restricted",
+      "split": "gate",
+      "role": "staff",
+      "question": "When can a tax reserve be released?",
+      "refused": true,
+      "should_answer": false,
+      "sufficiency": 0.3998,
+      "threshold": 0.8,
+      "withheld_count": 5,
+      "retrieved_ids": [
+        "PG-0015::005",
+        "PG-0014::000",
+        "PG-0005::004",
+        "PG-0002::002",
+        "PG-0017::003",
+        "PG-0015::001"
+      ],
+      "retrieved_labels": [
+        "internal",
+        "public"
+      ],
+      "cited_ids": [],
+      "cited_policy_ids": [],
+      "claims": [],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": "insufficient_evidence",
+      "expected_policy_ids": [
+        "PG-0026"
+      ],
+      "leaked_canaries": [],
+      "groundedness": null,
+      "judge_provider": null
+    },
+    {
+      "case_id": "pg-res-014",
+      "kind": "restricted",
+      "split": "gate",
+      "role": "controller",
+      "question": "When can a tax reserve be released?",
+      "refused": false,
+      "should_answer": true,
+      "sufficiency": 0.947,
+      "threshold": 0.8,
+      "withheld_count": 0,
+      "retrieved_ids": [
+        "PG-0026::007",
+        "PG-0026::004",
+        "PG-0026::006",
+        "PG-0026::000",
+        "PG-0026::001",
+        "PG-0015::005"
+      ],
+      "retrieved_labels": [
+        "internal",
+        "restricted"
+      ],
+      "cited_ids": [
+        "PG-0015::005",
+        "PG-0026::000",
+        "PG-0026::007"
+      ],
+      "cited_policy_ids": [
+        "PG-0015",
+        "PG-0026"
+      ],
+      "claims": [
+        {
+          "text": "A stale accrual released in a later period distorts both periods.",
+          "citation_ids": [
+            "PG-0015::005"
+          ]
+        },
+        {
+          "text": "**Distribution:** Chief Financial Officer, Group Head of Tax, Group Financial Controller, and named",
+          "citation_ids": [
+            "PG-0026::000"
+          ]
+        },
+        {
+          "text": "Accruals are released when the invoice is posted or when the obligation lapses.",
+          "citation_ids": [
+            "PG-0015::005"
+          ]
+        },
+        {
+          "text": "Tax documents a longer horizon and the Chief Financial Officer approves it.",
+          "citation_ids": [
+            "PG-0026::007"
+          ]
+        }
+      ],
+      "stripped_claims": 0,
+      "unknown_citation_ids": [],
+      "refusal_reason": null,
+      "expected_policy_ids": [
+        "PG-0026"
+      ],
+      "leaked_canaries": [],
+      "groundedness": 1.0,
+      "judge_provider": "offline-fixture"
+    }
+  ]
+}

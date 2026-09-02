@@ -1,0 +1,47 @@
+{
+  "note": "Committed baseline for the CI regression gate. Produced by the offline embedder and composer (BLOCKERS.md B1) \u2014 see docs/evals_methodology.md.",
+  "split": "gate",
+  "threshold": 0.8,
+  "embedder": "hash-embedder-v1",
+  "composer": "offline-extractive",
+  "judge": "offline-fixture:none",
+  "metrics": {
+    "runs": 73,
+    "citation_validity": 1.0,
+    "rendered_claims": 160,
+    "unsupported_claims": 0,
+    "fabricated_citation_ids": 0,
+    "label_leaks": 0,
+    "leaked_canaries": [],
+    "refusal_on_unanswerable": 0.7742,
+    "false_refusal_rate": 0.2143,
+    "unanswerable_runs": 31,
+    "answerable_runs": 42,
+    "missed_refusals": [
+      "pg-una-009/staff",
+      "pg-una-018/staff",
+      "pg-res-003/staff",
+      "pg-res-008/guest",
+      "pg-res-008/staff",
+      "pg-res-012/guest",
+      "pg-res-012/staff"
+    ],
+    "false_refusals": [
+      "pg-ans-006/staff",
+      "pg-ans-014/staff",
+      "pg-ans-015/staff",
+      "pg-ans-021/staff",
+      "pg-ans-024/staff",
+      "pg-ans-026/staff",
+      "pg-ans-027/staff",
+      "pg-ans-029/staff",
+      "pg-ans-033/staff"
+    ],
+    "restricted_refused_for_unprivileged": 0.7222,
+    "restricted_answered_for_controller": 1.0,
+    "expected_policy_cited": 1.0,
+    "groundedness": 1.0,
+    "judged_runs": 40,
+    "claims_stripped": 0
+  }
+}
