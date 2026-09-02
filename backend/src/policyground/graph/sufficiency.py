@@ -39,7 +39,7 @@ from collections import Counter
 from dataclasses import dataclass
 
 from policyground.retrieval.base import RetrievalResult
-from policyground.retrieval.embeddings import tokenize, tokenize_query
+from policyground.retrieval.embeddings import term_matches, tokenize, tokenize_query
 from policyground.retrieval.vocabulary import CorpusVocabulary
 
 #: Coverage dominates: it is the signal that most directly separates "the corpus discusses this"
@@ -133,7 +133,7 @@ def assess(
     for term in query_terms:
         weight = vocabulary.idf(term) if vocabulary else 1.0
         total_weight += weight
-        if _term_present(term, top_tokens):
+        if term_matches(term, top_tokens):
             matched.append(term)
             matched_weight += weight
         else:
@@ -181,22 +181,3 @@ def assess(
         missing_terms=tuple(missing),
         unknown_terms=tuple(unknown),
     )
-
-
-def _term_present(term: str, tokens: set[str]) -> bool:
-    """Whether a query term appears, allowing a simple morphological near-match.
-
-    "capitalisation" should count as present when the text says "capitalised", and "night" when it
-    says "nightly". Without this, coverage systematically under-reports and the system refuses
-    questions it can answer — and spec 08 §10 measures false refusals as seriously as wrong answers.
-
-    Deliberately not a stemmer: a five-character prefix rule is predictable and dependency-free,
-    where a stemmer would introduce vocabulary behaviour the corpus authors cannot see or reason
-    about.
-    """
-    if term in tokens:
-        return True
-    if len(term) < 5:
-        return False
-    stem = term[:5]
-    return any(token.startswith(stem) for token in tokens if len(token) >= 5)

@@ -27,11 +27,18 @@ from policyground.answers.schema import Claim
 from policyground.config import Settings
 from policyground.graph.prompts import SYSTEM_PROMPT, build_user_message
 from policyground.retrieval.base import Chunk
-from policyground.retrieval.embeddings import tokenize, tokenize_query
+from policyground.retrieval.embeddings import term_matches, tokenize, tokenize_query
 
 logger = logging.getLogger(__name__)
 
-_SENTENCE_RE = re.compile(r"(?<=[.:;])\s+(?=[A-Z(])|\n(?=[-|#])")
+#: Sentence boundary: ``.``, ``?`` or ``!`` followed by whitespace and a capital or an opening
+#: bracket. Deliberately **not** ``;`` or ``:`` — an earlier version split on those and produced
+#: claims like "in full; the general capitalisation threshold of USD 5,000, the IT equipment
+#: capitalisation", which cites correctly and reads as broken.
+_SENTENCE_RE = re.compile(r"(?<=[.?!])\s+(?=[A-Z(])")
+
+#: Numbered list items ("1. ", "12) "), kept whole like table rows.
+_LIST_ITEM_RE = re.compile(r"^\d+[.)]\s")
 
 
 @runtime_checkable
@@ -113,7 +120,10 @@ class OfflineComposer:
         for rank, chunk in enumerate(chunks):
             for sentence in self._sentences(chunk.text):
                 terms = set(tokenize(sentence))
-                overlap = len(query_terms & terms)
+                # Near-match, not exact: the sentence stating the nightly room rate cap does
+                # not contain the word "night", and an exact-match composer skipped it while
+                # happily citing an adjacent sentence that did.
+                overlap = sum(1 for term in query_terms if term_matches(term, terms))
                 if overlap < self.min_overlap:
                     continue
                 # Favour overlap, then earlier-ranked chunks; normalise by length so a long
@@ -140,20 +150,35 @@ class OfflineComposer:
     def _sentences(text: str) -> list[str]:
         """Split a passage into candidate claims.
 
-        Table rows and list items are kept whole: in this corpus the answer to "who approves
-        X?" often *is* a table row, and splitting it mid-row would produce a claim that reads as
-        nonsense while still citing correctly.
+        Three rules, each fixing something observed in the output rather than anticipated:
+
+        * **Split only on sentence-ending punctuation followed by a capital.** An earlier version
+          also split on ``;`` and ``:``, which produced claims like *"in full; the general
+          capitalisation threshold of USD 5,000, the IT equipment capitalisation"* — a fragment that
+          cites correctly and reads as broken. A claim the reader cannot parse is not an answer.
+        * **Keep table rows and list items whole.** In this corpus the answer to "who approves a
+          purchase of X?" often *is* a table row, and splitting one mid-row produces nonsense.
+        * **Drop fragments that start mid-sentence.** A piece beginning with a lowercase word is
+          almost always the tail of a sentence whose head was on the previous line.
         """
         pieces: list[str] = []
+
         for line in text.split("\n"):
             stripped = line.strip()
             if not stripped or stripped.startswith("#"):
                 continue
-            if stripped.startswith("|") or stripped.startswith(("-", "*", "1.", "2.", "3.")):
+
+            if stripped.startswith(("|", "-", "*")) or _LIST_ITEM_RE.match(stripped):
                 pieces.append(stripped)
                 continue
+
             pieces.extend(part.strip() for part in _SENTENCE_RE.split(stripped) if part.strip())
-        return [p for p in pieces if len(p) > 25]
+
+        return [
+            piece
+            for piece in pieces
+            if len(piece) > 25 and (piece[0].isupper() or not piece[0].isalpha())
+        ]
 
 
 class OpenAIComposer:

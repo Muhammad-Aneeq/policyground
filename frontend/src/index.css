@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Aurora surface: dark navy base with frosted-glass panels (spec 00 A2). */
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+  body {
+    @apply bg-navy-deep font-sans text-slate-200 antialiased;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 20% -10%, rgba(16, 185, 129, 0.1), transparent),
+      radial-gradient(ellipse 60% 50% at 90% 0%, rgba(11, 30, 59, 0.9), transparent);
+  }
+  h1, h2, h3, h4 {
+    @apply font-display text-slate-100;
+  }
+  ::selection {
+    @apply bg-emerald-brand/30 text-white;
+  }
+}
+
+@layer components {
+  .aurora-glass {
+    @apply rounded-xl border border-white/10 bg-white/[0.04] shadow-glass backdrop-blur-md;
+  }
+  /* Highlighted passage in the Source Viewer. Deliberately emerald, never the amber used for
+     refusals — a highlight means "this is your evidence", not "something went wrong". */
+  .aurora-highlight {
+    @apply rounded bg-emerald-brand/25 ring-1 ring-emerald-brand/50;
+  }
+}

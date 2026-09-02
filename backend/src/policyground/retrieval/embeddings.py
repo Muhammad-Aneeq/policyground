@@ -140,6 +140,32 @@ def tokenize_query(text: str) -> list[str]:
     return filtered or tokens
 
 
+#: Prefix length for morphological near-matching. Shared by the sufficiency assessor, the offline
+#: composer and the corpus vocabulary, so all three agree on what "this term appears" means. Three
+#: separate notions of matching would give a system that scores a term as covered, reports it as
+#: unknown to the corpus, and fails to extract the sentence containing it — all at once.
+NEAR_MATCH_PREFIX = 5
+
+
+def term_matches(term: str, tokens: set[str]) -> bool:
+    """Whether ``term`` appears in ``tokens``, allowing a simple morphological near-match.
+
+    "capitalisation" counts as present when the text says "capitalised", and "night" when it says
+    "nightly". Without it, coverage under-reports and the system refuses questions it can answer —
+    and spec 08 §10 treats a false refusal as seriously as a wrong answer.
+
+    Deliberately not a stemmer: a five-character prefix rule is predictable and dependency-free,
+    where a stemmer would introduce vocabulary behaviour the corpus authors cannot see or reason
+    about.
+    """
+    if term in tokens:
+        return True
+    if len(term) < NEAR_MATCH_PREFIX:
+        return False
+    stem = term[:NEAR_MATCH_PREFIX]
+    return any(token.startswith(stem) for token in tokens if len(token) >= NEAR_MATCH_PREFIX)
+
+
 def _char_ngrams(token: str, width: int = _CHAR_NGRAM) -> list[str]:
     """Character n-grams of a single token, padded so short tokens still contribute."""
     padded = f"#{token}#"

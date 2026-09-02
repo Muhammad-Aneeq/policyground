@@ -26,7 +26,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from policyground.retrieval.base import Chunk
-from policyground.retrieval.embeddings import tokenize
+from policyground.retrieval.embeddings import NEAR_MATCH_PREFIX, tokenize
 
 VOCABULARY_SCHEMA = "policyground/vocabulary/v1"
 
@@ -34,12 +34,6 @@ VOCABULARY_SCHEMA = "policyground/vocabulary/v1"
 #: a document — slightly rarer than the rarest real term, so an unknown term always outweighs a
 #: known-but-rare one without being so extreme that one unknown word alone decides the outcome.
 _UNKNOWN_DF = 0.5
-
-
-#: Prefix length for morphological near-matching. Must agree with ``sufficiency._term_present``:
-#: if the two disagree, a term can be "matched" in the retrieved text while being reported as
-#: unknown to the corpus, which is contradictory and would double-penalise it.
-_PREFIX_LEN = 5
 
 
 @dataclass(frozen=True, slots=True)
@@ -58,7 +52,9 @@ class CorpusVocabulary:
         perfectly answerable questions, turning a vocabulary quirk into a false refusal.
         """
         return frozenset(
-            term[:_PREFIX_LEN] for term in self.document_frequency if len(term) >= _PREFIX_LEN
+            term[:NEAR_MATCH_PREFIX]
+            for term in self.document_frequency
+            if len(term) >= NEAR_MATCH_PREFIX
         )
 
     @classmethod
@@ -93,7 +89,7 @@ class CorpusVocabulary:
         sufficiency assessor uses when checking whether a term appears in retrieved text."""
         if term in self.document_frequency:
             return True
-        return len(term) >= _PREFIX_LEN and term[:_PREFIX_LEN] in self._prefixes
+        return len(term) >= NEAR_MATCH_PREFIX and term[:NEAR_MATCH_PREFIX] in self._prefixes
 
     def unknown_terms(self, terms: list[str]) -> list[str]:
         """Query terms the corpus has never contained — the clearest off-corpus signal there is.

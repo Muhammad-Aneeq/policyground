@@ -274,20 +274,20 @@ drive the strip tests — the stub is never the only compose input under test.
 
 ---
 
-### P4 · Chat UI · citations panel · source viewer  `[ ]`
+### P4 · Chat UI · citations panel · source viewer  `[x]`
 
 > Spec 08 §9: *"(1) Chat (answer with inline citation superscripts; side panel shows sources;
 > refusal styled distinctly, never like a normal answer) · (2) Source Viewer (full policy,
 > highlighted passage)."*
 
-- [ ] Vite + React + TS + Tailwind + TanStack Query scaffold
-- [ ] `components/aurora/` per spec 00 A2 tokens (navy `#0B1E3B`, emerald `#10B981`, frosted glass,
+- [x] Vite + React + TS + Tailwind + TanStack Query scaffold
+- [x] `components/aurora/` per spec 00 A2 tokens (navy `#0B1E3B`, emerald `#10B981`, frosted glass,
       Space Grotesk / Inter) — implemented locally (D-002)
-- [ ] Chat: claims rendered with inline superscripts → click scrolls/highlights in `SourcesPanel`
-- [ ] `RefusalCard`: amber/neutral, "not found in the policies" heading, closest-sections list,
+- [x] Chat: claims rendered with inline superscripts → click scrolls/highlights in `SourcesPanel`
+- [x] `RefusalCard`: amber/neutral, "not found in the policies" heading, closest-sections list,
       "should this be a policy?" prompt — visually incapable of being mistaken for an answer
-- [ ] Source Viewer: full policy markdown with the cited passage highlighted via stored char offsets
-- [ ] `SyntheticDataBanner` on every screen
+- [x] Source Viewer: full policy markdown with the cited passage highlighted via stored char offsets
+- [x] `SyntheticDataBanner` on every screen
 
 **Test plan** — vitest + Testing Library:
 - an `Answer` payload renders exactly one superscript per `citation_id`, in order
@@ -342,8 +342,9 @@ fallback embedder; `docs/evals_methodology.md` states which embedder produced th
 - [ ] `/api/admin/metrics` (groundedness trend from `eval_runs`, refusal rate from `queries`),
       `/api/admin/unanswered`, CSV export, `POST /api/admin/reindex`
 - [ ] Admin screen: Recharts trend · `MetricTile` refusal rate · unanswered table + Export CSV
-- [ ] Roles demo: role toggle re-queries live; restricted policies vanish from **both** the answer's
-      sources **and** the source browser; a visible "N policies hidden at this role" counter
+- [x] Roles demo: asks one question at **all three roles at once** and shows the outcomes side by
+      side; restricted policies vanish from **both** the answer's sources **and** the source
+      browser; a visible "N policies hidden at this role" counter *(landed in P4)*
 
 **Test plan:** admin route contract tests; CSV export golden snapshot; vitest — flipping the role
 toggle removes restricted rows from both panes in the same render pass.
@@ -516,6 +517,20 @@ manually and recorded in PROGRESS.md; CI green.
   (0.49), because "travel" and "escalation" match strongly. Numbers and very short tokens are
   excluded — a number in a question is a parameter, not a subject, and counting "60"/"000" as
   unknown made "who approves a purchase of 60,000 dollars?" falsely refuse.
+- **D-026 · The roles demo shows three roles simultaneously, not a toggle to flip.** Spec 08 §9
+  describes "toggle role → watch restricted content vanish". A toggle asks the viewer to
+  remember the previous state; three columns from one question make the difference visible in a
+  single screenshot. The header toggle still exists and drives every other screen.
+- **D-027 · The offline composer splits sentences only on `.`/`?`/`!`.** An earlier version also
+  split on `;` and `:` and produced claims like *"in full; the general capitalisation threshold
+  of USD 5,000, the IT equipment capitalisation"* — correctly cited, unreadable. Table rows and
+  list items are kept whole because in this corpus the answer to "who approves X?" often *is* a
+  table row.
+- **D-028 · One morphological near-match rule, shared by three callers.** `term_matches` in
+  `retrieval/embeddings.py` is used by the sufficiency assessor, the offline composer and the
+  corpus vocabulary. Three separate notions of "this term appears" would let the system score a
+  term as covered, report it as unknown, and fail to extract the sentence containing it — all at
+  once.
 - **D-019 · Calibration/gate split in the question bank.** The sufficiency threshold is tuned on the
   calibration split only; CI gates on the untouched gate split. Tuning on all 60 and reporting the
   result would be measuring the thermometer against itself.
