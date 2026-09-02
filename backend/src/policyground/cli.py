@@ -13,10 +13,12 @@ import argparse
 import sys
 from collections.abc import Sequence
 
-from policyground.config import AppMode, get_settings
+from policyground.config import AppMode, get_settings, repo_root
 from policyground.corpus.consistency import check_corpus
 from policyground.corpus.loader import CorpusError, load_corpus
 from policyground.ingest.manifest import build_manifest, write_manifest
+
+JUDGE_CACHE_DIR = repo_root() / "evals" / "judge_cache"
 
 EXIT_OK = 0
 EXIT_CHECK_FAILED = 1
@@ -57,6 +59,16 @@ def _build_parser() -> argparse.ArgumentParser:
         choices=[m.value for m in AppMode],
         default=None,
         help="override APP_MODE for this run",
+    )
+
+    evaluate = subparsers.add_parser(
+        "eval", help="run the groundedness suite and record the result for the admin trend"
+    )
+    evaluate.add_argument("--split", choices=["calibration", "gate", "all"], default="gate")
+    evaluate.add_argument(
+        "--write-cache",
+        action="store_true",
+        help="allow the judge to populate its cache (otherwise a miss is fatal)",
     )
 
     serve = subparsers.add_parser("serve", help="run the FastAPI application")
@@ -135,6 +147,64 @@ def cmd_ingest(args: argparse.Namespace) -> int:
     return EXIT_OK
 
 
+def cmd_eval(args: argparse.Namespace) -> int:
+    """Run the suite, apply the gate, and record a row for the admin trend chart.
+
+    The eval writes to ``eval_runs`` rather than the API computing groundedness at request time:
+    spec 08 §8 reserves the judge for eval only, and scoring every live query would put a model
+    call on the serving path.
+    """
+    # `evals/` is a repository artifact, not part of the installed distribution — it holds the
+    # question bank, the judge cache and the gate, none of which belong in a wheel. pytest finds it
+    # via rootdir; the CLI has to say so explicitly.
+    root = str(repo_root())
+    if root not in sys.path:
+        sys.path.insert(0, root)
+
+    from evals.harness import build_graph, git_commit, load_cases, run_bank
+    from evals.judge import Judge, JudgeConfig
+    from evals.metrics import check_gate, compute_metrics
+
+    from policyground.corpus.consistency import load_canaries
+    from policyground.db import repo
+    from policyground.db.session import get_engine, init_db, session_scope
+
+    settings = get_settings()
+    cases = load_cases()
+    if args.split != "all":
+        cases = [case for case in cases if case.split == args.split]
+
+    graph = build_graph(settings)
+    judge = Judge(JudgeConfig.from_env(), JUDGE_CACHE_DIR, cache_only=not args.write_cache)
+    outcomes = run_bank(graph, cases, load_canaries(settings.canaries_path), judge=judge)
+
+    metrics = compute_metrics(outcomes)
+    gate = check_gate(metrics)
+
+    init_db(get_engine())
+    with session_scope() as session:
+        repo.record_eval_run(
+            session,
+            commit=git_commit(),
+            groundedness=metrics.groundedness or 0.0,
+            citation_validity=metrics.citation_validity,
+            refusal_accuracy=metrics.refusal_accuracy,
+            false_refusal_rate=metrics.false_refusal_rate,
+            label_leaks=metrics.label_leaks,
+            cases=len(cases),
+            passed=gate.passed,
+            offline=judge.config.is_offline,
+            judge=f"{judge.config.provider}:{judge.config.model}",
+            embedder=graph.embedder_name,
+            notes=f"split={args.split}; threshold={graph.threshold}",
+        )
+
+    print(metrics.render())
+    print()
+    print(gate.render())
+    return EXIT_OK if gate.passed else EXIT_CHECK_FAILED
+
+
 def cmd_serve(args: argparse.Namespace) -> int:
     import uvicorn
 
@@ -161,6 +231,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         return handlers[args.corpus_command](args)
     if args.command == "ingest":
         return cmd_ingest(args)
+    if args.command == "eval":
+        return cmd_eval(args)
     if args.command == "serve":
         return cmd_serve(args)
 

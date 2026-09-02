@@ -222,7 +222,7 @@ def run_bank(
             if judge is not None and outcome.claims:
                 passages = [
                     {"id": chunk.chunk_id, "text": chunk.text}
-                    for chunk in graph.retriever.search(  # type: ignore[union-attr]
+                    for chunk in graph.retriever.search(
                         case.question, role=role, top_k=graph.default_top_k
                     ).chunks
                 ]

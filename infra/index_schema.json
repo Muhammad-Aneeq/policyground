@@ -1,0 +1,91 @@
+{
+  "name": "policyground-chunks",
+  "fields": [
+    {
+      "name": "chunk_id",
+      "type": "Edm.String",
+      "key": true,
+      "filterable": true,
+      "searchable": false
+    },
+    {
+      "name": "policy_id",
+      "type": "Edm.String",
+      "filterable": true,
+      "facetable": true
+    },
+    {
+      "name": "policy_title",
+      "type": "Edm.String",
+      "searchable": true
+    },
+    {
+      "name": "section_path",
+      "type": "Edm.String",
+      "searchable": true
+    },
+    {
+      "name": "label",
+      "type": "Edm.String",
+      "filterable": true,
+      "facetable": true,
+      "searchable": false
+    },
+    {
+      "name": "version",
+      "type": "Edm.String",
+      "filterable": true,
+      "searchable": false
+    },
+    {
+      "name": "text",
+      "type": "Edm.String",
+      "searchable": true,
+      "filterable": false
+    },
+    {
+      "name": "start_offset",
+      "type": "Edm.Int32",
+      "searchable": false
+    },
+    {
+      "name": "end_offset",
+      "type": "Edm.Int32",
+      "searchable": false
+    },
+    {
+      "name": "ordinal",
+      "type": "Edm.Int32",
+      "sortable": true,
+      "searchable": false
+    },
+    {
+      "name": "embedding",
+      "type": "Collection(Edm.Single)",
+      "searchable": true,
+      "retrievable": false,
+      "dimensions": 1536,
+      "vectorSearchProfile": "policyground-hnsw-profile"
+    }
+  ],
+  "vectorSearch": {
+    "algorithms": [
+      {
+        "name": "policyground-hnsw",
+        "kind": "hnsw",
+        "hnswParameters": {
+          "m": 4,
+          "efConstruction": 400,
+          "efSearch": 500,
+          "metric": "cosine"
+        }
+      }
+    ],
+    "profiles": [
+      {
+        "name": "policyground-hnsw-profile",
+        "algorithm": "policyground-hnsw"
+      }
+    ]
+  }
+}

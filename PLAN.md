@@ -342,14 +342,14 @@ fallback embedder; `docs/evals_methodology.md` states which embedder produced th
 
 ---
 
-### P6 · Admin screens + roles demo  `[ ]`
+### P6 · Admin screens + roles demo  `[x]`
 
 > Spec 08 §9: *"(3) Admin: Groundedness (trend chart), Refusal rate, Unanswered log (exportable:
 > 'policies to write') · (4) Roles demo (toggle role → watch restricted content vanish)."*
 
-- [ ] `/api/admin/metrics` (groundedness trend from `eval_runs`, refusal rate from `queries`),
+- [x] `/api/admin/metrics` (groundedness trend from `eval_runs`, refusal rate from `queries`),
       `/api/admin/unanswered`, CSV export, `POST /api/admin/reindex`
-- [ ] Admin screen: Recharts trend · `MetricTile` refusal rate · unanswered table + Export CSV
+- [x] Admin screen: Recharts trend · `MetricTile` refusal rate · unanswered table + Export CSV
 - [x] Roles demo: asks one question at **all three roles at once** and shows the outcomes side by
       side; restricted policies vanish from **both** the answer's sources **and** the source
       browser; a visible "N policies hidden at this role" counter *(landed in P4)*
@@ -387,7 +387,7 @@ the live-model variant runs behind `@pytest.mark.live`.
 
 ---
 
-### P8 · Azure mode — retriever · IaC · runbook  `[ ]`
+### P8 · Azure mode — retriever · IaC · runbook  `[x]` *(deployment-ready, NEVER DEPLOYED — BLOCKERS.md B2)*
 
 > Spec 08 §12: *"azd up (AI Search, Azure OpenAI embeddings+chat, Postgres, Static Web Apps, Key
 > Vault)… azd down documented; teardown between demos."*
@@ -398,10 +398,10 @@ the live-model variant runs behind `@pytest.mark.live`.
       *(landed early in P2: the shared contract test needs both implementations to exist)*
 - [x] Index schema in `ingest/azure_index.py` (`label` filterable/facetable, `embedding` HNSW
       profile); emitted to `infra/index_schema.json` by `write_index_schema` *(landed in P2)*
-- [ ] `infra/main.bicep` + modules: AI Search (Basic), Azure OpenAI (embeddings + small chat),
+- [x] `infra/main.bicep` + modules: AI Search (Basic), Azure OpenAI (embeddings + small chat),
       Postgres Flexible burstable, Static Web App, Key Vault, user-assigned identity + RBAC
-- [ ] `azure.yaml`; `ingest/azure_index.py` targeting AI Search; `APP_MODE=azure` wiring
-- [ ] `DEPLOY_RUNBOOK.md`: prerequisites → `azd up` → index build → 5 smoke queries (incl. one
+- [x] `azure.yaml`; `ingest/azure_index.py` targeting AI Search; `APP_MODE=azure` wiring
+- [x] `DEPLOY_RUNBOOK.md`: prerequisites → `azd up` → index build → 5 smoke queries (incl. one
       refusal and one restricted) → groundedness run → **`azd down`** → itemised cost table
 
 **Test plan:** `tests/test_azure_retriever.py` with the Search SDK **mocked** — asserts the emitted
@@ -415,18 +415,20 @@ there is no subscription. Recorded in BLOCKERS.md, stated in README STATUS and t
 
 ---
 
-### P9 · Polish · README · costs · final report  `[ ]`
+### P9 · Polish · README · costs · final report  `[x]`
 
-- [ ] README in spec 00 A1 mandatory order: screenshot → one-line pitch → architecture diagram →
+- [x] README in spec 00 A1 mandatory order: screenshot → one-line pitch → architecture diagram →
       demo video link → **"⚠️ All content synthetic"** banner → quickstart →
       "Built by an ex-accountant turned AI engineer"
-- [ ] README sections: **"RAG that refuses to answer, and why that is the feature"** ·
+      **[BLOCKED]** screenshot and demo video: cannot capture either in this environment;
+      placeholders are marked in README.md
+- [x] README sections: **"RAG that refuses to answer, and why that is the feature"** ·
       **"Governed RAG vs commodity RAG"** (table) · honest **STATUS** (local runs; azure ready-not-deployed)
-- [ ] `MODEL_COSTS.md`: one-time embedding cost, per-query cost, monthly demo estimate, keep-it-cheap
-- [ ] `docs/architecture.md` both-mode diagram; `docker-compose.yml`; `make dev` end-to-end walkthrough
-- [ ] `FINAL_REPORT.md`: demoable now · exact commands · human Azure steps · blockers with one-line
+- [x] `MODEL_COSTS.md`: one-time embedding cost, per-query cost, monthly demo estimate, keep-it-cheap
+- [x] `docs/architecture.md` both-mode diagram; `docker-compose.yml`; `make dev` end-to-end walkthrough
+- [x] `FINAL_REPORT.md`: demoable now · exact commands · human Azure steps · blockers with one-line
       fixes · three next things
-- [ ] PLAN.md fully ticked or `[BLOCKED]`-marked
+- [x] PLAN.md fully ticked or `[BLOCKED]`-marked
 
 **Test plan:** `make dev` from a clean clone on this machine; the full Definition-of-Done loop walked
 manually and recorded in PROGRESS.md; CI green.

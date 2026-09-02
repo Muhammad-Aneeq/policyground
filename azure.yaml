@@ -1,0 +1,34 @@
+# azd service manifest.
+#
+# NEVER DEPLOYED. There is no Azure subscription in the environment this was built in
+# (BLOCKERS.md B2). See DEPLOY_RUNBOOK.md for the full path, including `azd down`.
+
+name: policyground
+metadata:
+  template: policyground@0.1.0
+
+infra:
+  provider: bicep
+  path: infra
+  module: main
+
+services:
+  web:
+    project: ./frontend
+    language: js
+    host: staticwebapp
+    dist: dist
+
+hooks:
+  postprovision:
+    # Ingestion is a separate, explicit step rather than an automatic hook: it costs money
+    # (embedding ~256 chunks) and it needs the Search index to exist first. The runbook walks
+    # through it so the cost is a decision rather than a surprise.
+    posix:
+      shell: sh
+      continueOnError: false
+      run: echo "Provisioned. Next: build the index — see DEPLOY_RUNBOOK.md step 4."
+    windows:
+      shell: pwsh
+      continueOnError: false
+      run: Write-Host "Provisioned. Next: build the index - see DEPLOY_RUNBOOK.md step 4."

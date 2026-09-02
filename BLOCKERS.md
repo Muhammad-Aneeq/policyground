@@ -66,6 +66,23 @@ Status legend: `OPEN` (workaround shipped, real fix needs the missing thing) · 
 
 ---
 
+## B5 · No way to capture a screenshot or record a demo video
+**Status:** OPEN · **Discovered:** P9 · **Affects:** README, spec 00 §E
+
+- **What.** Spec 00 §A1 requires a screenshot-first README, and §E makes a 60–90s demo video part of
+  the definition of done. This environment has no display, no browser session and no screen capture.
+- **Tried.** The SPA builds (`npm run build` succeeds) and the dev server runs; there is simply no
+  way to observe or record it from here.
+- **Needed to unblock.** A human running `./make.ps1 dev` and capturing two screens: Chat (a cited
+  answer beside its sources panel) and the Roles demo (three roles side by side).
+- **Workaround shipped.** HTML-comment placeholders at the top of `README.md` marking exactly where
+  each asset goes, and `FINAL_REPORT.md` §1 giving a seven-step walkthrough **with expected
+  outcomes**, so the recording is a script rather than an improvisation. The corresponding PLAN.md
+  item is marked `[BLOCKED]` rather than ticked — this is the one part of the definition of done
+  that is genuinely not met.
+
+---
+
 ## B4 · No running Postgres instance
 **Status:** CLOSED (by design) · **Discovered:** P0 · **Affects:** P3, P6
 

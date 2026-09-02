@@ -1,0 +1,64 @@
+# Postgres + API + SPA (spec 00 A1).
+#
+# NOT the quickstart path. The default developer loop is `./make.ps1 dev` (or `make dev`), which
+# runs against SQLite and needs no Docker. This file exists for the one case where SQLite is the
+# wrong answer: exercising the Postgres code path before an Azure deployment, where `DATABASE_URL`
+# is the only thing that changes.
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: policyground
+      POSTGRES_PASSWORD: policyground
+      POSTGRES_DB: policyground
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      # The API's startup syncs the corpus into `documents`/`chunks`, so it must not start before
+      # Postgres accepts connections.
+      test: ["CMD-SHELL", "pg_isready -U policyground -d policyground"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      APP_MODE: local
+      DATABASE_URL: postgresql+psycopg://policyground:policyground@postgres:5432/policyground
+      # No model credential by default — the container runs the same documented fallbacks the
+      # local loop does (BLOCKERS.md B1). Pass OPENAI_API_KEY through to use real models.
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      # The corpus is mounted rather than baked in, so editing a policy and hitting
+      # POST /api/admin/reindex works without a rebuild.
+      - ./corpus:/app/corpus:ro
+      - ./data:/app/data
+
+  web:
+    image: node:22-alpine
+    working_dir: /app
+    command: sh -c "npm install && npm run dev -- --host 0.0.0.0"
+    environment:
+      # Vite proxies /api to this inside the compose network.
+      VITE_API_PROXY_TARGET: http://api:8000
+    ports:
+      - "5173:5173"
+    depends_on:
+      - api
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+
+volumes:
+  pgdata:
