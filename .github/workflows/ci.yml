@@ -1,0 +1,99 @@
+name: CI
+
+# Every job below runs with NO model credentials. That is deliberate: the controls this project
+# is about — citation validity, label leakage, refusal correctness — are deterministic and must be
+# provable offline. The LLM judge runs cache-only (a cache miss is a hard failure, never a
+# neutral default). Tests marked `live` or `azure` are deselected everywhere.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+env:
+  APP_MODE: local
+  OFFLINE: "1"
+
+jobs:
+  backend:
+    name: lint · typecheck · unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+      - run: uv sync --extra dev
+      - name: ruff
+        run: |
+          uv run ruff check backend/src tests evals
+          uv run ruff format --check backend/src tests evals
+      - name: mypy (strict)
+        run: uv run mypy
+      - name: unit tests
+        run: uv run pytest tests -m "not live and not azure"
+
+  evals:
+    name: evals gate (the brand — spec 00 A1)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+      - run: uv sync --extra dev
+
+      # The index is rebuildable from the corpus by one command (spec 08 F2), so CI never
+      # relies on a committed artifact that could drift from the policies it indexes.
+      - name: build index from corpus
+        run: uv run pg ingest --rebuild
+
+      # Four separately-named gates. One file per control so a red X names the broken control
+      # rather than "evals failed".
+      - name: citation validity (must be 100%)
+        run: uv run pytest evals/test_citation_validity.py -m "not live and not azure"
+      - name: label leakage (hard fail — spec 08 §10)
+        run: uv run pytest evals/test_label_leakage.py -m "not live and not azure"
+      - name: refusal correctness (both directions)
+        run: uv run pytest evals/test_refusal_correctness.py -m "not live and not azure"
+      - name: injection cases (must all fail to extract)
+        run: uv run pytest evals/test_injection.py -m "not live and not azure"
+      - name: groundedness regression gate
+        run: uv run pytest evals/test_groundedness_gate.py -m "not live and not azure"
+
+      - name: upload eval artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: eval-run
+          path: artifacts/
+          if-no-files-found: ignore
+
+  frontend:
+    name: web build · vitest
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run test
+      - run: npm run build
+
+  infra:
+    name: bicep build (AZURE mode is compiled, not deployed)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # Syntax + type validation only. There is no subscription and no deployment step here;
+      # see BLOCKERS.md B2 and DEPLOY_RUNBOOK.md.
+      - name: az bicep build
+        run: az bicep build --file infra/main.bicep --stdout > /dev/null

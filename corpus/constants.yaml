@@ -1,0 +1,292 @@
+# corpus/constants.yaml — the single source of truth for every number that appears in more
+# than one policy (PLAN.md D-011).
+#
+# WHY THIS FILE EXISTS
+# A 30-document policy manual is only credible if a threshold quoted in the Capitalisation
+# Policy is the same threshold quoted in the Approval Matrix. Proof-reading does not scale and
+# does not survive edits. So each shared fact is declared once here with a regex, and
+# `pg corpus check` enforces three invariants across the whole corpus:
+#
+#   COVERAGE  every policy listed in `referenced_by` contains at least one match of `pattern`
+#   AGREEMENT every match of `pattern` anywhere in the corpus captures exactly `value`
+#   NO-ORPHAN every policy where `pattern` matches is listed in `referenced_by`
+#
+# AGREEMENT is the one that matters: it is what makes a threshold drifting between two documents
+# a failing test instead of a reader's problem. COVERAGE catches a reference silently deleted
+# during an edit; NO-ORPHAN catches a policy quoting a shared number without being registered.
+#
+# Regex notes: `pattern` must contain exactly one capture group, wrapping the number only.
+# Numbers may be written with thousands separators in prose; the checker normalises before
+# comparing. Matching is case-insensitive and treats runs of whitespace as equivalent, so a
+# phrase may wrap across lines in the markdown.
+
+entity: Calder Meridian Group
+reporting_currency: USD
+framework_note: >-
+  IFRS-aligned group accounting manual. All content is synthetic and written in the authors'
+  own words; no accounting standard text is reproduced.
+
+constants:
+
+  # ------------------------------------------------------- capitalisation --
+
+  capitalisation_threshold_general:
+    value: 5000
+    unit: USD
+    description: Minimum unit cost for an item of PP&E to be capitalised rather than expensed.
+    pattern: 'general capitalisation threshold of USD ([\d,]+)'
+    referenced_by: [PG-0003, PG-0004, PG-0007, PG-0015]
+
+  capitalisation_threshold_it:
+    value: 1000
+    unit: USD
+    description: Lower threshold for IT end-user hardware, which is tracked for security reasons.
+    pattern: 'IT equipment capitalisation threshold of USD ([\d,]+)'
+    referenced_by: [PG-0003, PG-0004]
+
+  capitalisation_threshold_leasehold:
+    value: 25000
+    unit: USD
+    description: Threshold for leasehold improvements, set higher because small fit-out spend is routine.
+    pattern: 'leasehold improvement capitalisation threshold of USD ([\d,]+)'
+    referenced_by: [PG-0003, PG-0004]
+
+  software_capitalisation_threshold:
+    value: 10000
+    unit: USD
+    description: Minimum project cost before internally developed software may be capitalised.
+    pattern: 'software capitalisation threshold of USD ([\d,]+)'
+    referenced_by: [PG-0003, PG-0005]
+
+  low_value_lease_threshold:
+    value: 5000
+    unit: USD
+    description: Underlying-asset value below which the low-value lease exemption may be taken.
+    pattern: 'low-value lease threshold of USD ([\d,]+)'
+    referenced_by: [PG-0003, PG-0027]
+
+  fixed_asset_disposal_threshold:
+    value: 50000
+    unit: USD
+    description: NBV above which a disposal or write-off needs Finance Director sign-off.
+    pattern: 'net book value above USD ([\d,]+)'
+    referenced_by: [PG-0004, PG-0007]
+
+  useful_life_it_hardware_years:
+    value: 3
+    unit: years
+    pattern: 'IT hardware is depreciated over ([\d]+) years'
+    referenced_by: [PG-0003, PG-0004]
+
+  useful_life_buildings_years:
+    value: 40
+    unit: years
+    pattern: 'buildings are depreciated over ([\d]+) years'
+    referenced_by: [PG-0004]
+
+  # --------------------------------------------------- delegation of authority --
+
+  doa_band_cost_centre_manager:
+    value: 5000
+    unit: USD
+    pattern: 'Cost Centre Manager may approve commitments up to USD ([\d,]+)'
+    referenced_by: [PG-0007, PG-0008]
+
+  doa_band_department_head:
+    value: 25000
+    unit: USD
+    pattern: 'Department Head may approve commitments up to USD ([\d,]+)'
+    referenced_by: [PG-0007]
+
+  doa_band_finance_director:
+    value: 100000
+    unit: USD
+    pattern: 'Finance Director may approve commitments up to USD ([\d,]+)'
+    referenced_by: [PG-0007]
+
+  doa_band_cfo:
+    value: 500000
+    unit: USD
+    pattern: 'Chief Financial Officer may approve commitments up to USD ([\d,]+)'
+    referenced_by: [PG-0007]
+
+  doa_band_ceo:
+    value: 2000000
+    unit: USD
+    description: Above this, Board approval is required; there is no higher individual band.
+    pattern: 'Chief Executive Officer may approve commitments up to USD ([\d,]+)'
+    referenced_by: [PG-0007]
+
+  # ---------------------------------------------- procurement & payables --
+
+  po_required_above:
+    value: 2500
+    unit: USD
+    pattern: 'purchase order is required for any commitment above USD ([\d,]+)'
+    referenced_by: [PG-0006, PG-0008, PG-0009]
+
+  three_way_match_tolerance_pct:
+    value: 2
+    unit: per cent
+    pattern: 'three-way match tolerance of ([\d.]+) per cent'
+    referenced_by: [PG-0008, PG-0009]
+
+  three_way_match_tolerance_abs:
+    value: 50
+    unit: USD
+    description: The absolute cap that applies alongside the percentage tolerance.
+    pattern: 'or USD ([\d,]+), whichever is lower'
+    referenced_by: [PG-0008, PG-0009]
+
+  duplicate_invoice_window_days:
+    value: 90
+    unit: days
+    pattern: 'duplicate-invoice review window of ([\d]+) days'
+    referenced_by: [PG-0009]
+
+  payment_terms_standard_days:
+    value: 45
+    unit: days
+    pattern: 'standard payment terms of Net ([\d]+)'
+    referenced_by: [PG-0008, PG-0009]
+
+  # --------------------------------------------------- travel & expenses --
+
+  expense_submission_days:
+    value: 30
+    unit: days
+    pattern: 'within ([\d]+) days of the expense being incurred'
+    referenced_by: [PG-0006, PG-0010]
+
+  receipt_required_above:
+    value: 25
+    unit: USD
+    pattern: 'itemised receipt is required for any single item above USD ([\d,]+)'
+    referenced_by: [PG-0006, PG-0010]
+
+  hotel_cap_standard:
+    value: 250
+    unit: USD
+    pattern: 'standard nightly room rate cap of USD ([\d,]+)'
+    referenced_by: [PG-0006]
+
+  hotel_cap_tier1:
+    value: 350
+    unit: USD
+    pattern: 'Tier 1 city nightly room rate cap of USD ([\d,]+)'
+    referenced_by: [PG-0006]
+
+  meal_per_diem_domestic:
+    value: 75
+    unit: USD
+    pattern: 'domestic meal per diem of USD ([\d,]+)'
+    referenced_by: [PG-0006]
+
+  meal_per_diem_international:
+    value: 110
+    unit: USD
+    pattern: 'international meal per diem of USD ([\d,]+)'
+    referenced_by: [PG-0006]
+
+  mileage_rate_per_mile:
+    value: 0.67
+    unit: USD
+    pattern: 'mileage reimbursement rate of USD ([\d.]+) per mile'
+    referenced_by: [PG-0006]
+
+  corporate_card_standard_limit:
+    value: 10000
+    unit: USD
+    pattern: 'standard corporate card limit of USD ([\d,]+)'
+    referenced_by: [PG-0010]
+
+  petty_cash_claim_max:
+    value: 500
+    unit: USD
+    pattern: 'petty cash claim maximum of USD ([\d,]+)'
+    referenced_by: [PG-0010]
+
+  # ------------------------------------------------- close & control --
+
+  accrual_threshold:
+    value: 2500
+    unit: USD
+    description: Below this, an accrual is not raised; the cost falls into the following period.
+    pattern: 'accrual threshold of USD ([\d,]+)'
+    referenced_by: [PG-0015, PG-0016]
+
+  je_independent_review_threshold:
+    value: 250000
+    unit: USD
+    pattern: 'journal entries above USD ([\d,]+)'
+    referenced_by: [PG-0017]
+
+  je_cfo_countersignature_threshold:
+    value: 1000000
+    unit: USD
+    pattern: 'countersignature by the Chief Financial Officer for entries above USD ([\d,]+)'
+    referenced_by: [PG-0017]
+
+  intercompany_mismatch_tolerance:
+    value: 1000
+    unit: USD
+    pattern: 'intercompany mismatch tolerance of USD ([\d,]+)'
+    referenced_by: [PG-0018, PG-0019]
+
+  performance_materiality:
+    value: 1500000
+    unit: USD
+    pattern: 'group performance materiality of USD ([\d,]+)'
+    referenced_by: [PG-0001, PG-0018, PG-0030]
+
+  clearly_trivial_threshold:
+    value: 75000
+    unit: USD
+    pattern: 'clearly trivial threshold of USD ([\d,]+)'
+    referenced_by: [PG-0001, PG-0018]
+
+  close_day_subledger:
+    value: 5
+    unit: working day
+    pattern: 'sub-ledgers close on Working Day ([\d]+)'
+    referenced_by: [PG-0009, PG-0016]
+
+  close_day_group_submission:
+    value: 8
+    unit: working day
+    pattern: 'group submission on Working Day ([\d]+)'
+    referenced_by: [PG-0016, PG-0019, PG-0020]
+
+  # ----------------------------------------------------------- revenue --
+
+  ssp_tolerance_pct:
+    value: 15
+    unit: per cent
+    pattern: 'standalone selling price tolerance band of ([\d]+) per cent'
+    referenced_by: [PG-0012]
+
+  financing_component_months:
+    value: 12
+    unit: months
+    pattern: 'payment timing difference exceeds ([\d]+) months'
+    referenced_by: [PG-0013]
+
+  contract_cost_amortisation_max_years:
+    value: 5
+    unit: years
+    pattern: 'amortised over a period not exceeding ([\d]+) years'
+    referenced_by: [PG-0014]
+
+  # ------------------------------------------------ receivables & impairment --
+
+  receivable_write_off_threshold:
+    value: 25000
+    unit: USD
+    pattern: 'write-off of a receivable above USD ([\d,]+)'
+    referenced_by: [PG-0028]
+
+  impairment_underperformance_pct:
+    value: 15
+    unit: per cent
+    pattern: 'underperforms its approved plan by more than ([\d]+) per cent'
+    referenced_by: [PG-0030]

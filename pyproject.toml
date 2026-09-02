@@ -1,0 +1,90 @@
+[project]
+name = "policyground"
+version = "0.1.0"
+description = "Governed finance RAG: every claim cited, empty retrieval refuses, labels govern retrieval, groundedness gated in CI."
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+authors = [{ name = "Aneeq" }]
+
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.32",
+    "pydantic>=2.9",
+    "pydantic-settings>=2.6",
+    "sqlalchemy>=2.0",
+    "langgraph>=0.2.50",
+    "langchain-core>=0.3.20",
+    "rank-bm25>=0.2.2",
+    "numpy>=2.1",
+    "pyyaml>=6.0",
+    "python-frontmatter>=1.1",
+    "httpx>=0.27",
+]
+
+[project.optional-dependencies]
+openai = ["openai>=1.55"]
+azure = ["azure-search-documents>=11.5.2", "azure-identity>=1.19"]
+postgres = ["psycopg[binary]>=3.2"]
+otel = [
+    "opentelemetry-api>=1.28",
+    "opentelemetry-sdk>=1.28",
+    "opentelemetry-instrumentation-fastapi>=0.49b0",
+]
+dev = [
+    "pytest>=8.3",
+    "pytest-asyncio>=0.24",
+    "ruff>=0.8",
+    "mypy>=1.13",
+    "types-PyYAML>=6.0",
+]
+
+[project.scripts]
+pg = "policyground.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["backend/src/policyground"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"backend/src/policyground/py.typed" = "policyground/py.typed"
+
+[tool.uv]
+package = true
+
+# ----------------------------------------------------------------- tooling --
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+src = ["backend/src", "tests", "evals"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
+ignore = ["B008"]  # FastAPI Depends() in defaults is the framework idiom
+
+[tool.mypy]
+python_version = "3.12"
+# Resolve first-party imports from source, not from the installed copy in site-packages.
+# Without this, an intra-package import mypy cannot yet see is reported as an untyped
+# third-party module, which is a confusing way to say "that file does not exist".
+mypy_path = "backend/src"
+files = ["backend/src/policyground"]
+strict = true
+warn_unused_ignores = true
+# Optional extras are not installed in the default dev environment.
+[[tool.mypy.overrides]]
+module = ["rank_bm25.*", "frontmatter.*", "openai.*", "azure.*", "langgraph.*"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests", "evals"]
+pythonpath = ["backend/src"]
+addopts = "-q --strict-markers"
+markers = [
+    "live: hits a real LLM/embedding API. Deselected by default; requires OPENAI_API_KEY.",
+    "azure: requires a live Azure AI Search endpoint. Never run in CI.",
+]

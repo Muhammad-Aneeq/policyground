@@ -1,0 +1,10 @@
+# Normalise to LF in the repository. Without this, every file shows as modified when the repo
+# moves between Windows and CI, and corpus content hashes in MANIFEST.json would appear to churn
+# for reasons unrelated to any policy edit.
+* text=auto eol=lf
+
+# Binary artifacts
+*.npy binary
+*.png binary
+*.jpg binary
+*.ico binary
