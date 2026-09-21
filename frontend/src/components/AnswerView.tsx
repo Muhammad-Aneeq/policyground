@@ -23,12 +23,13 @@ export function AnswerView({
 
   return (
     <Card
-      className="border-emerald-brand/30 bg-emerald-brand/[0.06]"
+      // The accent edge is the answer's signature, opposite the refusal's tinted surface.
+      className="border-l-4 border-l-accent"
       data-testid="answer-card"
       aria-label="Cited answer"
     >
       <div className="mb-3 flex flex-wrap items-center gap-2">
-        <span className="rounded bg-emerald-brand/20 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-emerald-300">
+        <span className="rounded bg-accent px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white">
           Answer
         </span>
         <ConfidencePill score={answer.trace.sufficiency} threshold={answer.trace.threshold} />
@@ -52,7 +53,7 @@ export function AnswerView({
 
       <div className="space-y-3 leading-relaxed">
         {answer.claims.map((claim, claimIndex) => (
-          <p key={claimIndex} data-testid="claim" className="text-slate-200">
+          <p key={claimIndex} data-testid="claim" className="text-ink">
             {claim.text}
             {claim.citation_ids.map((citationId) => (
               <CitationSuperscript

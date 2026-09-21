@@ -10,10 +10,10 @@ export function EmptyState({
   icon?: ReactNode
 }) {
   return (
-    <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-white/10 px-6 py-10 text-center">
-      <div className="mb-2 text-2xl text-slate-600">{icon}</div>
-      <div className="font-display text-slate-300">{title}</div>
-      {children ? <div className="mt-1 max-w-md text-sm text-slate-500">{children}</div> : null}
+    <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-line-strong bg-surface-sunken/50 px-6 py-10 text-center">
+      <div className="mb-2 font-display text-2xl text-ink-faint">{icon}</div>
+      <div className="font-display text-ink">{title}</div>
+      {children ? <div className="mt-1 max-w-md text-sm text-ink-muted">{children}</div> : null}
     </div>
   )
 }

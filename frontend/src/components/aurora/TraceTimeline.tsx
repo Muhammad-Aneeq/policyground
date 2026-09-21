@@ -18,15 +18,16 @@ export function TraceTimeline({ steps }: { steps: TraceStep[] }) {
         <li key={`${step.node}-${index}`} className="flex gap-3">
           <div className="flex flex-col items-center">
             <span
-              className={`mt-1 h-2 w-2 shrink-0 rounded-full border ${
-                stepClasses[step.node as keyof typeof stepClasses] ?? 'border-white/20 bg-white/10'
+              className={`mt-1 h-2.5 w-2.5 shrink-0 rounded-full border ${
+                stepClasses[step.node as keyof typeof stepClasses] ??
+                'border-line-strong bg-surface-sunken'
               }`}
             />
-            {index < steps.length - 1 ? <span className="w-px flex-1 bg-white/10" /> : null}
+            {index < steps.length - 1 ? <span className="w-px flex-1 bg-line" /> : null}
           </div>
           <div className="pb-2">
-            <div className="font-mono text-xs text-slate-300">{step.node}</div>
-            <div className="text-xs text-slate-500">{step.detail}</div>
+            <div className="font-mono text-xs font-medium text-ink">{step.node}</div>
+            <div className="text-xs text-ink-muted">{step.detail}</div>
           </div>
         </li>
       ))}

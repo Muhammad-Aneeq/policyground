@@ -16,13 +16,15 @@ export function EvidencePanel({
   return (
     <Card as="aside" className="flex h-full flex-col gap-3 p-4">
       <header className="flex items-baseline justify-between">
-        <h2 className="font-display text-sm uppercase tracking-wide text-slate-400">{title}</h2>
+        <h2 className="pg-eyebrow">{title}</h2>
         {count === undefined ? null : (
-          <span className="text-xs tabular-nums text-slate-500">{count}</span>
+          <span className="rounded-full bg-surface-sunken px-2 py-0.5 text-xs font-semibold tabular-nums text-ink-muted">
+            {count}
+          </span>
         )}
       </header>
-      <div className="flex-1 space-y-3 overflow-y-auto">{children}</div>
-      {footer ? <footer className="border-t border-white/10 pt-3">{footer}</footer> : null}
+      <div className="pg-scroll flex-1 space-y-3 overflow-y-auto">{children}</div>
+      {footer ? <footer className="border-t border-line pt-3">{footer}</footer> : null}
     </Card>
   )
 }

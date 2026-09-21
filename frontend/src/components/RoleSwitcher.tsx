@@ -19,10 +19,10 @@ export function RoleSwitcher({
 }) {
   return (
     <div className="flex flex-wrap items-center gap-2" data-testid="role-switcher">
-      <span className="text-xs uppercase tracking-wide text-slate-500">Session role</span>
+      <span className="pg-eyebrow">Session role</span>
 
       <div
-        className="flex rounded-lg border border-white/10 bg-white/[0.03] p-0.5"
+        className="flex rounded-lg border border-line bg-surface-sunken p-0.5"
         role="radiogroup"
         aria-label="Session role"
       >
@@ -35,10 +35,10 @@ export function RoleSwitcher({
             onClick={() => onChange(candidate)}
             title={ROLE_DESCRIPTIONS[candidate]}
             data-testid={`role-${candidate}`}
-            className={`rounded-md px-3 py-1 text-xs font-medium capitalize transition-colors ${
+            className={`rounded-md px-3 py-1 text-xs font-semibold capitalize transition-colors ${
               role === candidate
-                ? 'bg-emerald-brand/20 text-emerald-300'
-                : 'text-slate-400 hover:text-slate-200'
+                ? 'bg-surface text-accent-fg shadow-card'
+                : 'text-ink-muted hover:text-ink'
             }`}
           >
             {candidate}
@@ -47,7 +47,10 @@ export function RoleSwitcher({
       </div>
 
       {hiddenCount !== undefined && hiddenCount > 0 ? (
-        <span className="text-xs text-amber-300/80" data-testid="hidden-count">
+        <span
+          className="rounded-full border border-caution-line bg-caution-wash px-2 py-0.5 text-xs font-medium text-caution-fg"
+          data-testid="hidden-count"
+        >
           {hiddenCount} polic{hiddenCount === 1 ? 'y' : 'ies'} hidden at this role
         </span>
       ) : null}

@@ -74,8 +74,8 @@ export function RolesDemo() {
   return (
     <div className="space-y-4">
       <Card as="section">
-        <h1 className="font-display text-lg text-slate-100">Same question. Three roles.</h1>
-        <p className="mt-1 text-sm text-slate-400">
+        <h1 className="font-display text-xl font-semibold text-ink">Same question. Three roles.</h1>
+        <p className="mt-1 text-sm text-ink-muted">
           The label filter runs <strong>inside the retriever</strong>, so restricted passages never
           enter model context for an unprivileged role. They are not retrieved and then hidden —
           they are never read.
@@ -93,8 +93,8 @@ export function RolesDemo() {
               }}
               className={`rounded-full border px-2.5 py-1 text-[11px] transition-colors ${
                 question === candidate.text
-                  ? 'border-emerald-brand/40 bg-emerald-brand/10 text-emerald-300'
-                  : 'border-white/10 text-slate-400 hover:border-white/25 hover:text-slate-200'
+                  ? 'border-accent-line bg-accent-wash font-medium text-accent-fg'
+                  : 'border-line bg-surface text-ink-muted hover:border-accent-line hover:text-accent-fg'
               }`}
             >
               {candidate.text}
@@ -106,7 +106,7 @@ export function RolesDemo() {
           type="button"
           onClick={() => void runAllRoles(question)}
           disabled={running}
-          className="mt-3 rounded-lg bg-emerald-brand/20 px-4 py-2 text-sm font-medium text-emerald-300 transition-colors hover:bg-emerald-brand/30 disabled:opacity-40"
+          className="mt-3 rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-white shadow-card transition-colors hover:bg-accent-fg disabled:opacity-40"
           data-testid="run-all-roles"
         >
           {running ? 'Asking at all three roles…' : 'Ask at all three roles'}
@@ -128,12 +128,12 @@ export function RolesDemo() {
                 response === null
                   ? ''
                   : answered
-                    ? 'border-emerald-brand/30 bg-emerald-brand/[0.06]'
-                    : 'border-amber-400/40 bg-amber-400/[0.08]'
+                    ? 'border-l-4 border-l-accent'
+                    : 'border-caution-line bg-caution-wash'
               }
             >
               <header className="mb-2 flex items-center justify-between">
-                <h2 className="font-display text-sm capitalize text-slate-200">{role}</h2>
+                <h2 className="font-display text-sm font-semibold capitalize text-ink">{role}</h2>
                 <StatBadge
                   label="policies visible"
                   value={counts[role] ?? '—'}
@@ -142,15 +142,15 @@ export function RolesDemo() {
               </header>
 
               {response === null ? (
-                <p className="text-xs text-slate-500">
+                <p className="text-xs text-ink-soft">
                   {running ? 'Asking…' : 'Run the question to compare outcomes.'}
                 </p>
               ) : answered ? (
                 <div>
-                  <span className="rounded bg-emerald-brand/20 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-emerald-300">
+                  <span className="rounded bg-accent px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white">
                     Answered
                   </span>
-                  <p className="mt-2 line-clamp-4 text-xs leading-relaxed text-slate-300">
+                  <p className="mt-2 line-clamp-4 text-xs leading-relaxed text-ink">
                     {response.claims[0]?.text}
                   </p>
                   <div className="mt-2 flex flex-wrap gap-1">
@@ -158,7 +158,7 @@ export function RolesDemo() {
                       <RiskTag key={label} label={label} />
                     ))}
                   </div>
-                  <p className="mt-2 text-[11px] text-slate-500">
+                  <p className="mt-2 text-[11px] text-ink-soft">
                     {response.citations.length} source
                     {response.citations.length === 1 ? '' : 's'} · sufficiency{' '}
                     {response.trace.sufficiency.toFixed(2)}
@@ -166,22 +166,22 @@ export function RolesDemo() {
                 </div>
               ) : (
                 <div>
-                  <span className="rounded bg-amber-400/20 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-amber-300">
+                  <span className="rounded bg-caution px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white">
                     Refused
                   </span>
-                  <p className="mt-2 text-xs leading-relaxed text-amber-100/80">
+                  <p className="mt-2 text-xs font-medium leading-relaxed text-caution-fg">
                     Not found in the policies at this role.
                   </p>
                   {response.trace.withheld_count > 0 ? (
                     <p
-                      className="mt-2 text-[11px] text-amber-300/80"
+                      className="mt-2 text-[11px] font-medium text-caution-fg/80"
                       data-testid={`withheld-${role}`}
                     >
                       {response.trace.withheld_count} passage
                       {response.trace.withheld_count === 1 ? '' : 's'} withheld by the label filter.
                     </p>
                   ) : null}
-                  <p className="mt-2 text-[11px] text-slate-500">
+                  <p className="mt-2 text-[11px] text-ink-soft">
                     sufficiency {response.trace.sufficiency.toFixed(2)} · threshold{' '}
                     {response.trace.threshold.toFixed(2)}
                   </p>
@@ -193,10 +193,8 @@ export function RolesDemo() {
       </div>
 
       <Card as="section">
-        <h2 className="font-display text-sm uppercase tracking-wide text-slate-400">
-          The source browser vanishes too
-        </h2>
-        <p className="mt-1 text-sm text-slate-400">
+        <h2 className="pg-eyebrow">The source browser vanishes too</h2>
+        <p className="mt-1 text-sm text-ink-muted">
           Filtering only retrieval would leave the documents readable through the policy list. Both
           surfaces apply the same rule.
         </p>
@@ -206,18 +204,18 @@ export function RolesDemo() {
               role
             ]
             return (
-              <div key={role} className="rounded-lg border border-white/10 p-3">
-                <div className="mb-1 text-xs uppercase tracking-wide text-slate-500">{role}</div>
-                <div className="font-display text-2xl tabular-nums text-slate-100">
+              <div key={role} className="rounded-lg border border-line bg-surface-sunken p-3">
+                <div className="pg-eyebrow mb-1">{role}</div>
+                <div className="font-display text-2xl font-semibold tabular-nums text-ink">
                   {query.data?.visible_count ?? '—'}
-                  <span className="text-sm text-slate-500"> / 30</span>
+                  <span className="text-sm font-normal text-ink-soft"> / 30</span>
                 </div>
                 {query.data && query.data.hidden_count > 0 ? (
-                  <div className="mt-1 text-[11px] text-amber-300/80">
+                  <div className="mt-1 text-[11px] font-medium text-caution-fg">
                     {query.data.hidden_count} hidden ({query.data.hidden_labels.join(', ')})
                   </div>
                 ) : (
-                  <div className="mt-1 text-[11px] text-emerald-300/80">nothing hidden</div>
+                  <div className="mt-1 text-[11px] font-medium text-accent-fg">nothing hidden</div>
                 )}
               </div>
             )

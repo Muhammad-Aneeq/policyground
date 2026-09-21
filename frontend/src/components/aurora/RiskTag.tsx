@@ -6,7 +6,7 @@ export type SensitivityLabel = 'public' | 'internal' | 'restricted'
 export function RiskTag({ label, className = '' }: { label: SensitivityLabel; className?: string }) {
   return (
     <span
-      className={`inline-flex items-center rounded border px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wide ${labelClasses[label]} ${className}`}
+      className={`inline-flex items-center rounded border px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide ${labelClasses[label]} ${className}`}
       data-testid={`label-${label}`}
     >
       {label}

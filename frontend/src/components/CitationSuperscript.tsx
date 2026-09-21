@@ -25,10 +25,10 @@ export function CitationSuperscript({
       data-citation-id={citationId}
       aria-label={`Source ${index}: ${citationId}`}
       title={citationId}
-      className={`mx-0.5 -translate-y-1 rounded px-1 align-super text-[10px] font-semibold tabular-nums transition-colors ${
+      className={`mx-0.5 -translate-y-1 rounded px-1 align-super text-[10px] font-bold tabular-nums transition-colors ${
         active
-          ? 'bg-emerald-brand/40 text-white'
-          : 'bg-emerald-brand/15 text-emerald-300 hover:bg-emerald-brand/30'
+          ? 'bg-accent text-white'
+          : 'bg-accent-wash text-accent-fg ring-1 ring-inset ring-accent-line hover:bg-accent/20'
       }`}
     >
       {index}

@@ -151,8 +151,15 @@ describe('RefusalCard', () => {
     const answerClass = screen.getByTestId('answer-card').className
 
     expect(refusalClass).not.toEqual(answerClass)
-    expect(refusalClass).toContain('amber')
-    expect(answerClass).toContain('emerald')
+
+    // Asserted against the *semantic* token, not a palette name. This test used to require the
+    // literal strings "amber" and "emerald", which made a theme change look like a governance
+    // regression: re-skinning the app failed the one test whose job is to prove a refusal can
+    // never be mistaken for an answer. The rule being protected is that the two outcomes do not
+    // share a surface — so that is what is checked.
+    expect(refusalClass).toContain('caution')
+    expect(answerClass).not.toContain('caution')
+    expect(answerClass).toContain('accent')
   })
 })
 

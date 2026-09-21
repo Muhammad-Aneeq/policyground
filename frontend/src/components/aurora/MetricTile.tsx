@@ -13,17 +13,17 @@ export function MetricTile({
   tone?: 'neutral' | 'good' | 'warn' | 'bad'
 }) {
   const accents = {
-    neutral: 'text-slate-100',
-    good: 'text-emerald-300',
-    warn: 'text-amber-300',
-    bad: 'text-rose-300',
+    neutral: 'text-ink',
+    good: 'text-accent-fg',
+    warn: 'text-caution-fg',
+    bad: 'text-danger-fg',
   } as const
 
   return (
-    <div className="aurora-glass p-4">
-      <div className="text-xs uppercase tracking-wide text-slate-400">{label}</div>
-      <div className={`mt-1 font-display text-2xl tabular-nums ${accents[tone]}`}>{value}</div>
-      {caption ? <div className="mt-1 text-xs text-slate-400">{caption}</div> : null}
+    <div className="pg-card p-4">
+      <div className="pg-eyebrow">{label}</div>
+      <div className={`mt-1.5 font-display text-2xl tabular-nums ${accents[tone]}`}>{value}</div>
+      {caption ? <div className="mt-1 text-xs text-ink-muted">{caption}</div> : null}
     </div>
   )
 }

@@ -75,12 +75,12 @@ export function Chat({ role, onRoleChange: _onRoleChange }: { role: Role; onRole
               onChange={(event) => setQuestion(event.target.value)}
               placeholder="Ask the policy manual…"
               autoComplete="off"
-              className="flex-1 rounded-lg border border-white/10 bg-white/[0.03] px-3 py-2 text-sm text-slate-100 placeholder:text-slate-600 focus:border-emerald-brand/50 focus:outline-none"
+              className="flex-1 rounded-lg border border-line bg-surface px-3.5 py-2.5 text-sm text-ink placeholder:text-ink-faint focus:border-accent focus:outline-none"
             />
             <button
               type="submit"
               disabled={askMutation.isPending || question.trim().length === 0}
-              className="rounded-lg bg-emerald-brand/20 px-4 py-2 text-sm font-medium text-emerald-300 transition-colors hover:bg-emerald-brand/30 disabled:opacity-40"
+              className="rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-white shadow-card transition-colors hover:bg-accent-fg disabled:opacity-40"
             >
               {askMutation.isPending ? 'Asking…' : 'Ask'}
             </button>
@@ -96,7 +96,7 @@ export function Chat({ role, onRoleChange: _onRoleChange }: { role: Role; onRole
                   submit(suggestion.text)
                 }}
                 title={suggestion.hint}
-                className="rounded-full border border-white/10 px-2.5 py-1 text-[11px] text-slate-400 transition-colors hover:border-white/25 hover:text-slate-200"
+                className="rounded-full border border-line bg-surface px-2.5 py-1 text-[11px] text-ink-muted transition-colors hover:border-accent-line hover:bg-accent-wash hover:text-accent-fg"
               >
                 {suggestion.text}
               </button>
@@ -105,9 +105,9 @@ export function Chat({ role, onRoleChange: _onRoleChange }: { role: Role; onRole
         </Card>
 
         {askMutation.isError ? (
-          <Card className="border-rose-400/40 bg-rose-400/[0.08] text-sm text-rose-200">
+          <Card className="border-danger-line bg-danger-wash text-sm text-danger-fg">
             Could not reach the API. Is it running? Try{' '}
-            <code className="rounded bg-black/30 px-1">./make.ps1 api</code>.
+            <code className="rounded bg-surface px-1 font-mono">./make.ps1 api</code>.
           </Card>
         ) : null}
 
@@ -136,10 +136,10 @@ export function Chat({ role, onRoleChange: _onRoleChange }: { role: Role; onRole
               onClick={() => setShowTrace((current) => !current)}
               className="flex w-full items-center justify-between text-left"
             >
-              <span className="font-display text-sm uppercase tracking-wide text-slate-400">
-                How this answer was produced
+              <span className="pg-eyebrow">How this answer was produced</span>
+              <span className="text-xs font-medium text-accent-fg">
+                {showTrace ? 'hide' : 'show'}
               </span>
-              <span className="text-xs text-slate-500">{showTrace ? 'hide' : 'show'}</span>
             </button>
 
             {showTrace ? (

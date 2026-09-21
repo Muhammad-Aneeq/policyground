@@ -2,34 +2,67 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Aurora surface: dark navy base with frosted-glass panels (spec 00 A2). */
 @layer base {
   html,
   body,
   #root {
     height: 100%;
   }
+
   body {
-    @apply bg-navy-deep font-sans text-slate-200 antialiased;
-    background-image:
-      radial-gradient(ellipse 80% 50% at 20% -10%, rgba(16, 185, 129, 0.1), transparent),
-      radial-gradient(ellipse 60% 50% at 90% 0%, rgba(11, 30, 59, 0.9), transparent);
+    @apply bg-canvas font-sans text-ink antialiased;
   }
-  h1, h2, h3, h4 {
-    @apply font-display text-slate-100;
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display text-ink;
   }
+
   ::selection {
-    @apply bg-emerald-brand/30 text-white;
+    @apply bg-accent/15 text-ink;
+  }
+
+  /* Visible focus on a light surface. The citation superscripts are the primary navigation of
+     this product and are frequently used from the keyboard, so the ring must be obvious rather
+     than tasteful. */
+  :focus-visible {
+    @apply outline-none ring-2 ring-accent/45 ring-offset-2 ring-offset-canvas;
   }
 }
 
 @layer components {
-  .aurora-glass {
-    @apply rounded-xl border border-white/10 bg-white/[0.04] shadow-glass backdrop-blur-md;
+  /* The base panel: a sheet of paper on a warm canvas. */
+  .pg-card {
+    @apply rounded-xl border border-line bg-surface shadow-card;
   }
-  /* Highlighted passage in the Source Viewer. Deliberately emerald, never the amber used for
-     refusals — a highlight means "this is your evidence", not "something went wrong". */
-  .aurora-highlight {
-    @apply rounded bg-emerald-brand/25 ring-1 ring-emerald-brand/50;
+
+  /* The highlighted passage in the Source Viewer.
+     Deliberately the accent colour and never the caution amber used for refusals — a highlight
+     means "this is your evidence", not "something went wrong". */
+  .pg-highlight {
+    @apply rounded bg-accent/15 text-ink ring-1 ring-accent/35;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+
+  /* Section eyebrow used above panels and trace blocks. */
+  .pg-eyebrow {
+    @apply font-display text-xs font-medium uppercase tracking-wider text-ink-soft;
+  }
+
+  .pg-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: #D6D3D1 transparent;
+  }
+  .pg-scroll::-webkit-scrollbar {
+    width: 8px;
+  }
+  .pg-scroll::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-line-strong;
+  }
+  .pg-scroll::-webkit-scrollbar-track {
+    background: transparent;
   }
 }

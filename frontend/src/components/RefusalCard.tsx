@@ -13,10 +13,11 @@ const REASON_TEXT: Record<Refusal['reason'], string> = {
 /**
  * A refusal, styled so it cannot be mistaken for an answer (spec 08 section 9).
  *
- * The separation is deliberate and total: amber rather than emerald, a "Not found" heading rather
- * than an "Answer" chip, and near-misses presented as *places to look*, never as citations. It
- * carries no `data-testid="answer-card"`, and a test asserts that a refusal renders no
- * answer-shaped container at all — the rule expressed as an assertion rather than a convention.
+ * The separation is deliberate and total: a *tinted* amber surface rather than the answer's white
+ * sheet with an accent edge, a "Not found" heading rather than an "Answer" chip, and near-misses
+ * presented as *places to look*, never as citations. It carries no `data-testid="answer-card"`,
+ * and a test asserts that a refusal renders no answer-shaped container at all — the rule expressed
+ * as an assertion rather than a convention.
  *
  * Structurally it could not render an answer even if someone tried: the `Refusal` type has no
  * `claims` field to read, so reaching for one is a compile error.
@@ -26,14 +27,14 @@ export function RefusalCard({ refusal, role }: { refusal: Refusal; role: Role })
 
   return (
     <Card
-      className="border-amber-400/40 bg-amber-400/[0.08]"
+      className="border-caution-line bg-caution-wash"
       data-testid="refusal-card"
       role="status"
       aria-label="Refusal: not found in the policies"
     >
       <div className="mb-3 flex flex-wrap items-center gap-2">
         <span
-          className="rounded bg-amber-400/20 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-amber-300"
+          className="rounded bg-caution px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white"
           data-testid="refusal-chip"
         >
           Not found in the policies
@@ -49,11 +50,11 @@ export function RefusalCard({ refusal, role }: { refusal: Refusal; role: Role })
         ) : null}
       </div>
 
-      <p className="text-amber-100/90">{refusal.message}</p>
-      <p className="mt-2 text-sm text-amber-200/70">{REASON_TEXT[refusal.reason]}</p>
+      <p className="font-medium text-caution-fg">{refusal.message}</p>
+      <p className="mt-2 text-sm text-caution-fg/80">{REASON_TEXT[refusal.reason]}</p>
 
       {withheld > 0 ? (
-        <p className="mt-2 text-sm text-amber-200/70" data-testid="withheld-note">
+        <p className="mt-2 text-sm text-caution-fg/80" data-testid="withheld-note">
           {withheld} passage{withheld === 1 ? ' was' : 's were'} withheld at the{' '}
           <strong>{role}</strong> role. Material exists that a more privileged role could see.
         </p>
@@ -61,7 +62,7 @@ export function RefusalCard({ refusal, role }: { refusal: Refusal; role: Role })
 
       {refusal.closest_sections.length > 0 ? (
         <div className="mt-4">
-          <h3 className="text-xs uppercase tracking-wide text-amber-300/70">
+          <h3 className="text-xs font-semibold uppercase tracking-wider text-caution-fg/70">
             Closest sections — not an answer, just the nearest material
           </h3>
           <ul className="mt-2 space-y-1.5" data-testid="closest-sections">
@@ -69,18 +70,18 @@ export function RefusalCard({ refusal, role }: { refusal: Refusal; role: Role })
               <li key={`${section.policy_id}-${section.section_path}`} className="text-sm">
                 <Link
                   to={`/sources/${section.policy_id}`}
-                  className="text-amber-200 underline decoration-amber-400/40 underline-offset-2 hover:decoration-amber-400"
+                  className="font-medium text-caution-fg underline decoration-caution/40 underline-offset-2 hover:decoration-caution"
                 >
                   {section.policy_id} — {section.policy_title}
                 </Link>
-                <span className="text-amber-200/50"> · {section.section_path}</span>
+                <span className="text-caution-fg/60"> · {section.section_path}</span>
               </li>
             ))}
           </ul>
         </div>
       ) : null}
 
-      <p className="mt-4 border-t border-amber-400/20 pt-3 text-sm text-amber-200/80">
+      <p className="mt-4 border-t border-caution-line pt-3 text-sm text-caution-fg/80">
         {refusal.suggestion_prompt}
       </p>
     </Card>

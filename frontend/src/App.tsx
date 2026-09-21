@@ -33,12 +33,22 @@ export function App() {
     <div className="min-h-full">
       <SyntheticDataBanner degraded={health.data?.degraded ?? false} />
 
-      <header className="border-b border-white/10 bg-navy/40 backdrop-blur">
+      <header className="sticky top-0 z-20 border-b border-line bg-surface/85 backdrop-blur">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-x-6 gap-y-3 px-4 py-3">
-          <div>
-            <div className="font-display text-lg leading-none text-slate-100">PolicyGround</div>
-            <div className="text-[11px] text-slate-500">
-              Governed finance RAG — cited, or it refuses
+          <div className="flex items-center gap-2.5">
+            <span
+              aria-hidden="true"
+              className="grid h-8 w-8 place-items-center rounded-lg bg-accent font-display text-sm font-bold text-white"
+            >
+              §
+            </span>
+            <div>
+              <div className="font-display text-lg font-semibold leading-none text-ink">
+                PolicyGround
+              </div>
+              <div className="text-[11px] text-ink-soft">
+                Governed finance RAG — cited, or it refuses
+              </div>
             </div>
           </div>
 
@@ -49,10 +59,10 @@ export function App() {
                 to={item.to}
                 end={item.end}
                 className={({ isActive }) =>
-                  `rounded-lg px-3 py-1.5 text-sm transition-colors ${
+                  `rounded-lg px-3 py-1.5 text-sm font-medium transition-colors ${
                     isActive
-                      ? 'bg-white/10 text-slate-100'
-                      : 'text-slate-400 hover:bg-white/5 hover:text-slate-200'
+                      ? 'bg-accent-wash text-accent-fg'
+                      : 'text-ink-muted hover:bg-surface-sunken hover:text-ink'
                   }`
                 }
               >
@@ -81,7 +91,7 @@ export function App() {
         </Routes>
       </main>
 
-      <footer className="mx-auto max-w-7xl px-4 pb-8 text-[11px] text-slate-600">
+      <footer className="mx-auto max-w-7xl px-4 pb-8 text-[11px] text-ink-soft">
         Built by an ex-accountant turned AI engineer. All policy content is synthetic.
         {health.data ? ` · APP_MODE=${health.data.app_mode}` : null}
       </footer>

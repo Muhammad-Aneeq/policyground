@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 
-/** Frosted-glass surface — the base panel of the aurora system (spec 00 A2). */
+/** The base panel: a sheet of paper on a warm canvas. */
 export function Card({
   children,
   className = '',
@@ -12,7 +12,7 @@ export function Card({
   as?: 'div' | 'section' | 'article' | 'aside'
 } & React.HTMLAttributes<HTMLElement>) {
   return (
-    <Tag className={`aurora-glass p-5 ${className}`} {...rest}>
+    <Tag className={`pg-card p-5 ${className}`} {...rest}>
       {children}
     </Tag>
   )

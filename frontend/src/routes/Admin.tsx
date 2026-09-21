@@ -67,9 +67,7 @@ export function Admin() {
 
       <Card as="section">
         <header className="mb-3 flex flex-wrap items-center gap-2">
-          <h2 className="font-display text-sm uppercase tracking-wide text-slate-400">
-            Groundedness trend
-          </h2>
+          <h2 className="pg-eyebrow">Groundedness trend</h2>
           {offlineRuns > 0 ? (
             <StatBadge
               label="offline proxy"
@@ -86,28 +84,36 @@ export function Admin() {
 
         {chartData.length === 0 ? (
           <EmptyState title="No eval runs recorded yet" icon="↗">
-            Run <code className="rounded bg-black/30 px-1">./make.ps1 eval</code> to populate the
-            trend. CI writes a row per run.
+            Run <code className="rounded bg-surface-sunken px-1 font-mono">./make.ps1 eval</code> to
+            populate the trend. CI writes a row per run.
           </EmptyState>
         ) : (
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={chartData} margin={{ top: 8, right: 12, bottom: 4, left: -20 }}>
-                <CartesianGrid stroke="rgba(255,255,255,0.06)" />
-                <XAxis dataKey="name" stroke="#64748b" fontSize={11} />
-                <YAxis domain={[0, 1]} stroke="#64748b" fontSize={11} />
+                <CartesianGrid stroke={tokens.line} />
+                <XAxis dataKey="name" stroke="#8A8581" fontSize={11} tickLine={false} />
+                <YAxis
+                  domain={[0, 1]}
+                  stroke="#8A8581"
+                  fontSize={11}
+                  tickLine={false}
+                  axisLine={false}
+                />
                 <Tooltip
                   contentStyle={{
-                    background: tokens.navy,
-                    border: '1px solid rgba(255,255,255,0.12)',
+                    background: tokens.surface,
+                    border: `1px solid ${tokens.line}`,
                     borderRadius: 8,
                     fontSize: 12,
+                    color: tokens.ink,
+                    boxShadow: '0 2px 4px rgba(28,25,23,0.04), 0 4px 12px rgba(28,25,23,0.08)',
                   }}
                 />
                 <Line
                   type="monotone"
                   dataKey="citation_validity"
-                  stroke={tokens.emerald}
+                  stroke={tokens.accent}
                   strokeWidth={2}
                   dot={false}
                   name="Citation validity"
@@ -115,7 +121,7 @@ export function Admin() {
                 <Line
                   type="monotone"
                   dataKey="groundedness"
-                  stroke="#38bdf8"
+                  stroke="#0284C7"
                   strokeWidth={2}
                   dot={false}
                   name="Groundedness"
@@ -123,7 +129,7 @@ export function Admin() {
                 <Line
                   type="monotone"
                   dataKey="refusal_accuracy"
-                  stroke={tokens.amber}
+                  stroke={tokens.caution}
                   strokeWidth={2}
                   dot={false}
                   name="Refusal accuracy"
@@ -136,12 +142,10 @@ export function Admin() {
 
       <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_18rem]">
         <Card as="section">
-          <header className="mb-3 flex items-center justify-between">
+          <header className="mb-3 flex items-center justify-between gap-3">
             <div>
-              <h2 className="font-display text-sm uppercase tracking-wide text-slate-400">
-                Unanswered log
-              </h2>
-              <p className="text-xs text-slate-500">
+              <h2 className="pg-eyebrow">Unanswered log</h2>
+              <p className="mt-1 text-xs text-ink-muted">
                 What people asked that the manual could not answer — ranked by how often, because
                 that ranking is what makes it a roadmap rather than a list.
               </p>
@@ -149,7 +153,7 @@ export function Admin() {
             <a
               href={unansweredCsvUrl}
               download
-              className="shrink-0 rounded-lg border border-white/15 px-3 py-1.5 text-xs text-slate-300 transition-colors hover:border-white/30"
+              className="shrink-0 rounded-lg border border-line bg-surface px-3 py-1.5 text-xs font-medium text-ink-muted shadow-card transition-colors hover:border-accent-line hover:text-accent-fg"
               data-testid="export-csv"
             >
               Export CSV
@@ -159,19 +163,23 @@ export function Admin() {
           {unanswered.data && unanswered.data.entries.length > 0 ? (
             <div className="overflow-x-auto">
               <table className="w-full text-left text-sm">
-                <thead className="text-xs uppercase tracking-wide text-slate-500">
+                <thead className="pg-eyebrow">
                   <tr>
-                    <th className="pb-2 pr-3 font-medium">Asked</th>
-                    <th className="pb-2 pr-3 font-medium">Question</th>
-                    <th className="pb-2 font-medium">Closest sections</th>
+                    <th className="pb-2 pr-3">Asked</th>
+                    <th className="pb-2 pr-3">Question</th>
+                    <th className="pb-2">Closest sections</th>
                   </tr>
                 </thead>
                 <tbody className="align-top">
                   {unanswered.data.entries.map((entry) => (
-                    <tr key={entry.id} className="border-t border-white/5">
-                      <td className="py-2 pr-3 tabular-nums text-slate-400">{entry.times_asked}×</td>
-                      <td className="py-2 pr-3 text-slate-200">{entry.query_text}</td>
-                      <td className="py-2 text-xs text-slate-500">
+                    <tr key={entry.id} className="border-t border-line">
+                      <td className="py-2 pr-3">
+                        <span className="rounded-full bg-caution-wash px-2 py-0.5 text-xs font-semibold tabular-nums text-caution-fg">
+                          {entry.times_asked}×
+                        </span>
+                      </td>
+                      <td className="py-2 pr-3 text-ink">{entry.query_text}</td>
+                      <td className="py-2 font-mono text-xs text-ink-soft">
                         {entry.closest_sections.map((s) => s.policy_id).join(', ') || '—'}
                       </td>
                     </tr>
@@ -188,32 +196,28 @@ export function Admin() {
 
         <div className="space-y-4">
           <Card as="section">
-            <h2 className="mb-2 font-display text-sm uppercase tracking-wide text-slate-400">
-              Refusals by reason
-            </h2>
+            <h2 className="pg-eyebrow mb-2">Refusals by reason</h2>
             {data && Object.keys(data.refusals_by_reason).length > 0 ? (
               <ul className="space-y-1.5 text-sm">
                 {Object.entries(data.refusals_by_reason).map(([reason, count]) => (
                   <li key={reason} className="flex justify-between gap-3">
-                    <span className="font-mono text-xs text-slate-400">{reason}</span>
-                    <span className="tabular-nums text-slate-300">{count}</span>
+                    <span className="font-mono text-xs text-ink-muted">{reason}</span>
+                    <span className="font-semibold tabular-nums text-ink">{count}</span>
                   </li>
                 ))}
               </ul>
             ) : (
-              <p className="text-xs text-slate-500">No refusals recorded yet.</p>
+              <p className="text-xs text-ink-soft">No refusals recorded yet.</p>
             )}
           </Card>
 
           <Card as="section">
-            <h2 className="mb-2 font-display text-sm uppercase tracking-wide text-slate-400">
-              Corpus
-            </h2>
+            <h2 className="pg-eyebrow mb-2">Corpus</h2>
             <ul className="space-y-1.5 text-sm">
               {Object.entries(data?.corpus_labels ?? {}).map(([label, count]) => (
                 <li key={label} className="flex justify-between gap-3">
-                  <span className="capitalize text-slate-400">{label}</span>
-                  <span className="tabular-nums text-slate-300">{count}</span>
+                  <span className="capitalize text-ink-muted">{label}</span>
+                  <span className="font-semibold tabular-nums text-ink">{count}</span>
                 </li>
               ))}
             </ul>
@@ -221,7 +225,7 @@ export function Admin() {
               type="button"
               onClick={() => reindex.mutate()}
               disabled={reindex.isPending}
-              className="mt-3 w-full rounded-lg border border-white/15 px-3 py-1.5 text-xs text-slate-300 transition-colors hover:border-white/30 disabled:opacity-40"
+              className="mt-3 w-full rounded-lg border border-line bg-surface px-3 py-1.5 text-xs font-medium text-ink-muted shadow-card transition-colors hover:border-accent-line hover:text-accent-fg disabled:opacity-40"
             >
               {reindex.isPending ? 'Rebuilding…' : 'Rebuild index from corpus'}
             </button>

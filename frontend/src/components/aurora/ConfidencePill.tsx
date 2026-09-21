@@ -18,9 +18,9 @@ export function ConfidencePill({
   const label = above ? (score >= threshold + 0.25 ? 'strong' : 'sufficient') : 'below threshold'
   const tone = above
     ? score >= threshold + 0.25
-      ? 'border-emerald-brand/40 bg-emerald-brand/10 text-emerald-300'
-      : 'border-sky-400/40 bg-sky-400/10 text-sky-300'
-    : 'border-amber-400/40 bg-amber-400/10 text-amber-300'
+      ? 'border-accent-line bg-accent-wash text-accent-fg'
+      : 'border-info-line bg-info-wash text-info-fg'
+    : 'border-caution-line bg-caution-wash text-caution-fg'
 
   return (
     <span
@@ -28,9 +28,9 @@ export function ConfidencePill({
       title={`Evidence sufficiency ${score.toFixed(3)} against a refusal threshold of ${threshold}`}
       data-testid="confidence-pill"
     >
-      <span className="font-medium tabular-nums">{score.toFixed(2)}</span>
-      <span className="opacity-70">{label}</span>
-      <span className="opacity-50">/ {threshold.toFixed(2)}</span>
+      <span className="font-semibold tabular-nums">{score.toFixed(2)}</span>
+      <span className="opacity-80">{label}</span>
+      <span className="opacity-55">/ {threshold.toFixed(2)}</span>
     </span>
   )
 }

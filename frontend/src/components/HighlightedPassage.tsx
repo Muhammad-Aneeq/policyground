@@ -37,24 +37,20 @@ export function HighlightedPassage({
     }
   }, [hasHighlight, start, end])
 
+  const body = 'whitespace-pre-wrap break-words font-sans text-sm leading-relaxed text-ink-muted'
+
   if (!hasHighlight) {
     return (
-      <pre
-        className="whitespace-pre-wrap break-words font-sans text-sm leading-relaxed text-slate-300"
-        data-testid="policy-body"
-      >
+      <pre className={body} data-testid="policy-body">
         {markdown}
       </pre>
     )
   }
 
   return (
-    <pre
-      className="whitespace-pre-wrap break-words font-sans text-sm leading-relaxed text-slate-300"
-      data-testid="policy-body"
-    >
+    <pre className={body} data-testid="policy-body">
       {markdown.slice(0, start)}
-      <mark ref={markRef} className="aurora-highlight text-slate-100" data-testid="highlight">
+      <mark ref={markRef} className="pg-highlight" data-testid="highlight">
         {markdown.slice(start, end)}
       </mark>
       {markdown.slice(end)}
