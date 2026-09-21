@@ -144,13 +144,24 @@ about entitlement to that identity. The fix is one function: `api/deps.py::parse
 validated token claim instead of a request field. It is one function precisely because the role
 enters the system in exactly one place.
 
-**2. Re-calibrate against a real embedder and publish both curves.**
-The threshold sits at 0.80 — high, because a lexical retriever scores off-corpus questions that
-share vocabulary too generously. Four of the nine false refusals score 0.70–0.80: retrieval found
-the right policy and the threshold took them with it. With `text-embedding-3-small` the classes
-should separate further, a lower threshold should do the same work, and most of those should come
-back. Publishing the before/after sweep would turn "the embedder matters" from an assertion into a
-measurement — which is more interesting than simply reporting better numbers.
+**2. ~~Re-calibrate against a real embedder and publish both curves.~~ DONE — see
+`docs/evals_methodology.md` §3a.**
+The prediction was right and the consequence was bigger than expected. With
+`text-embedding-3-small` the calibrated optimum moves from 0.80 to **0.51**, and the false refusal
+rate on the gate split falls from **0.2143 to 0.0476** — nine wrongly-refused questions down to
+two. Both absolute gates hold.
+
+Two findings that were not predicted. **At 0.80 with real embeddings the positive control breaks**:
+a controller is refused on restricted material, dropping `restricted_answered_for_controller` to
+0.8889 against an absolute bar of 1.0. And **the threshold is not portable** — 0.51 against the hash
+embedder refuses only 0.355 of the unanswerable cases, far under the 0.70 floor. It is a property of
+the retrieval stack, so the committed default stays at 0.80 and 0.51 is configured alongside a real
+embedder.
+
+The remaining open item is the judge: these runs are still scored by the offline proxy, and the
+groundedness figure fell from a near-vacuous 1.0000 to 0.83 simply because an abstractive composer
+gives the proxy something to measure. That number needs a live pinned judge before it means much,
+and the stored baseline needs replacing rather than defending.
 
 **3. Split "over-answering" from "leaking" as a first-class metric.**
 The failure analysis found that 5 of 7 missed refusals are restricted-*topic* questions answered

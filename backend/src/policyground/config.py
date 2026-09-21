@@ -77,10 +77,19 @@ class Settings(BaseSettings):
     #: minus false-refusal-rate), which weights both directions equally. CI then gates on the
     #: *gate* split, which the threshold has never seen (PLAN.md D-019).
     #:
-    #: It is high because the vector arm is a lexical stand-in in this build (BLOCKERS.md B1), so
+    #: It is high because the vector arm is a lexical stand-in when no credential is configured, so
     #: off-corpus questions that share vocabulary with the corpus score higher than they should.
-    #: With a real embedding model the two classes separate further and a lower threshold would
-    #: do the same work. The full sweep is published in docs/evals_methodology.md.
+    #:
+    #: **This default is calibrated for the offline stack, and only for it.** Re-running the same
+    #: procedure against `text-embedding-3-small` puts the optimum at **0.51**, and the two are not
+    #: interchangeable: 0.51 measured against the hash embedder refuses only 0.355 of the
+    #: unanswerable gate cases, well under the 0.70 floor, while 0.80 measured against real
+    #: embeddings refuses a *controller* on restricted material and breaks the positive control.
+    #:
+    #: So the threshold is a property of the retrieval stack rather than of the product, and the
+    #: committed value is the one matching the configuration this ships in — no credential. Set
+    #: ``SUFFICIENCY_THRESHOLD=0.51`` alongside a real embedder. Both curves, and the reasoning,
+    #: are published in docs/evals_methodology.md §3a.
     sufficiency_threshold: float = Field(default=0.80, ge=0.0, le=1.0)
     #: RRF constant. 60 is the published default and the value Azure AI Search uses for hybrid
     #: fusion, which is what keeps LOCAL and AZURE behaviourally comparable (PLAN.md D-005).

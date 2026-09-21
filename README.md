@@ -62,13 +62,16 @@ got. `APP_MODE` is read in exactly one function.
 | **LOCAL mode** | ✅ Complete, running, tested. 377 tests green. |
 | **AZURE mode** | 🟡 **Deployment-ready. Never deployed.** No Azure subscription in this build environment (`BLOCKERS.md` B2). Bicep compiles in CI; the retriever is covered by contract tests with the SDK mocked. |
 | **Model credentials** | ✅ Live (`BLOCKERS.md` B1, closed). Retrieval uses `text-embedding-3-small`; compose uses **`gpt-5.6-luna`** at `reasoning_effort=low`. `/api/health` reports `degraded: false`. |
-| **The numbers below** | ⚠️ **Predate the model.** Every figure in the next section was produced by the offline `HashEmbedder` + extractive composer, before a credential existed. They have **not** been re-measured against GPT-5.6 Luna. |
+| **The numbers below** | ⚠️ **Are the offline figures**, produced by `HashEmbedder` + the extractive composer — the configuration CI runs in. The same bank re-measured against the real stack is in **`docs/evals_methodology.md` §3a**, published side by side rather than swapped in. |
 
-**Read that last row before quoting a number.** The app you run today answers with a real model;
-the table below describes a system that did not have one. Both statements are true and they are
-deliberately not blended — re-running the gate split against the real embedder is the open
-follow-up (§6.2 of `FINAL_REPORT.md`), and publishing the before/after is more interesting than
-quietly replacing one set of numbers with a better-looking set.
+**Read that last row before quoting a number.** Both sets are real; they describe two different
+retrieval stacks, and they are deliberately not blended.
+
+The short version of the re-run: with `text-embedding-3-small` the calibrated threshold moves from
+**0.80 to 0.51**, and the false refusal rate falls from **0.2143 to 0.0476**. The threshold turns
+out to be a property of the *retrieval stack*, not of the product — 0.51 against the hash embedder
+refuses only 0.355 of the unanswerable cases, so neither value is correct for both. The committed
+default stays at 0.80 because that is the configuration this ships in.
 
 **What the credential does and does not change.** The two controls this project actually stands
 on — citation validity and label leakage — are *structural*: they are properties of the code, not
