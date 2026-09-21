@@ -64,6 +64,32 @@ def retriever(chunks: list[Chunk], settings: Settings) -> LocalHybridRetriever:
 
 
 @pytest.fixture(scope="session")
+def offline_data_dir(tmp_path_factory: pytest.TempPathFactory) -> Path:
+    """A scratch ``data/`` holding an index built by :class:`HashEmbedder`, built once per session.
+
+    This exists so the **API** tests can run the way every other test in this suite already does:
+    offline, deterministically, and without a credential. Those tests boot the real application,
+    which loads ``<repo>/data/index.json`` — so with a real key configured they were embedding and
+    composing against the live API, on every ``POST /api/ask``, on every run. That contradicted the
+    README's "254 unit tests (LLM mocked)" and would bill the project's owner for CI.
+
+    Session-scoped because building it is the expensive part (chunk + embed 256 passages) and the
+    content is identical for every test. The one test that *writes* here — the reindex endpoint —
+    regenerates the same bytes from the same corpus, so sharing it is safe.
+    """
+    from policyground.config import AppMode, Settings
+    from policyground.ingest.pipeline import run_ingest
+
+    data_dir = tmp_path_factory.mktemp("offline-data")
+    run_ingest(
+        Settings(openai_api_key=None, pg_data_dir=data_dir),
+        mode=AppMode.LOCAL,
+        rebuild=True,
+    )
+    return data_dir
+
+
+@pytest.fixture(scope="session")
 def vocabulary(chunks: list[Chunk]) -> CorpusVocabulary:
     """Corpus document frequencies, built in-process from the same chunks the retriever uses.
 

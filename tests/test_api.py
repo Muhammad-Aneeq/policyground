@@ -23,12 +23,43 @@ OFF_CORPUS = "What is our policy on cryptocurrency custody and staking rewards?"
 RESTRICTED_TOPIC = "How do we account for executive severance and retention awards?"
 
 
+def expected_degraded() -> bool:
+    """What ``degraded`` *should* say in whatever environment this suite is running in.
+
+    Deliberately derived rather than hard-coded. These assertions used to read
+    ``payload["degraded"] is True``, which was true of the build at the time and quietly encoded
+    "this project has no API key" as a property of the *code*. Supplying a credential then failed
+    three tests that were, read literally, correct — the system was no longer degraded.
+
+    The claim worth testing is not "we are degraded", it is **"the flag tells the truth"** — which
+    is exactly what the test names say. So the expectation is computed from the same credentials
+    the endpoints consult, and the assertion holds with a key and without one.
+    """
+    from policyground.config import get_settings
+
+    settings = get_settings()
+    return not (settings.has_openai_key or settings.has_azure_openai)
+
+
 @pytest.fixture
-def client(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Iterator[TestClient]:
-    """A client backed by a throwaway SQLite database.
+def client(
+    tmp_path: Path, offline_data_dir: Path, monkeypatch: pytest.MonkeyPatch
+) -> Iterator[TestClient]:
+    """A client backed by a throwaway SQLite database and an offline index.
 
     Each test gets a clean database so the refusal-rate and unanswered-log assertions are about
     what *this* test did, not about accumulated state from the whole suite.
+
+    **Credentials are cleared deliberately.** These tests boot the real application, so with a key
+    configured they embedded and composed against the live API on every ``POST /api/ask`` — real
+    network calls, real latency, real spend, on every run including CI. The suite is supposed to be
+    hermetic; an environment variable was quietly deciding otherwise. Blanking the key selects the
+    documented offline fallbacks, which is what the rest of the suite already uses and what the
+    README claims.
+
+    ``PG_DATA_DIR`` goes with it and is not optional. The offline fallbacks need an index built by
+    the *same* embedder or the provenance check in ``load_index`` rejects it — and the reindex test
+    writes a real index, which without this would overwrite the developer's working copy.
     """
     from policyground.api import deps
     from policyground.config import reset_settings_cache
@@ -36,6 +67,10 @@ def client(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Iterator[TestClie
     from policyground.retrieval import factory
 
     monkeypatch.setenv("DATABASE_URL", f"sqlite:///{(tmp_path / 'test.db').as_posix()}")
+    monkeypatch.setenv("OPENAI_API_KEY", "")
+    monkeypatch.setenv("AZURE_OPENAI_ENDPOINT", "")
+    monkeypatch.setenv("AZURE_OPENAI_API_KEY", "")
+    monkeypatch.setenv("PG_DATA_DIR", str(offline_data_dir))
     reset_settings_cache()
     db_session.reset_engine_cache()
     factory.reset_retriever_cache()
@@ -61,7 +96,7 @@ def test_health_states_the_degraded_mode_honestly(client: TestClient) -> None:
 
     assert payload["status"] == "ok"
     assert payload["synthetic_corpus"] is True
-    assert payload["degraded"] is True  # no model credential here (BLOCKERS.md B1)
+    assert payload["degraded"] is expected_degraded()
     assert payload["roles"] == [r.value for r in Role]
 
 
@@ -250,7 +285,7 @@ def test_metrics_count_answers_and_refusals(client: TestClient) -> None:
     assert metrics["answered"] == 1
     assert metrics["refused"] == 2
     assert metrics["refusal_rate"] == pytest.approx(2 / 3, abs=1e-3)
-    assert metrics["degraded"] is True
+    assert metrics["degraded"] is expected_degraded()
     assert metrics["corpus_labels"] == {"public": 10, "internal": 14, "restricted": 6}
 
 
@@ -304,7 +339,7 @@ def test_reindex_rebuilds_from_the_corpus(client: TestClient) -> None:
 
     assert payload["policies"] == 30
     assert payload["chunks"] > 200
-    assert payload["degraded"] is True
+    assert payload["degraded"] is expected_degraded()
     assert len(payload["corpus_sha256"]) == 64
 
 

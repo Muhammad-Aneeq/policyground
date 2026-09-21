@@ -83,7 +83,12 @@ ignore_missing_imports = true
 [tool.pytest.ini_options]
 testpaths = ["tests", "evals"]
 pythonpath = ["backend/src"]
-addopts = "-q --strict-markers"
+# `-m "not live"` is what actually makes the `live` marker below mean what it says. Without it
+# the marker was decorative: the test was declared "deselected by default", carried a
+# `skip if no OPENAI_API_KEY` guard, and then ran and hit the real API the moment a key existed.
+# The default suite must be hermetic — no network, no credential, no spend. Run the excluded
+# tests deliberately with `pytest -m live`.
+addopts = '-q --strict-markers -m "not live"'
 markers = [
     "live: hits a real LLM/embedding API. Deselected by default; requires OPENAI_API_KEY.",
     "azure: requires a live Azure AI Search endpoint. Never run in CI.",

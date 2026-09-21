@@ -23,6 +23,14 @@ frontend/dist/
 .env.local
 .azure/
 
+# Demo recordings — kept local, never pushed.
+# The stills in media/*.png ARE committed: the README is screenshot-first and would
+# render with broken images without them. Only the video files are excluded.
+media/*.mp4
+media/*.webm
+media/*.mov
+media/*.gif
+
 # OS
 .DS_Store
 Thumbs.db
