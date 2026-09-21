@@ -182,12 +182,29 @@ class OfflineComposer:
 
 
 class OpenAIComposer:
-    """The real compose step. Untested against the live API in this build (BLOCKERS.md **B1**)."""
+    """The real compose step, against the GPT-5.6 reasoning family.
 
-    def __init__(self, model: str, api_key: str, temperature: float = 0.0) -> None:
+    **There is deliberately no ``temperature`` here.** The obvious way to write this is
+    ``temperature=0`` — determinism is exactly what a cited-answer step wants, and it is what the
+    pinned eval judge still does on its older snapshot. The GPT-5.6 models reject it outright::
+
+        400 - Unsupported value: 'temperature' does not support 0.0 with this model.
+              Only the default (1) value is supported.
+
+    Verified against the live API rather than inferred. Sending it is not a degraded-quality
+    choice, it is a hard failure, so the parameter is gone rather than defaulted — a
+    ``temperature: float = 0.0`` argument nobody passes is a trap waiting for the next caller.
+
+    What replaces it as the determinism lever is ``reasoning_effort``. Compose is a *constrained
+    extraction* task: the passages are already retrieved, the schema is fixed, and the job is to
+    restate what a passage says and attach the id it came from. That needs care, not deliberation
+    — and every token of reasoning is paid for on a step that runs on every answered question.
+    """
+
+    def __init__(self, model: str, api_key: str, reasoning_effort: str = "low") -> None:
         self.name = f"openai:{model}"
         self.model = model
-        self.temperature = temperature
+        self.reasoning_effort = reasoning_effort
         self._api_key = api_key
 
     def _client(self) -> Any:
@@ -198,7 +215,7 @@ class OpenAIComposer:
     def compose(self, question: str, chunks: list[Chunk]) -> list[Claim]:
         response = self._client().chat.completions.create(
             model=self.model,
-            temperature=self.temperature,
+            reasoning_effort=self.reasoning_effort,
             response_format={"type": "json_object"},
             messages=[
                 {"role": "system", "content": SYSTEM_PROMPT},
@@ -220,10 +237,10 @@ class AzureOpenAIComposer(OpenAIComposer):
         deployment: str,
         endpoint: str,
         api_key: str,
-        api_version: str = "2024-10-21",
-        temperature: float = 0.0,
+        api_version: str = "2025-04-01-preview",
+        reasoning_effort: str = "low",
     ) -> None:
-        super().__init__(model=deployment, api_key=api_key, temperature=temperature)
+        super().__init__(model=deployment, api_key=api_key, reasoning_effort=reasoning_effort)
         self.name = f"azure-openai:{deployment}"
         self._endpoint = endpoint
         self._api_version = api_version
@@ -252,10 +269,15 @@ def build_chat_client(settings: Settings) -> ChatClient:
             deployment=settings.azure_openai_chat_deployment,
             endpoint=settings.azure_openai_endpoint,
             api_key=settings.azure_openai_api_key,
+            reasoning_effort=settings.openai_reasoning_effort,
         )
     if settings.has_openai_key:
         assert settings.openai_api_key is not None
-        return OpenAIComposer(model=settings.openai_chat_model, api_key=settings.openai_api_key)
+        return OpenAIComposer(
+            model=settings.openai_chat_model,
+            api_key=settings.openai_api_key,
+            reasoning_effort=settings.openai_reasoning_effort,
+        )
 
     logger.warning(
         "no model credential: compose is using the offline extractive stub, which selects "

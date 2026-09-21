@@ -48,12 +48,18 @@ class Settings(BaseSettings):
     # rather than raising, so the whole product runs offline.
     openai_api_key: str | None = None
     openai_embedding_model: str = "text-embedding-3-small"
-    openai_chat_model: str = "gpt-5-mini"
+    openai_chat_model: str = "gpt-5.6-luna"
+    #: Reasoning budget for the compose call. ``low`` because compose is constrained extraction,
+    #: not deliberation: the passages are already retrieved and the schema is fixed, so the model
+    #: restates a passage and attaches the id it came from. It runs on every answered question,
+    #: which is where the cost sits. ``none`` is also valid if compose is ever given tools —
+    #: GPT-5.6 rejects function tools combined with any other effort on chat completions.
+    openai_reasoning_effort: str = "low"
 
     azure_openai_endpoint: str | None = None
     azure_openai_api_key: str | None = None
     azure_openai_embedding_deployment: str = "text-embedding-3-small"
-    azure_openai_chat_deployment: str = "gpt-5-mini"
+    azure_openai_chat_deployment: str = "gpt-5.6-luna"
 
     azure_search_endpoint: str | None = None
     azure_search_api_key: str | None = None
@@ -84,6 +90,16 @@ class Settings(BaseSettings):
     #: Cache-only judging and no network calls. CI sets this; a judge cache miss becomes fatal.
     offline: bool = False
 
+    #: Where the built index, vectors and vocabulary live. ``None`` means ``<repo>/data``.
+    #:
+    #: Overridable because the *tests* need somewhere else to put them. ``POST /api/admin/reindex``
+    #: genuinely rebuilds the index, so the test covering it was rewriting the developer's working
+    #: index on every run — harmless while both used the same embedder, and destructive the moment
+    #: they did not: a suite run with no credential would silently replace a real embedding index
+    #: with a hash one, and the next request would fail a provenance check for reasons nothing in
+    #: the test output explained. Env var: ``PG_DATA_DIR``.
+    pg_data_dir: Path | None = None
+
     # --------------------------------------------------------------- paths --
     @property
     def corpus_dir(self) -> Path:
@@ -107,7 +123,7 @@ class Settings(BaseSettings):
 
     @property
     def data_dir(self) -> Path:
-        return repo_root() / "data"
+        return self.pg_data_dir or repo_root() / "data"
 
     @property
     def index_path(self) -> Path:

@@ -9,7 +9,35 @@ Status legend: `OPEN` (workaround shipped, real fix needs the missing thing) · 
 ---
 
 ## B1 · No `OPENAI_API_KEY` — embeddings, compose model, and LLM judge all run offline
-**Status:** OPEN · **Discovered:** P0 (toolchain probe) · **Affects:** P2, P3, P5
+**Status:** **CLOSED** (credential supplied 2026-09-22) · **Discovered:** P0 (toolchain probe) ·
+**Affects:** P2, P3, P5
+
+> **Closed.** An `OPENAI_API_KEY` is now configured. The app runs on
+> `text-embedding-3-small` (1536-dim) for retrieval and **`gpt-5.6-luna`** for compose;
+> `/api/health` reports `degraded: false`. The unblock was exactly the env var predicted below —
+> the embedder and composer are selected from the environment, so no application logic changed.
+>
+> Two things did have to change, both recorded here because neither was predictable from the
+> design:
+>
+> 1. **`temperature` had to be removed from the compose call.** The GPT-5.6 family accepts only
+>    the default value and returns `400 unsupported_value` for anything else, including the `0.0`
+>    this code had always sent. `reasoning_effort` (set to `low`) replaces it as the determinism
+>    lever. Verified against the live API, not inferred.
+> 2. **Three API tests asserted `degraded is True`.** That was true of the build at the time, but
+>    it encoded "this project has no key" as a property of the *code*, so supplying one failed
+>    tests that were literally correct. They now derive the expectation from the configured
+>    credentials and pass either way.
+>
+> **The committed eval numbers still predate this.** Everything in `README.md` § Measured results
+> and `docs/evals_methodology.md` was produced by `HashEmbedder` + the extractive composer, and is
+> still described as such below. Re-running the gate split against the real embedder is the open
+> follow-up — see `FINAL_REPORT.md` §6.2. Until that is run and published, no number in this repo
+> should be attributed to GPT-5.6 Luna.
+>
+> The record of what the workaround was, and what it cost, is kept below rather than deleted.
+
+**Original entry (while OPEN):**
 
 - **What.** No OpenAI (or Azure OpenAI) credential is available in this environment.
   `echo "${OPENAI_API_KEY:+yes}"` → empty. Three things depend on a model:
@@ -67,7 +95,21 @@ Status legend: `OPEN` (workaround shipped, real fix needs the missing thing) · 
 ---
 
 ## B5 · No way to capture a screenshot or record a demo video
-**Status:** OPEN · **Discovered:** P9 · **Affects:** README, spec 00 §E
+**Status:** **CLOSED** (captured 2026-09-22) · **Discovered:** P9 · **Affects:** README, spec 00 §E
+
+> **Closed.** Driven with Playwright against the running app rather than by a human with a screen
+> recorder: `media/policyground_demo.mp4` (59s, 1280×720, h264) plus five stills pulled from the
+> same recording. The seven-step walkthrough in `FINAL_REPORT.md` §1 became the script, which is
+> what made the run reproducible instead of an improvisation.
+>
+> Worth noting for anyone re-recording: the model path is warmed with two throwaway requests
+> first. Cold, the first compose call takes ~20s of TLS and connection setup; warm it is ~3s.
+> Recording cold puts twenty seconds of spinner in a sixty-second video.
+>
+> The run is real end to end — live retrieval, live GPT-5.6 Luna compose, real refusals, real
+> withheld counts. Nothing is mocked or re-enacted.
+
+**Original entry (while OPEN):**
 
 - **What.** Spec 00 §A1 requires a screenshot-first README, and §E makes a 60–90s demo video part of
   the definition of done. This environment has no display, no browser session and no screen capture.

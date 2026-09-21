@@ -117,7 +117,7 @@ code that reads it back.
 
 | | Blocker | One-line fix |
 |---|---|---|
-| **B1** | No `OPENAI_API_KEY` — hash embeddings, extractive compose, offline judge | `export OPENAI_API_KEY=sk-…` then `pg ingest --rebuild`. No code change; the embedder and composer are selected from the environment. |
+| ~~**B1**~~ | ~~No `OPENAI_API_KEY`~~ — **CLOSED.** Live on `gpt-5.6-luna` + `text-embedding-3-small`. | Was `export OPENAI_API_KEY=sk-…` then `pg ingest --rebuild` — and it was exactly that; no application logic changed. Two caveats surfaced: GPT-5.6 rejects `temperature` outright (`reasoning_effort` replaces it), and three tests hard-coded `degraded is True`. See `BLOCKERS.md` B1. |
 | **B2** | No Azure subscription — AZURE mode never deployed | Follow `DEPLOY_RUNBOOK.md`; `azd up` with quota confirmed. |
 | **B3** | No `make` on Windows | Use `./make.ps1 <target>` — identical target names. *(Closed: the shim is the shipped path.)* |
 | **B4** | No Postgres running | `docker compose up -d` and set `DATABASE_URL`. *(Closed by design: SQLite is a documented dev target.)* |
@@ -169,10 +169,12 @@ about, because it is where "helpful" and "governed" genuinely trade off.
 | LOCAL mode | ✅ Complete, running, tested |
 | AZURE mode | 🟡 Deployment-ready, compiles, contract-tested — **never deployed** |
 | Corpus | ✅ 30 policies, 21,811 words, consistency enforced in CI |
+| Model credential | ✅ Live: `gpt-5.6-luna` compose, `text-embedding-3-small` retrieval (B1 closed) |
 | Structural controls | ✅ Citation validity 1.0, label leaks 0, both gated absolutely |
 | Statistical controls | ⚠️ Measured and gated as regression floors; limits published |
+| **Numbers in §3** | ⚠️ **Produced before the credential existed** — hash embedder + extractive compose. Not re-measured against GPT-5.6 Luna. |
 | Groundedness judge | ⚠️ Offline deterministic proxy — **no live LLM judge has scored these runs** |
-| Screenshot / demo video | ❌ Not captured — placeholders in `README.md` |
+| Screenshot / demo video | ✅ `media/policyground_demo.mp4` (59s) + 5 stills, recorded against the live system (B5 closed) |
 | `PLAN.md` | ✅ All phases ticked; every deviation recorded in the decisions log |
 
 Nothing in this repository claims to have been deployed, and no number is quoted without saying what

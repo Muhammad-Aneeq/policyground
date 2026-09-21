@@ -3,8 +3,18 @@
 **Governed finance RAG: every claim is cited, weak retrieval refuses, sensitivity labels decide
 what is retrievable at all, and groundedness is gated in CI.**
 
-<!-- screenshot: frontend Chat screen showing a cited answer beside its sources panel -->
-<!-- demo video: 60-90s walkthrough — cited answer → refusal → role toggle -->
+![A cited answer beside its sources panel](media/01_cited_answer.png)
+
+The four stills below are frames from a 60-second walkthrough — cited answer → citation
+click-through → refusal → unanswered log → the same question at three roles. All of it was
+recorded against the running system with the live model; nothing in it is mocked.
+
+| | |
+|---|---|
+| ![The cited passage highlighted in the full policy](media/02_passage_highlighted.png) | ![A refusal](media/03_refusal.png) |
+| The cited passage, located by stored character offset | A refusal — never styled like an answer |
+| ![The unanswered log](media/04_unanswered_log.png) | ![Three roles side by side](media/05_roles_side_by_side.png) |
+| Repeats fold onto one row: a roadmap, not a list | Same question, same code — only the role differs |
 
 > ⚠️ **All policy content in this repository is synthetic.** The 30-policy accounting manual under
 > `corpus/` was authored for this project. It is not any organisation's real policy, and no
@@ -51,12 +61,20 @@ got. `APP_MODE` is read in exactly one function.
 |---|---|
 | **LOCAL mode** | ✅ Complete, running, tested. 377 tests green. |
 | **AZURE mode** | 🟡 **Deployment-ready. Never deployed.** No Azure subscription in this build environment (`BLOCKERS.md` B2). Bicep compiles in CI; the retriever is covered by contract tests with the SDK mocked. |
-| **Model credentials** | ❌ None (`BLOCKERS.md` B1). Embeddings use a deterministic hash embedder with **no semantic similarity**; compose is an extractive stub; groundedness is scored by an offline proxy — **no live LLM judge has scored these runs.** |
+| **Model credentials** | ✅ Live (`BLOCKERS.md` B1, closed). Retrieval uses `text-embedding-3-small`; compose uses **`gpt-5.6-luna`** at `reasoning_effort=low`. `/api/health` reports `degraded: false`. |
+| **The numbers below** | ⚠️ **Predate the model.** Every figure in the next section was produced by the offline `HashEmbedder` + extractive composer, before a credential existed. They have **not** been re-measured against GPT-5.6 Luna. |
 
-**What that does and does not affect.** The two controls this project actually stands on —
-citation validity and label leakage — are *structural*: they are properties of the code, not of
-retrieval quality, and they are unaffected. Refusal correctness *is* affected, and the measured
-numbers below are honest floors rather than the system's ceiling.
+**Read that last row before quoting a number.** The app you run today answers with a real model;
+the table below describes a system that did not have one. Both statements are true and they are
+deliberately not blended — re-running the gate split against the real embedder is the open
+follow-up (§6.2 of `FINAL_REPORT.md`), and publishing the before/after is more interesting than
+quietly replacing one set of numbers with a better-looking set.
+
+**What the credential does and does not change.** The two controls this project actually stands
+on — citation validity and label leakage — are *structural*: they are properties of the code, not
+of retrieval quality, and they are unaffected either way. Refusal correctness *is* sensitive to
+embedding quality, which is precisely why the measured figures below are described as honest
+floors rather than the system's ceiling.
 
 ---
 
@@ -151,7 +169,8 @@ It is harder to build one that tells you where it is weak.
 make install && make ingest && make dev
 ```
 
-No API key is needed. It runs fully offline on documented fallbacks and tells you so, in the
+Set `OPENAI_API_KEY` in `.env` to run on `gpt-5.6-luna`. **No API key is required** — without one
+the whole product still runs, fully offline on documented fallbacks, and tells you so in the
 terminal and in a badge on every screen.
 
 ### The 60-second demo
